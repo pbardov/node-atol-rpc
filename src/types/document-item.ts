@@ -10,6 +10,7 @@ import {
 	type DocumentItemAdditionalAttribute,
 	isDocumentItemAdditionalAttribute,
 } from './document-item.additional-attribute.js';
+import {type DocumentItemPosition, isDocumentItemPosition} from './document-item.position.js';
 
 export type DocumentItem = {
 	type: DocumentItemType;
@@ -19,18 +20,17 @@ type DocumentItemTypeMap = {
 	[DocumentItemType.additionalAttribute]: DocumentItemAdditionalAttribute;
 	[DocumentItemType.barcode]: DocumentItemBarcode;
 	[DocumentItemType.pixels]: DocumentItemPixels;
-	[DocumentItemType.position]: DocumentItem;
+	[DocumentItemType.position]: DocumentItemPosition;
 	[DocumentItemType.pictureFromMemory]: DocumentItemPictureFromMemory;
 	[DocumentItemType.text]: DocumentItemText;
 	[DocumentItemType.userAttribute]: DocumentItemUserAttribute;
 };
 
-const falseGuard: TypeGuardDetail<DocumentItem> = (v: unknown, errors: ValidationErrors = {}): v is DocumentItem => false;
 const documentItemTypeGuardMap: Record<DocumentItemType, TypeGuardDetail<DocumentItemTypeMap[DocumentItemType]>> = {
 	[DocumentItemType.additionalAttribute]: isDocumentItemAdditionalAttribute,
 	[DocumentItemType.barcode]: isDocumentItemBarcode,
 	[DocumentItemType.pixels]: isDocumentItemPixels,
-	[DocumentItemType.position]: falseGuard,
+	[DocumentItemType.position]: isDocumentItemPosition,
 	[DocumentItemType.pictureFromMemory]: isDocumentItemPictureFromMemory,
 	[DocumentItemType.text]: isDocumentItemText,
 	[DocumentItemType.userAttribute]: isDocumentItemUserAttribute,
