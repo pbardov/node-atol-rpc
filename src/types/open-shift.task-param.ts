@@ -1,21 +1,20 @@
 import {isOperator, type Operator} from './operator.js';
-import isOpt from '../common/types/is-opt.js';
+import {makeOpt} from '../common/types/is-opt.js';
 import isBoolean from '../common/types/is-boolean.js';
-import isArray from '../common/types/is-array.js';
+import structureValidator from '../common/types/structure-validator.js';
+import {arrayTypeGuard} from '../common/types/is-array-of.js';
+import {type DocumentPrintItem, isDocumentPrintItem} from './document-item.js';
 
 export type OpenShiftTaskParam = {
 	operator?: Operator;
-	preItems?: unknown[];
-	postItems?: unknown[];
+	preItems?: DocumentPrintItem[];
+	postItems?: DocumentPrintItem[];
 	electronically?: boolean;
 };
 
-export function isOpenShiftTaskParam(v: unknown): v is OpenShiftTaskParam {
-	const mb = v as OpenShiftTaskParam | undefined;
-	return Boolean(mb)
-		&& typeof mb === 'object'
-		&& isOpt(mb.operator, isOperator)
-		&& isOpt(mb.preItems, isArray)
-		&& isOpt(mb.postItems, isArray)
-		&& isOpt(mb.electronically, isBoolean);
-}
+export const isOpenShiftTaskParam = structureValidator<OpenShiftTaskParam>({
+	operator: makeOpt(isOperator),
+	preItems: makeOpt(arrayTypeGuard(isDocumentPrintItem)),
+	postItems: makeOpt(arrayTypeGuard(isDocumentPrintItem)),
+	electronically: makeOpt(isBoolean),
+});

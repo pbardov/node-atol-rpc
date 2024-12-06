@@ -4,6 +4,8 @@ import {type OpenShiftTaskParam} from './types/open-shift.task-param.js';
 import {type JsonTask} from './types/json-task.js';
 import {JsonTaskType} from './types/json-task-type.js';
 import {isOpenShiftTaskResult, type OpenShiftTaskResult} from './types/open-shift.task-result.js';
+import {type CloseShiftTaskParam} from './types/close-shift.task-param.js';
+import {type CloseShiftTaskResult, isCloseShiftTaskResult} from './types/close-shift.task-result.js';
 
 export default class AtolRpc extends Fptr10 {
 	public readonly processJsonPromisified;
@@ -19,8 +21,9 @@ export default class AtolRpc extends Fptr10 {
 		return this.processJsonTask(jsonTask, isOpenShiftTaskResult);
 	}
 
-	async closeShift() {
-		//
+	async closeShift(params: CloseShiftTaskParam): Promise<CloseShiftTaskResult> {
+		const jsonTask: JsonTask<CloseShiftTaskParam> = {...params, type: JsonTaskType.closeShift};
+		return this.processJsonTask(jsonTask, isCloseShiftTaskResult);
 	}
 
 	async processJsonTask<P extends Record<string, any>, R>(task: JsonTask<P>, isR: (v: unknown) => v is R): Promise<R> {
