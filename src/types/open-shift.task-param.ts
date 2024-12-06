@@ -4,11 +4,11 @@ import isBoolean from '../common/types/is-boolean.js';
 import isArray from '../common/types/is-array.js';
 
 export type OpenShiftTaskParam = {
-	operator?: Operator,
-	preItems?: unknown[],
-	postItems?: unknown[],
-	electronically?: boolean
-}
+	operator?: Operator;
+	preItems?: unknown[];
+	postItems?: unknown[];
+	electronically?: boolean;
+};
 
 export function isOpenShiftTaskParam(v: unknown): v is OpenShiftTaskParam {
 	const mb = v as OpenShiftTaskParam | undefined;

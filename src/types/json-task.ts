@@ -1,7 +1,7 @@
-import {isJsonTaskType, JsonTaskType} from './json-task-type.js';
+import {isJsonTaskType, type JsonTaskType} from './json-task-type.js';
 
 export type JsonTask<P extends Record<string, any> > = {
-	type: JsonTaskType
+	type: JsonTaskType;
 } & P;
 
 export function isJsonTask(v: unknown): v is JsonTask<Record<string, any>> {

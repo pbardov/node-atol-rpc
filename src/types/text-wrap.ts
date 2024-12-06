@@ -1,9 +1,9 @@
 export enum TextWrap {
 	none = 'none',
 	chars = 'chars',
-	words = 'words'
+	words = 'words',
 }
 
 export function isTextWrap(v: unknown): v is TextWrap {
-	return Object.values(TextWrap).includes(<TextWrap>v);
+	return Object.values(TextWrap).includes((v as TextWrap));
 }

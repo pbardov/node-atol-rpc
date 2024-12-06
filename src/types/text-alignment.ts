@@ -1,9 +1,9 @@
 export enum TextAlignment {
 	left = 'left',
 	center = 'center',
-	right = 'right'
+	right = 'right',
 }
 
 export function isTextAlignment(v: unknown): v is TextAlignment {
-	return Object.values(TextAlignment).includes(<TextAlignment>v);
+	return Object.values(TextAlignment).includes((v as TextAlignment));
 }

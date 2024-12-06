@@ -1,0 +1,40 @@
+/* eslint-disable @typescript-eslint/no-duplicate-enum-values */
+export enum PaymentObject {
+	commodity = 1,
+	excise,
+	job,
+	service,
+	gamblingBet,
+	gamblingPrize,
+	lottery,
+	lotteryPrize,
+	intellectualActivity,
+	payment,
+	agentCommission,
+	composite = 12,
+	pay = 12,
+	another,
+	proprietaryLaw,
+	nonOperatingIncome,
+	insuranceContributions = 16,
+	otherContributions = 16,
+	merchantTax,
+	resortFee,
+	deposit,
+	consumption,
+	soleProprietorCPIContributions,
+	cpiContributions,
+	soleProprietorCMIContributions,
+	cmiContributions,
+	csiContributions,
+	casinoPayment,
+	fundsIssuance,
+	exciseWithoutMarking = 30,
+	exciseWithMarking,
+	commodityWithoutMarking,
+	commodityWithMarking,
+}
+
+export function isPaymentObject(v: unknown): v is PaymentObject {
+	return Object.values(PaymentObject).includes(v as PaymentObject);
+}

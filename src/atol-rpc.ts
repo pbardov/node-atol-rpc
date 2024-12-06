@@ -1,9 +1,9 @@
 import {Fptr10} from 'node-atol-wrapper';
 import {promisify} from 'node:util';
-import {OpenShiftTaskParam} from './types/open-shift.task-param.js';
-import {JsonTask} from './types/json-task.js';
+import {type OpenShiftTaskParam} from './types/open-shift.task-param.js';
+import {type JsonTask} from './types/json-task.js';
 import {JsonTaskType} from './types/json-task-type.js';
-import {isOpenShiftTaskResult, OpenShiftTaskResult} from './types/open-shift.task-result.js';
+import {isOpenShiftTaskResult, type OpenShiftTaskResult} from './types/open-shift.task-result.js';
 
 export default class AtolRpc extends Fptr10 {
 	public readonly processJsonPromisified;
@@ -24,6 +24,7 @@ export default class AtolRpc extends Fptr10 {
 	}
 
 	async processJsonTask<P extends Record<string, any>, R>(task: JsonTask<P>, isR: (v: unknown) => v is R): Promise<R> {
+		// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
 		const result = await this.processJsonPromisified(task);
 		if (!isR(result)) {
 			throw new TypeError('Invalid return value type');

@@ -53,9 +53,9 @@ export enum JsonTaskType {
 	addMarksToBuffer = 'addMarksToBuffer',
 	checkImcWorkState = 'checkImcWorkState',
 	checkImcTime = 'checkImcTime',
-	pingIsm = 'pingIsm'
+	pingIsm = 'pingIsm',
 }
 
 export function isJsonTaskType(v: unknown): v is JsonTaskType {
-	return Object.values(JsonTaskType).includes(<JsonTaskType>v);
+	return Object.values(JsonTaskType).includes((v as JsonTaskType));
 }
