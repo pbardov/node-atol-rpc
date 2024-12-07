@@ -26,6 +26,8 @@ import {
 	type SellReturnTaskResult,
 	type SellTaskResult,
 } from './fiscal.task-result.js';
+import {type ContinuePrintTask, isContinuePrint} from './continue-print.task.js';
+import {isVoidTaskResult, type VoidTaskResult} from './void.task-result.js';
 
 export type JsonTask = {
 	type: JsonTaskType;
@@ -36,6 +38,7 @@ export const isJsonTask = structureValidator<JsonTask>({
 });
 
 export type JsonTaskMap = {
+	[JsonTaskType.continuePrint]: ContinuePrintTask;
 	[JsonTaskType.openShift]: OpenShiftTask;
 	[JsonTaskType.closeShift]: CloseShiftTask;
 	[JsonTaskType.sell]: SellTask;
@@ -45,6 +48,7 @@ export type JsonTaskMap = {
 };
 
 export type JsonTaskResultMap = {
+	[JsonTaskType.continuePrint]: VoidTaskResult;
 	[JsonTaskType.openShift]: ShiftTaskResult;
 	[JsonTaskType.closeShift]: CloseShiftTaskResult;
 	[JsonTaskType.sell]: SellTaskResult;
@@ -58,6 +62,7 @@ export type JsonTaskDriver = {
 };
 
 export const jsonTaskTypeGuards: TypeGuardMap<JsonTaskMap> = {
+	[JsonTaskType.continuePrint]: isContinuePrint,
 	[JsonTaskType.openShift]: isOpenShiftTask,
 	[JsonTaskType.closeShift]: isCloseShiftTask,
 	[JsonTaskType.sell]: isSellTask,
@@ -67,6 +72,7 @@ export const jsonTaskTypeGuards: TypeGuardMap<JsonTaskMap> = {
 } as const;
 
 export const jsonTaskResultTypeGuards: TypeGuardMap<JsonTaskResultMap> = {
+	[JsonTaskType.continuePrint]: isVoidTaskResult,
 	[JsonTaskType.openShift]: isOpenShiftTaskResult,
 	[JsonTaskType.closeShift]: isCloseShiftTaskResult,
 	[JsonTaskType.sell]: isSellTaskResult,

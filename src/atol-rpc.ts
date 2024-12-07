@@ -20,6 +20,8 @@ import {
 } from './types/fiscal.task-result.js';
 import {type TypeGuardDetail} from './common/types/type-guard.js';
 import {TypeGuardError} from './common/types/type-guard.error.js';
+import {type ContinuePrintTask} from './types/continue-print.task.js';
+import {JsonTaskType} from './types/json-task-type.js';
 
 export default class AtolRpc extends Fptr10 implements JsonTaskDriver {
 	public readonly processJsonPromisified;
@@ -28,6 +30,10 @@ export default class AtolRpc extends Fptr10 implements JsonTaskDriver {
 		super();
 
 		this.processJsonPromisified = promisify(this.processJsonAsync.bind(this));
+	}
+
+	async continuePrint(params: ContinuePrintTask = {type: JsonTaskType.continuePrint}): Promise<void> {
+		return this.processJsonTask(params);
 	}
 
 	async openShift(params: OpenShiftTask): Promise<ShiftTaskResult> {

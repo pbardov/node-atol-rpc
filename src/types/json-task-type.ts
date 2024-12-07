@@ -1,4 +1,5 @@
 export enum JsonTaskType {
+	continuePrint = 'continuePrint',
 	openShift = 'openShift',
 	closeShift = 'closeShift',
 	sell = 'sell',
