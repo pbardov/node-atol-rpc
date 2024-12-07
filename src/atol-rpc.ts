@@ -19,6 +19,7 @@ import {
 	type SellTaskResult,
 } from './types/fiscal.task-result.js';
 import {type TypeGuardDetail} from './common/types/type-guard.js';
+import {TypeGuardError} from './common/types/type-guard.error.js';
 
 export default class AtolRpc extends Fptr10 implements JsonTaskDriver {
 	public readonly processJsonPromisified;
@@ -64,15 +65,16 @@ export default class AtolRpc extends Fptr10 implements JsonTaskDriver {
 			throw new EvalError(`Method ${task.type} not implemented`);
 		}
 
-		const validationErrors = {};
+		let validationErrors = {};
 		if (!paramTypeGuard(task, validationErrors)) {
-			throw new TypeError('Invalid input params');
+			throw new TypeGuardError('Invalid input params type', {cause: validationErrors});
 		}
 
 		// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
 		const result = await this.processJsonPromisified(task);
+		validationErrors = {};
 		if (!resultTypeGuard(result, validationErrors)) {
-			throw new TypeError('Invalid return value type');
+			throw new TypeGuardError('Invalid return value type', {cause: validationErrors});
 		}
 
 		return result;
