@@ -10,6 +10,22 @@ import {
 } from './shift.task-result.js';
 import {type TypeGuardMap} from '../common/types/type-guard.js';
 import structureValidator from '../common/types/structure-validator.js';
+import {
+	type BuyReturnTask,
+	type BuyTask, isBuyReturnTask,
+	isBuyTask,
+	isSellReturnTask,
+	isSellTask,
+	type SellReturnTask,
+	type SellTask,
+} from './fiscal.task.js';
+import {
+	type BuyReturnTaskResult,
+	type BuyTaskResult, isBuyReturnTaskResult, isBuyTaskResult, isSellReturnTaskResult,
+	isSellTaskResult,
+	type SellReturnTaskResult,
+	type SellTaskResult,
+} from './fiscal.task-result.js';
 
 export type JsonTask = {
 	type: JsonTaskType;
@@ -22,11 +38,19 @@ export const isJsonTask = structureValidator<JsonTask>({
 export type JsonTaskMap = {
 	[JsonTaskType.openShift]: OpenShiftTask;
 	[JsonTaskType.closeShift]: CloseShiftTask;
+	[JsonTaskType.sell]: SellTask;
+	[JsonTaskType.buy]: BuyTask;
+	[JsonTaskType.sellReturn]: SellReturnTask;
+	[JsonTaskType.buyReturn]: BuyReturnTask;
 };
 
 export type JsonTaskResultMap = {
 	[JsonTaskType.openShift]: ShiftTaskResult;
 	[JsonTaskType.closeShift]: CloseShiftTaskResult;
+	[JsonTaskType.sell]: SellTaskResult;
+	[JsonTaskType.buy]: BuyTaskResult;
+	[JsonTaskType.sellReturn]: SellReturnTaskResult;
+	[JsonTaskType.buyReturn]: BuyReturnTaskResult;
 };
 
 export type JsonTaskDriver = {
@@ -36,9 +60,17 @@ export type JsonTaskDriver = {
 export const jsonTaskTypeGuards: TypeGuardMap<JsonTaskMap> = {
 	[JsonTaskType.openShift]: isOpenShiftTask,
 	[JsonTaskType.closeShift]: isCloseShiftTask,
+	[JsonTaskType.sell]: isSellTask,
+	[JsonTaskType.buy]: isBuyTask,
+	[JsonTaskType.sellReturn]: isSellReturnTask,
+	[JsonTaskType.buyReturn]: isBuyReturnTask,
 } as const;
 
 export const jsonTaskResultTypeGuards: TypeGuardMap<JsonTaskResultMap> = {
 	[JsonTaskType.openShift]: isOpenShiftTaskResult,
 	[JsonTaskType.closeShift]: isCloseShiftTaskResult,
+	[JsonTaskType.sell]: isSellTaskResult,
+	[JsonTaskType.buy]: isBuyTaskResult,
+	[JsonTaskType.sellReturn]: isSellReturnTaskResult,
+	[JsonTaskType.buyReturn]: isBuyReturnTaskResult,
 };

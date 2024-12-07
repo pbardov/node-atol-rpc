@@ -9,6 +9,16 @@ import {
 	jsonTaskTypeGuards,
 } from './types/json-task.js';
 import {type CloseShiftTaskResult, type ShiftTaskResult} from './types/shift.task-result.js';
+import {
+	type BuyReturnTask, type BuyTask, type SellReturnTask, type SellTask,
+} from './types/fiscal.task.js';
+import {
+	type BuyReturnTaskResult,
+	type BuyTaskResult,
+	type SellReturnTaskResult,
+	type SellTaskResult,
+} from './types/fiscal.task-result.js';
+import {type TypeGuardDetail} from './common/types/type-guard.js';
 
 export default class AtolRpc extends Fptr10 implements JsonTaskDriver {
 	public readonly processJsonPromisified;
@@ -27,9 +37,28 @@ export default class AtolRpc extends Fptr10 implements JsonTaskDriver {
 		return this.processJsonTask(params);
 	}
 
-	async processJsonTask<T extends keyof JsonTaskMap>(task: JsonTaskMap[T]): Promise<JsonTaskResultMap[T]> {
-		const paramTypeGuard = jsonTaskTypeGuards[task.type];
-		const resultTypeGuard = jsonTaskResultTypeGuards[task.type];
+	async sell(params: SellTask): Promise<SellTaskResult> {
+		return this.processJsonTask(params);
+	}
+
+	async buy(params: BuyTask): Promise<BuyTaskResult> {
+		return this.processJsonTask(params);
+	}
+
+	async sellReturn(params: SellReturnTask): Promise<SellReturnTaskResult> {
+		return this.processJsonTask(params);
+	}
+
+	async buyReturn(params: BuyReturnTask): Promise<BuyReturnTaskResult> {
+		return this.processJsonTask(params);
+	}
+
+	async processJsonTask<T extends keyof JsonTaskMap, R = JsonTaskResultMap[T]>(task: JsonTaskMap[T]): Promise<R> {
+		type Param = JsonTaskMap[T];
+		type Result = R;
+
+		const paramTypeGuard = jsonTaskTypeGuards[task.type] as TypeGuardDetail<Param> | undefined;
+		const resultTypeGuard = jsonTaskResultTypeGuards[task.type] as TypeGuardDetail<Result> | undefined;
 
 		if (typeof paramTypeGuard !== 'function' || typeof resultTypeGuard !== 'function') {
 			throw new EvalError(`Method ${task.type} not implemented`);
