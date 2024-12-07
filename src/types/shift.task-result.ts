@@ -4,8 +4,17 @@ import isString from '../common/types/is-string.js';
 import isOpt, {makeOpt} from '../common/types/is-opt.js';
 import isBoolean from '../common/types/is-boolean.js';
 import structureValidator from '../common/types/structure-validator.js';
+import {TypeGuardDetail} from '../common/types/type-guard.js';
 
-export type OpenShiftTaskResult = {
+export type Warnings = {
+	notPrinted?: boolean;
+};
+
+export const isWarnings = structureValidator<Warnings>({
+	notPrinted: makeOpt(isBoolean),
+});
+
+export type ShiftTaskResult = {
 	fiscalDocumentNumber: number;
 	fiscalDocumentSign: string;
 	fiscalDocumentDateTime: IsoDateString;
@@ -13,10 +22,12 @@ export type OpenShiftTaskResult = {
 	fnNumber: string;
 	registrationNumber: string;
 	fnsUrl: string;
-	notPrinted?: boolean;
+	warnings?: Warnings;
 };
+export type OpenShiftTaskResult = ShiftTaskResult;
+export type CloseShiftTaskResult = ShiftTaskResult;
 
-export const isOpenShiftTaskResult = structureValidator<OpenShiftTaskResult>({
+export const isShiftTaskResult = structureValidator<ShiftTaskResult>({
 	fiscalDocumentNumber: isNumber,
 	fiscalDocumentSign: isString,
 	fiscalDocumentDateTime: isIsoDateString,
@@ -24,5 +35,7 @@ export const isOpenShiftTaskResult = structureValidator<OpenShiftTaskResult>({
 	fnNumber: isString,
 	registrationNumber: isString,
 	fnsUrl: isString,
-	notPrinted: makeOpt(isBoolean),
+	warnings: makeOpt(isWarnings),
 });
+export const isOpenShiftTaskResult: TypeGuardDetail<OpenShiftTaskResult> = isShiftTaskResult;
+export const isCloseShiftTaskResult: TypeGuardDetail<CloseShiftTaskResult> = isShiftTaskResult;

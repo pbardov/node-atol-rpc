@@ -1,13 +1,16 @@
 import {Fptr10} from 'node-atol-wrapper';
 import {promisify} from 'node:util';
-import {type OpenShiftTaskParam} from './types/open-shift.task-param.js';
-import {type JsonTask} from './types/json-task.js';
-import {JsonTaskType} from './types/json-task-type.js';
-import {isOpenShiftTaskResult, type OpenShiftTaskResult} from './types/open-shift.task-result.js';
-import {type CloseShiftTaskParam} from './types/close-shift.task-param.js';
-import {type CloseShiftTaskResult, isCloseShiftTaskResult} from './types/close-shift.task-result.js';
+import {type CloseShiftTask, type OpenShiftTask} from './types/shift.task.js';
+import {
+	type JsonTaskDriver,
+	type JsonTaskMap,
+	type JsonTaskResultMap,
+	jsonTaskResultTypeGuards,
+	jsonTaskTypeGuards,
+} from './types/json-task.js';
+import {type CloseShiftTaskResult, type ShiftTaskResult} from './types/shift.task-result.js';
 
-export default class AtolRpc extends Fptr10 {
+export default class AtolRpc extends Fptr10 implements JsonTaskDriver {
 	public readonly processJsonPromisified;
 
 	constructor() {
@@ -16,20 +19,30 @@ export default class AtolRpc extends Fptr10 {
 		this.processJsonPromisified = promisify(this.processJsonAsync.bind(this));
 	}
 
-	async openShift(params: OpenShiftTaskParam): Promise<OpenShiftTaskResult> {
-		const jsonTask: JsonTask<OpenShiftTaskParam> = {...params, type: JsonTaskType.openShift};
-		return this.processJsonTask(jsonTask, isOpenShiftTaskResult);
+	async openShift(params: OpenShiftTask): Promise<ShiftTaskResult> {
+		return this.processJsonTask(params);
 	}
 
-	async closeShift(params: CloseShiftTaskParam): Promise<CloseShiftTaskResult> {
-		const jsonTask: JsonTask<CloseShiftTaskParam> = {...params, type: JsonTaskType.closeShift};
-		return this.processJsonTask(jsonTask, isCloseShiftTaskResult);
+	async closeShift(params: CloseShiftTask): Promise<CloseShiftTaskResult> {
+		return this.processJsonTask(params);
 	}
 
-	async processJsonTask<P extends Record<string, any>, R>(task: JsonTask<P>, isR: (v: unknown) => v is R): Promise<R> {
+	async processJsonTask<T extends keyof JsonTaskMap>(task: JsonTaskMap[T]): Promise<JsonTaskResultMap[T]> {
+		const paramTypeGuard = jsonTaskTypeGuards[task.type];
+		const resultTypeGuard = jsonTaskResultTypeGuards[task.type];
+
+		if (typeof paramTypeGuard !== 'function' || typeof resultTypeGuard !== 'function') {
+			throw new EvalError(`Method ${task.type} not implemented`);
+		}
+
+		const validationErrors = {};
+		if (!paramTypeGuard(task, validationErrors)) {
+			throw new TypeError('Invalid input params');
+		}
+
 		// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
 		const result = await this.processJsonPromisified(task);
-		if (!isR(result)) {
+		if (!resultTypeGuard(result, validationErrors)) {
 			throw new TypeError('Invalid return value type');
 		}
 
