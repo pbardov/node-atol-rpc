@@ -22,6 +22,9 @@ import {type TypeGuardDetail} from './common/types/type-guard.js';
 import {TypeGuardError} from './common/types/type-guard.error.js';
 import {type ContinuePrintTask} from './types/continue-print.task.js';
 import {JsonTaskType} from './types/json-task-type.js';
+import {type PrintLastReceiptCopyTask} from './types/print-last-receipt-copy.task.js';
+import {type GetDeviceStatusTask} from './types/get-device-status.task.js';
+import {type GetDeviceStatusTaskResult} from './types/get-device-status.task-result.js';
 
 export default class AtolRpc extends Fptr10 implements JsonTaskDriver {
 	public readonly processJsonPromisified;
@@ -33,6 +36,14 @@ export default class AtolRpc extends Fptr10 implements JsonTaskDriver {
 	}
 
 	async continuePrint(params: ContinuePrintTask = {type: JsonTaskType.continuePrint}): Promise<void> {
+		return this.processJsonTask(params);
+	}
+
+	async printLastReceiptCopy(params: PrintLastReceiptCopyTask = {type: JsonTaskType.printLastReceiptCopy}): Promise<void> {
+		return this.processJsonTask(params);
+	}
+
+	async getDeviceStatus(params: GetDeviceStatusTask = {type: JsonTaskType.getDeviceStatus}): Promise<GetDeviceStatusTaskResult> {
 		return this.processJsonTask(params);
 	}
 
