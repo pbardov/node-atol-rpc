@@ -2,6 +2,7 @@ import AtolRpcBase from './atol-rpc-base.js';
 import {type GetDeviceStatusTaskResult} from './types/get-device-status.task-result.js';
 import {JsonTaskType} from './types/json-task-type.js';
 import {type GetDeviceInfoTaskResult} from './types/get-device-info.task-result.js';
+import {type GetMcuTaskResult} from './types/get-mcu.task-result.js';
 
 export default class AtolRpc extends AtolRpcBase {
 	async getDeviceStatus(): Promise<GetDeviceStatusTaskResult> {
@@ -10,6 +11,10 @@ export default class AtolRpc extends AtolRpcBase {
 
 	async getDeviceInfo(): Promise<GetDeviceInfoTaskResult> {
 		return this.processJsonTask({type: JsonTaskType.getDeviceInfo});
+	}
+
+	async getMcu(): Promise<GetMcuTaskResult> {
+		return this.processJsonTask({type: JsonTaskType.getMcu});
 	}
 
 	async continuePrint(): Promise<void> {

@@ -33,6 +33,8 @@ import {type GetDeviceStatusTask, isGetDeviceStatusTask} from './get-device-stat
 import {type GetDeviceStatusTaskResult, isGetDeviceStatusTaskResult} from './get-device-status.task-result.js';
 import {type GetDeviceInfoTask, isGetDeviceInfoTask} from './get-device-info.task.js';
 import {type GetDeviceInfoTaskResult, isGetDeviceInfoTaskResult} from './get-device-info.task-result.js';
+import {type GetMcuTask, isGetMcuTask} from './get-mcu.task.js';
+import {type GetMcuTaskResult, isGetMcuTaskResult} from './get-mcu.task-result.js';
 
 export type JsonTask = {
 	type: JsonTaskType;
@@ -53,6 +55,7 @@ export type JsonTaskMap = {
 	[JsonTaskType.printLastReceiptCopy]: PrintLastReceiptCopyTask;
 	[JsonTaskType.getDeviceStatus]: GetDeviceStatusTask;
 	[JsonTaskType.getDeviceInfo]: GetDeviceInfoTask;
+	[JsonTaskType.getMcu]: GetMcuTask;
 };
 
 export type JsonTaskResultMap = {
@@ -66,6 +69,7 @@ export type JsonTaskResultMap = {
 	[JsonTaskType.printLastReceiptCopy]: VoidTaskResult;
 	[JsonTaskType.getDeviceStatus]: GetDeviceStatusTaskResult;
 	[JsonTaskType.getDeviceInfo]: GetDeviceInfoTaskResult;
+	[JsonTaskType.getMcu]: GetMcuTaskResult;
 };
 
 export type JsonTaskDriver = {
@@ -83,6 +87,7 @@ export const jsonTaskTypeGuards: TypeGuardMap<JsonTaskMap> = {
 	[JsonTaskType.printLastReceiptCopy]: isPrintLastReceiptCopyTask,
 	[JsonTaskType.getDeviceStatus]: isGetDeviceStatusTask,
 	[JsonTaskType.getDeviceInfo]: isGetDeviceInfoTask,
+	[JsonTaskType.getMcu]: isGetMcuTask,
 } as const;
 
 export const jsonTaskResultTypeGuards: TypeGuardMap<JsonTaskResultMap> = {
@@ -96,4 +101,5 @@ export const jsonTaskResultTypeGuards: TypeGuardMap<JsonTaskResultMap> = {
 	[JsonTaskType.printLastReceiptCopy]: isVoidTaskResult,
 	[JsonTaskType.getDeviceStatus]: isGetDeviceStatusTaskResult,
 	[JsonTaskType.getDeviceInfo]: isGetDeviceInfoTaskResult,
+	[JsonTaskType.getMcu]: isGetMcuTaskResult,
 };
