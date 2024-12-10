@@ -16,6 +16,6 @@ export class TypeGuardError extends TypeError {
 	}
 
 	toString() {
-		return util.inspect(this);
+		return util.inspect(this, {showHidden: true});
 	}
 }
