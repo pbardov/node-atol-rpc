@@ -4,6 +4,7 @@ import {JsonTaskType} from './types/json-task-type.js';
 import {type GetDeviceInfoTaskResult} from './types/get-device-info.task-result.js';
 import {type GetMcuTaskResult} from './types/get-mcu.task-result.js';
 import {type GetCashDrawerStatusTaskResult} from './types/get-cash-drawer-status.task-result.js';
+import {type GetShiftStatusTaskResult} from './types/get-shift-status.task-result.js';
 
 export default class AtolRpc extends AtolRpcBase {
 	async getDeviceStatus(): Promise<GetDeviceStatusTaskResult> {
@@ -20,6 +21,10 @@ export default class AtolRpc extends AtolRpcBase {
 
 	async getCashDrawerStatus(): Promise<GetCashDrawerStatusTaskResult> {
 		return this.processJsonTask({type: JsonTaskType.getCashDrawerStatus});
+	}
+
+	async getShiftStatus(): Promise<GetShiftStatusTaskResult> {
+		return this.processJsonTask({type: JsonTaskType.getShiftStatus});
 	}
 
 	async continuePrint(): Promise<void> {

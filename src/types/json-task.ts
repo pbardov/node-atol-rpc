@@ -37,6 +37,8 @@ import {type GetMcuTask, isGetMcuTask} from './get-mcu.task.js';
 import {type GetMcuTaskResult, isGetMcuTaskResult} from './get-mcu.task-result.js';
 import {type GetCashDrawerStatusTask, isGetCashDrawerStatusTask} from './get-cash-drawer-status.task.js';
 import {type GetCashDrawerStatusTaskResult, isGetCashDrawerStatusTaskResult} from './get-cash-drawer-status.task-result.js';
+import {type GetShiftStatusTask, isGetShiftStatusTask} from './get-shift-status.task.js';
+import {type GetShiftStatusTaskResult, isGetShiftStatusTaskResult} from './get-shift-status.task-result.js';
 
 export type JsonTask = {
 	type: JsonTaskType;
@@ -59,6 +61,7 @@ export type JsonTaskMap = {
 	[JsonTaskType.getDeviceInfo]: GetDeviceInfoTask;
 	[JsonTaskType.getMcu]: GetMcuTask;
 	[JsonTaskType.getCashDrawerStatus]: GetCashDrawerStatusTask;
+	[JsonTaskType.getShiftStatus]: GetShiftStatusTask;
 };
 
 export type JsonTaskResultMap = {
@@ -74,6 +77,7 @@ export type JsonTaskResultMap = {
 	[JsonTaskType.getDeviceInfo]: GetDeviceInfoTaskResult;
 	[JsonTaskType.getMcu]: GetMcuTaskResult;
 	[JsonTaskType.getCashDrawerStatus]: GetCashDrawerStatusTaskResult;
+	[JsonTaskType.getShiftStatus]: GetShiftStatusTaskResult;
 };
 
 export type JsonTaskDriver = {
@@ -93,6 +97,7 @@ export const jsonTaskTypeGuards: TypeGuardMap<JsonTaskMap> = {
 	[JsonTaskType.getDeviceInfo]: isGetDeviceInfoTask,
 	[JsonTaskType.getMcu]: isGetMcuTask,
 	[JsonTaskType.getCashDrawerStatus]: isGetCashDrawerStatusTask,
+	[JsonTaskType.getShiftStatus]: isGetShiftStatusTask,
 } as const;
 
 export const jsonTaskResultTypeGuards: TypeGuardMap<JsonTaskResultMap> = {
@@ -108,4 +113,5 @@ export const jsonTaskResultTypeGuards: TypeGuardMap<JsonTaskResultMap> = {
 	[JsonTaskType.getDeviceInfo]: isGetDeviceInfoTaskResult,
 	[JsonTaskType.getMcu]: isGetMcuTaskResult,
 	[JsonTaskType.getCashDrawerStatus]: isGetCashDrawerStatusTaskResult,
+	[JsonTaskType.getShiftStatus]: isGetShiftStatusTaskResult,
 };
