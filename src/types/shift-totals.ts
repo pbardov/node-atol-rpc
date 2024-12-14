@@ -33,11 +33,11 @@ export const isShiftTotalsPayments = structureValidator<ShiftTotalsPayments>({
 	'userPaymentType-5': makeOpt(isNumber),
 });
 
-type ReceiptPayments = {
+export type ReceiptPayments = {
 	payments: ShiftTotalsPayments;
 };
 
-const isReceiptPayments = structureValidator<ReceiptPayments>({
+export const isReceiptPayments = structureValidator<ReceiptPayments>({
 	payments: isShiftTotalsPayments,
 });
 

@@ -9,6 +9,7 @@ import {type GetFnInfoTaskResult} from './types/get-fn-info.task-result.js';
 import {type GetFnStatusTaskResult} from './types/get-fn-status.task-result.js';
 import {type OfdExchangeStatusTaskResult} from './types/ofd-exchange-status.task-result.js';
 import {type GetShiftTotalsTaskResult} from './types/get-shift-totals.task-result.js';
+import {type GetOverallTotalsTaskResult} from './types/get-overall-totals.task-result.js';
 
 export default class AtolRpc extends AtolRpcBase {
 	async getDeviceStatus(): Promise<GetDeviceStatusTaskResult> {
@@ -45,6 +46,10 @@ export default class AtolRpc extends AtolRpcBase {
 
 	async getShiftTotals(): Promise<GetShiftTotalsTaskResult> {
 		return this.processJsonTask({type: JsonTaskType.getShiftTotals});
+	}
+
+	async getOverallTotals(): Promise<GetOverallTotalsTaskResult> {
+		return this.processJsonTask({type: JsonTaskType.getOverallTotals});
 	}
 
 	async continuePrint(): Promise<void> {

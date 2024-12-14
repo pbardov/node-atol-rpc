@@ -47,6 +47,7 @@ import {isOfdExchangeStatusTask, type OfdExchangeStatusTask} from './ofd-exchang
 import {isOfdExchangeStatusTaskResult, type OfdExchangeStatusTaskResult} from './ofd-exchange-status.task-result.js';
 import {type GetShiftTotalsTask, isGetShiftTotalsTask} from './get-shift-totals.task.js';
 import {type GetShiftTotalsTaskResult, isGetShiftTotalsTaskResult} from './get-shift-totals.task-result.js';
+import {type GetOverallTotalsTask, isGetOverallTotalsTask} from './get-overall-totals.task.js';
 
 export type JsonTask = {
 	type: JsonTaskType;
@@ -74,6 +75,7 @@ export type JsonTaskMap = {
 	[JsonTaskType.getFnStatus]: GetFnStatusTask;
 	[JsonTaskType.ofdExchangeStatus]: OfdExchangeStatusTask;
 	[JsonTaskType.getShiftTotals]: GetShiftTotalsTask;
+	[JsonTaskType.getOverallTotals]: GetOverallTotalsTask;
 };
 
 export type JsonTaskResultMap = {
@@ -94,6 +96,7 @@ export type JsonTaskResultMap = {
 	[JsonTaskType.getFnStatus]: GetFnStatusTaskResult;
 	[JsonTaskType.ofdExchangeStatus]: OfdExchangeStatusTaskResult;
 	[JsonTaskType.getShiftTotals]: GetShiftTotalsTaskResult;
+	[JsonTaskType.getOverallTotals]: GetShiftTotalsTaskResult;
 };
 
 export type JsonTaskDriver = {
@@ -118,6 +121,7 @@ export const jsonTaskTypeGuards: TypeGuardMap<JsonTaskMap> = {
 	[JsonTaskType.getFnStatus]: isGetFnStatusTask,
 	[JsonTaskType.ofdExchangeStatus]: isOfdExchangeStatusTask,
 	[JsonTaskType.getShiftTotals]: isGetShiftTotalsTask,
+	[JsonTaskType.getOverallTotals]: isGetOverallTotalsTask,
 } as const;
 
 export const jsonTaskResultTypeGuards: TypeGuardMap<JsonTaskResultMap> = {
@@ -138,4 +142,5 @@ export const jsonTaskResultTypeGuards: TypeGuardMap<JsonTaskResultMap> = {
 	[JsonTaskType.getFnStatus]: isGetFnStatusTaskResult,
 	[JsonTaskType.ofdExchangeStatus]: isOfdExchangeStatusTaskResult,
 	[JsonTaskType.getShiftTotals]: isGetShiftTotalsTaskResult,
+	[JsonTaskType.getOverallTotals]: isGetShiftTotalsTaskResult,
 };
