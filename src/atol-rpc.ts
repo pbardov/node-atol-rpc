@@ -11,6 +11,9 @@ import {type OfdExchangeStatusTaskResult} from './types/ofd-exchange-status.task
 import {type GetShiftTotalsTaskResult} from './types/get-shift-totals.task-result.js';
 import {type GetOverallTotalsTaskResult} from './types/get-overall-totals.task-result.js';
 import {type GetDepartmentSumTaskResult} from './types/get-department-sum.task-result.js';
+import {type JsonTaskParam} from './types/json-task.js';
+import {type ReportXTask} from './types/report-x.task.js';
+import {type VoidTaskResult} from './types/void.task-result.js';
 
 export default class AtolRpc extends AtolRpcBase {
 	async getDeviceStatus(): Promise<GetDeviceStatusTaskResult> {
@@ -63,5 +66,9 @@ export default class AtolRpc extends AtolRpcBase {
 
 	async printLastReceiptCopy(): Promise<void> {
 		return this.processJsonTask({type: JsonTaskType.printLastReceiptCopy});
+	}
+
+	async reportX(param: JsonTaskParam<ReportXTask>): Promise<VoidTaskResult> {
+		return this.processJsonTask({...param, type: JsonTaskType.reportX});
 	}
 }

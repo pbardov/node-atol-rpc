@@ -50,10 +50,13 @@ import {type GetShiftTotalsTaskResult, isGetShiftTotalsTaskResult} from './get-s
 import {type GetOverallTotalsTask, isGetOverallTotalsTask} from './get-overall-totals.task.js';
 import {type GetDepartmentSumTask, isGetDepartmentSumTask} from './get-department-sum.task.js';
 import {type GetDepartmentSumTaskResult, isGetDepartmentSumTaskResult} from './get-department-sum.task-result.js';
+import {isReportXTask, type ReportXTask} from './report-x.task.js';
 
 export type JsonTask = {
 	type: JsonTaskType;
 };
+
+export type JsonTaskParam<P> = Omit<P, 'type'>;
 
 export const isJsonTask = structureValidator<JsonTask>({
 	type: isJsonTaskType,
@@ -79,6 +82,7 @@ export type JsonTaskMap = {
 	[JsonTaskType.getShiftTotals]: GetShiftTotalsTask;
 	[JsonTaskType.getOverallTotals]: GetOverallTotalsTask;
 	[JsonTaskType.getDepartmentSum]: GetDepartmentSumTask;
+	[JsonTaskType.reportX]: ReportXTask;
 };
 
 export type JsonTaskResultMap = {
@@ -101,6 +105,7 @@ export type JsonTaskResultMap = {
 	[JsonTaskType.getShiftTotals]: GetShiftTotalsTaskResult;
 	[JsonTaskType.getOverallTotals]: GetShiftTotalsTaskResult;
 	[JsonTaskType.getDepartmentSum]: GetDepartmentSumTaskResult;
+	[JsonTaskType.reportX]: VoidTaskResult;
 };
 
 export type JsonTaskDriver = {
@@ -127,6 +132,7 @@ export const jsonTaskTypeGuards: TypeGuardMap<JsonTaskMap> = {
 	[JsonTaskType.getShiftTotals]: isGetShiftTotalsTask,
 	[JsonTaskType.getOverallTotals]: isGetOverallTotalsTask,
 	[JsonTaskType.getDepartmentSum]: isGetDepartmentSumTask,
+	[JsonTaskType.reportX]: isReportXTask,
 } as const;
 
 export const jsonTaskResultTypeGuards: TypeGuardMap<JsonTaskResultMap> = {
@@ -149,4 +155,5 @@ export const jsonTaskResultTypeGuards: TypeGuardMap<JsonTaskResultMap> = {
 	[JsonTaskType.getShiftTotals]: isGetShiftTotalsTaskResult,
 	[JsonTaskType.getOverallTotals]: isGetShiftTotalsTaskResult,
 	[JsonTaskType.getDepartmentSum]: isGetDepartmentSumTaskResult,
+	[JsonTaskType.reportX]: isVoidTaskResult,
 };
