@@ -45,6 +45,8 @@ import {type GetFnStatusTask, isGetFnStatusTask} from './get-fn-status.task.js';
 import {type GetFnStatusTaskResult, isGetFnStatusTaskResult} from './get-fn-status.task-result.js';
 import {isOfdExchangeStatusTask, type OfdExchangeStatusTask} from './ofd-exchange-status.task.js';
 import {isOfdExchangeStatusTaskResult, type OfdExchangeStatusTaskResult} from './ofd-exchange-status.task-result.js';
+import {type GetShiftTotalsTask, isGetShiftTotalsTask} from './get-shift-totals.task.js';
+import {type GetShiftTotalsTaskResult, isGetShiftTotalsTaskResult} from '../common/types/get-shift-totals.task-result.js';
 
 export type JsonTask = {
 	type: JsonTaskType;
@@ -71,6 +73,7 @@ export type JsonTaskMap = {
 	[JsonTaskType.getFnInfo]: GetFnInfoTask;
 	[JsonTaskType.getFnStatus]: GetFnStatusTask;
 	[JsonTaskType.ofdExchangeStatus]: OfdExchangeStatusTask;
+	[JsonTaskType.getShiftTotals]: GetShiftTotalsTask;
 };
 
 export type JsonTaskResultMap = {
@@ -90,6 +93,7 @@ export type JsonTaskResultMap = {
 	[JsonTaskType.getFnInfo]: GetFnInfoTaskResult;
 	[JsonTaskType.getFnStatus]: GetFnStatusTaskResult;
 	[JsonTaskType.ofdExchangeStatus]: OfdExchangeStatusTaskResult;
+	[JsonTaskType.getShiftTotals]: GetShiftTotalsTaskResult;
 };
 
 export type JsonTaskDriver = {
@@ -113,6 +117,7 @@ export const jsonTaskTypeGuards: TypeGuardMap<JsonTaskMap> = {
 	[JsonTaskType.getFnInfo]: isGetFnInfoTask,
 	[JsonTaskType.getFnStatus]: isGetFnStatusTask,
 	[JsonTaskType.ofdExchangeStatus]: isOfdExchangeStatusTask,
+	[JsonTaskType.getShiftTotals]: isGetShiftTotalsTask,
 } as const;
 
 export const jsonTaskResultTypeGuards: TypeGuardMap<JsonTaskResultMap> = {
@@ -132,4 +137,5 @@ export const jsonTaskResultTypeGuards: TypeGuardMap<JsonTaskResultMap> = {
 	[JsonTaskType.getFnInfo]: isGetFnInfoTaskResult,
 	[JsonTaskType.getFnStatus]: isGetFnStatusTaskResult,
 	[JsonTaskType.ofdExchangeStatus]: isOfdExchangeStatusTaskResult,
+	[JsonTaskType.getShiftTotals]: isGetShiftTotalsTaskResult,
 };
