@@ -108,9 +108,9 @@ export type JsonTaskResultMap = {
 	[JsonTaskType.reportX]: VoidTaskResult;
 };
 
-export type JsonTaskDriver = {
-	[K in keyof JsonTaskMap]: (p: JsonTaskMap[K]) => Promise<JsonTaskResultMap[K]>;
-};
+// export type JsonTaskDriver = {
+// 	[K in keyof JsonTaskMap]: (p?: JsonTaskParam<JsonTaskMap[K]>) => Promise<JsonTaskResultMap[K]>;
+// };
 
 export const jsonTaskTypeGuards: TypeGuardMap<JsonTaskMap> = {
 	[JsonTaskType.continuePrint]: isContinuePrint,

@@ -14,6 +14,17 @@ import {type GetDepartmentSumTaskResult} from './types/get-department-sum.task-r
 import {type JsonTaskParam} from './types/json-task.js';
 import {type ReportXTask} from './types/report-x.task.js';
 import {type VoidTaskResult} from './types/void.task-result.js';
+import {type CloseShiftTask, type OpenShiftTask} from './types/shift.task.js';
+import {type CloseShiftTaskResult, type OpenShiftTaskResult} from './types/shift.task-result.js';
+import {
+	type BuyReturnTask, type BuyTask, type SellReturnTask, type SellTask,
+} from './types/fiscal.task.js';
+import {
+	type BuyReturnTaskResult,
+	type BuyTaskResult,
+	type SellReturnTaskResult,
+	type SellTaskResult,
+} from './types/fiscal.task-result.js';
 
 export default class AtolRpc extends AtolRpcBase {
 	async getDeviceStatus(): Promise<GetDeviceStatusTaskResult> {
@@ -68,7 +79,31 @@ export default class AtolRpc extends AtolRpcBase {
 		return this.processJsonTask({type: JsonTaskType.printLastReceiptCopy});
 	}
 
-	async reportX(param: JsonTaskParam<ReportXTask>): Promise<VoidTaskResult> {
+	async reportX(param: JsonTaskParam<ReportXTask> = {}): Promise<VoidTaskResult> {
 		return this.processJsonTask({...param, type: JsonTaskType.reportX});
+	}
+
+	async openShift(param: JsonTaskParam<OpenShiftTask> = {}): Promise<OpenShiftTaskResult> {
+		return this.processJsonTask({...param, type: JsonTaskType.openShift});
+	}
+
+	async closeShift(param: JsonTaskParam<CloseShiftTask> = {}): Promise<CloseShiftTaskResult> {
+		return this.processJsonTask({...param, type: JsonTaskType.closeShift});
+	}
+
+	async sell(param: JsonTaskParam<SellTask>): Promise<SellTaskResult> {
+		return this.processJsonTask({...param, type: JsonTaskType.sell});
+	}
+
+	async sellReturn(param: JsonTaskParam<SellReturnTask>): Promise<SellReturnTaskResult> {
+		return this.processJsonTask({...param, type: JsonTaskType.sellReturn});
+	}
+
+	async buy(param: JsonTaskParam<BuyTask>): Promise<BuyTaskResult> {
+		return this.processJsonTask({...param, type: JsonTaskType.buy});
+	}
+
+	async buyReturn(param: JsonTaskParam<BuyReturnTask>): Promise<BuyReturnTaskResult> {
+		return this.processJsonTask({...param, type: JsonTaskType.buyReturn});
 	}
 }
