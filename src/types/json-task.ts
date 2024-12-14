@@ -48,6 +48,8 @@ import {isOfdExchangeStatusTaskResult, type OfdExchangeStatusTaskResult} from '.
 import {type GetShiftTotalsTask, isGetShiftTotalsTask} from './get-shift-totals.task.js';
 import {type GetShiftTotalsTaskResult, isGetShiftTotalsTaskResult} from './get-shift-totals.task-result.js';
 import {type GetOverallTotalsTask, isGetOverallTotalsTask} from './get-overall-totals.task.js';
+import {type GetDepartmentSumTask, isGetDepartmentSumTask} from './get-department-sum.task.js';
+import {type GetDepartmentSumTaskResult, isGetDepartmentSumTaskResult} from './get-department-sum.task-result.js';
 
 export type JsonTask = {
 	type: JsonTaskType;
@@ -76,6 +78,7 @@ export type JsonTaskMap = {
 	[JsonTaskType.ofdExchangeStatus]: OfdExchangeStatusTask;
 	[JsonTaskType.getShiftTotals]: GetShiftTotalsTask;
 	[JsonTaskType.getOverallTotals]: GetOverallTotalsTask;
+	[JsonTaskType.getDepartmentSum]: GetDepartmentSumTask;
 };
 
 export type JsonTaskResultMap = {
@@ -97,6 +100,7 @@ export type JsonTaskResultMap = {
 	[JsonTaskType.ofdExchangeStatus]: OfdExchangeStatusTaskResult;
 	[JsonTaskType.getShiftTotals]: GetShiftTotalsTaskResult;
 	[JsonTaskType.getOverallTotals]: GetShiftTotalsTaskResult;
+	[JsonTaskType.getDepartmentSum]: GetDepartmentSumTaskResult;
 };
 
 export type JsonTaskDriver = {
@@ -122,6 +126,7 @@ export const jsonTaskTypeGuards: TypeGuardMap<JsonTaskMap> = {
 	[JsonTaskType.ofdExchangeStatus]: isOfdExchangeStatusTask,
 	[JsonTaskType.getShiftTotals]: isGetShiftTotalsTask,
 	[JsonTaskType.getOverallTotals]: isGetOverallTotalsTask,
+	[JsonTaskType.getDepartmentSum]: isGetDepartmentSumTask,
 } as const;
 
 export const jsonTaskResultTypeGuards: TypeGuardMap<JsonTaskResultMap> = {
@@ -143,4 +148,5 @@ export const jsonTaskResultTypeGuards: TypeGuardMap<JsonTaskResultMap> = {
 	[JsonTaskType.ofdExchangeStatus]: isOfdExchangeStatusTaskResult,
 	[JsonTaskType.getShiftTotals]: isGetShiftTotalsTaskResult,
 	[JsonTaskType.getOverallTotals]: isGetShiftTotalsTaskResult,
+	[JsonTaskType.getDepartmentSum]: isGetDepartmentSumTaskResult,
 };

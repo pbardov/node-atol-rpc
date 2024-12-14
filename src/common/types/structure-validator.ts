@@ -1,7 +1,7 @@
 import {
 	errorDescription, type TypeGuard, type TypeGuardDetail, type ValidationErrors,
 } from './type-guard.js';
-import getTypeGuardDetails from './get-type-guard-details.js';
+import describeValidationErrors from './describe-validation-errors.js';
 
 export type StructureValidator<T extends Record<any, any>, P = Required<T>> = {
 	[K in keyof P]: TypeGuard<T[K]> | TypeGuardDetail<T[K]>;
@@ -21,13 +21,7 @@ export default function structureValidator<T extends Record<any, any>>(validator
 			const propError: ValidationErrors = {};
 			if (!typeGuard(mb[prop], propError)) {
 				errorCount += 1;
-				if (typeof propError[errorDescription] === 'string') {
-					error[prop] = propError[errorDescription];
-				} else if (!Object.keys(propError).length) {
-					error[prop] = getTypeGuardDetails(typeGuard);
-				} else {
-					error[prop] = propError;
-				}
+				error[prop] = describeValidationErrors('', typeGuard, propError);
 			}
 		}
 
