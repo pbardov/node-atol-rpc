@@ -46,7 +46,7 @@ import {type GetFnStatusTaskResult, isGetFnStatusTaskResult} from './get-fn-stat
 import {isOfdExchangeStatusTask, type OfdExchangeStatusTask} from './ofd-exchange-status.task.js';
 import {isOfdExchangeStatusTaskResult, type OfdExchangeStatusTaskResult} from './ofd-exchange-status.task-result.js';
 import {type GetShiftTotalsTask, isGetShiftTotalsTask} from './get-shift-totals.task.js';
-import {type GetShiftTotalsTaskResult, isGetShiftTotalsTaskResult} from '../common/types/get-shift-totals.task-result.js';
+import {type GetShiftTotalsTaskResult, isGetShiftTotalsTaskResult} from './get-shift-totals.task-result.js';
 
 export type JsonTask = {
 	type: JsonTaskType;
