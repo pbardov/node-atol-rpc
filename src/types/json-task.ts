@@ -41,6 +41,8 @@ import {type GetShiftStatusTask, isGetShiftStatusTask} from './get-shift-status.
 import {type GetShiftStatusTaskResult, isGetShiftStatusTaskResult} from './get-shift-status.task-result.js';
 import {type GetFnInfoTask, isGetFnInfoTask} from './get-fn-info.task.js';
 import {type GetFnInfoTaskResult, isGetFnInfoTaskResult} from './get-fn-info.task-result.js';
+import {type GetFnStatusTask, isGetFnStatusTask} from './get-fn-status.task.js';
+import {type GetFnStatusTaskResult, isGetFnStatusTaskResult} from './get-fn-status.task-result.js';
 
 export type JsonTask = {
 	type: JsonTaskType;
@@ -65,6 +67,7 @@ export type JsonTaskMap = {
 	[JsonTaskType.getCashDrawerStatus]: GetCashDrawerStatusTask;
 	[JsonTaskType.getShiftStatus]: GetShiftStatusTask;
 	[JsonTaskType.getFnInfo]: GetFnInfoTask;
+	[JsonTaskType.getFnStatus]: GetFnStatusTask;
 };
 
 export type JsonTaskResultMap = {
@@ -82,6 +85,7 @@ export type JsonTaskResultMap = {
 	[JsonTaskType.getCashDrawerStatus]: GetCashDrawerStatusTaskResult;
 	[JsonTaskType.getShiftStatus]: GetShiftStatusTaskResult;
 	[JsonTaskType.getFnInfo]: GetFnInfoTaskResult;
+	[JsonTaskType.getFnStatus]: GetFnStatusTaskResult;
 };
 
 export type JsonTaskDriver = {
@@ -103,6 +107,7 @@ export const jsonTaskTypeGuards: TypeGuardMap<JsonTaskMap> = {
 	[JsonTaskType.getCashDrawerStatus]: isGetCashDrawerStatusTask,
 	[JsonTaskType.getShiftStatus]: isGetShiftStatusTask,
 	[JsonTaskType.getFnInfo]: isGetFnInfoTask,
+	[JsonTaskType.getFnStatus]: isGetFnStatusTask,
 } as const;
 
 export const jsonTaskResultTypeGuards: TypeGuardMap<JsonTaskResultMap> = {
@@ -120,4 +125,5 @@ export const jsonTaskResultTypeGuards: TypeGuardMap<JsonTaskResultMap> = {
 	[JsonTaskType.getCashDrawerStatus]: isGetCashDrawerStatusTaskResult,
 	[JsonTaskType.getShiftStatus]: isGetShiftStatusTaskResult,
 	[JsonTaskType.getFnInfo]: isGetFnInfoTaskResult,
+	[JsonTaskType.getFnStatus]: isGetFnStatusTaskResult,
 };
