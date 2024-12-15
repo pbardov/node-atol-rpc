@@ -5,15 +5,7 @@ import {
 } from './types/json-task.js';
 import type {TypeGuardDetail} from './common/types/type-guard.js';
 import {TypeGuardError} from './common/types/type-guard.error.js';
-
-export enum WorkMode {
-	sync = 'sync',
-	async = 'async',
-}
-
-export type Settings = Fptr10Settings & {
-	workMode?: WorkMode;
-};
+import {type Settings, WorkMode} from './types/settings.js';
 
 export default class AtolRpcBase extends Fptr10 {
 	public workMode: WorkMode = WorkMode.async;
