@@ -1,0 +1,1 @@
+{"version":3,"file":"get-cash-drawer-status.task-result.d.ts","sourceRoot":"","sources":["../../src/types/get-cash-drawer-status.task-result.ts"],"names":[],"mappings":"AAAA,OAAO,EACN,KAAK,kBAAkB,EAAE,KAAK,gBAAgB,EAC9C,MAAM,yBAAyB,CAAC;AAGjC,MAAM,MAAM,6BAA6B,GAAG;IAC3C,QAAQ,EAAE,kBAAkB,CAAC;IAC7B,gBAAgB,EAAE,gBAAgB,CAAC;CACnC,CAAC;AAEF,eAAO,MAAM,+BAA+B,wFAG1C,CAAC"}

@@ -1,0 +1,1 @@
+{"version":3,"file":"print-last-receipt-copy.task.d.ts","sourceRoot":"","sources":["../../src/types/print-last-receipt-copy.task.ts"],"names":[],"mappings":"AAAA,OAAO,EAAC,KAAK,QAAQ,EAAC,MAAM,gBAAgB,CAAC;AAC7C,OAAO,EAAC,YAAY,EAAC,MAAM,qBAAqB,CAAC;AAGjD,MAAM,MAAM,wBAAwB,GAAG,QAAQ,GAAG;IACjD,IAAI,EAAE,YAAY,CAAC,oBAAoB,CAAC;CACxC,CAAC;AAEF,eAAO,MAAM,0BAA0B,mFAErC,CAAC"}

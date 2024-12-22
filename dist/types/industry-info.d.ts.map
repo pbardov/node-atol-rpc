@@ -1,0 +1,1 @@
+{"version":3,"file":"industry-info.d.ts","sourceRoot":"","sources":["../../src/types/industry-info.ts"],"names":[],"mappings":"AAAA,OAAO,EAAC,KAAK,QAAQ,EAAa,MAAM,gBAAgB,CAAC;AAKzD,MAAM,MAAM,YAAY,GAAG;IAC1B,IAAI,CAAC,EAAE,QAAQ,CAAC;IAChB,IAAI,CAAC,EAAE,MAAM,CAAC;IACd,MAAM,CAAC,EAAE,MAAM,CAAC;IAChB,iBAAiB,CAAC,EAAE,MAAM,CAAC;CAC3B,CAAC;AACF,eAAO,MAAM,cAAc,uEAKzB,CAAC"}

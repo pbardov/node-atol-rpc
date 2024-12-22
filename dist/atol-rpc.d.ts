@@ -1,0 +1,42 @@
+import AtolRpcBase from './atol-rpc-base.js';
+import { type GetDeviceStatusTaskResult } from './types/get-device-status.task-result.js';
+import { type GetDeviceInfoTaskResult } from './types/get-device-info.task-result.js';
+import { type GetMcuTaskResult } from './types/get-mcu.task-result.js';
+import { type GetCashDrawerStatusTaskResult } from './types/get-cash-drawer-status.task-result.js';
+import { type GetShiftStatusTaskResult } from './types/get-shift-status.task-result.js';
+import { type GetFnInfoTaskResult } from './types/get-fn-info.task-result.js';
+import { type GetFnStatusTaskResult } from './types/get-fn-status.task-result.js';
+import { type OfdExchangeStatusTaskResult } from './types/ofd-exchange-status.task-result.js';
+import { type GetShiftTotalsTaskResult } from './types/get-shift-totals.task-result.js';
+import { type GetOverallTotalsTaskResult } from './types/get-overall-totals.task-result.js';
+import { type GetDepartmentSumTaskResult } from './types/get-department-sum.task-result.js';
+import { type JsonTaskParam } from './types/json-task.js';
+import { type ReportXTask } from './types/report-x.task.js';
+import { type VoidTaskResult } from './types/void.task-result.js';
+import { type CloseShiftTask, type OpenShiftTask } from './types/shift.task.js';
+import { type CloseShiftTaskResult, type OpenShiftTaskResult } from './types/shift.task-result.js';
+import { type BuyReturnTask, type BuyTask, type SellReturnTask, type SellTask } from './types/fiscal.task.js';
+import { type BuyReturnTaskResult, type BuyTaskResult, type SellReturnTaskResult, type SellTaskResult } from './types/fiscal.task-result.js';
+export default class AtolRpc extends AtolRpcBase {
+    getDeviceStatus(): Promise<GetDeviceStatusTaskResult>;
+    getDeviceInfo(): Promise<GetDeviceInfoTaskResult>;
+    getMcu(): Promise<GetMcuTaskResult>;
+    getCashDrawerStatus(): Promise<GetCashDrawerStatusTaskResult>;
+    getShiftStatus(): Promise<GetShiftStatusTaskResult>;
+    getFnInfo(): Promise<GetFnInfoTaskResult>;
+    getFnStatus(): Promise<GetFnStatusTaskResult>;
+    ofdExchangeStatus(): Promise<OfdExchangeStatusTaskResult>;
+    getShiftTotals(): Promise<GetShiftTotalsTaskResult>;
+    getOverallTotals(): Promise<GetOverallTotalsTaskResult>;
+    getDepartmentSum(): Promise<GetDepartmentSumTaskResult>;
+    continuePrint(): Promise<void>;
+    printLastReceiptCopy(): Promise<void>;
+    reportX(param?: JsonTaskParam<ReportXTask>): Promise<VoidTaskResult>;
+    openShift(param?: JsonTaskParam<OpenShiftTask>): Promise<OpenShiftTaskResult>;
+    closeShift(param?: JsonTaskParam<CloseShiftTask>): Promise<CloseShiftTaskResult>;
+    sell(param: JsonTaskParam<SellTask>): Promise<SellTaskResult>;
+    sellReturn(param: JsonTaskParam<SellReturnTask>): Promise<SellReturnTaskResult>;
+    buy(param: JsonTaskParam<BuyTask>): Promise<BuyTaskResult>;
+    buyReturn(param: JsonTaskParam<BuyReturnTask>): Promise<BuyReturnTaskResult>;
+}
+//# sourceMappingURL=atol-rpc.d.ts.map

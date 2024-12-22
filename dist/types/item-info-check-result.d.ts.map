@@ -1,0 +1,1 @@
+{"version":3,"file":"item-info-check-result.d.ts","sourceRoot":"","sources":["../../src/types/item-info-check-result.ts"],"names":[],"mappings":"AAGA,MAAM,MAAM,mBAAmB,GAAG;IACjC,YAAY,EAAE,OAAO,CAAC;IACtB,cAAc,EAAE,OAAO,CAAC;IACxB,aAAa,EAAE,OAAO,CAAC;IACvB,yBAAyB,EAAE,OAAO,CAAC;IACnC,iBAAiB,EAAE,OAAO,CAAC;CAC3B,CAAC;AAEF,eAAO,MAAM,qBAAqB,8EAMhC,CAAC"}
