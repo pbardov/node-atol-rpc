@@ -1,17 +1,31 @@
-import { Fptr10 } from 'node-atol-wrapper';
+import AtolWrapper from 'node-atol-wrapper';
 import * as util from 'node:util';
 import { jsonTaskResultTypeGuards, jsonTaskTypeGuards, } from './types/json-task.js';
 import { TypeGuardError } from './common/types/type-guard.error.js';
 import { WorkMode } from './types/settings.js';
-export default class AtolRpcBase extends Fptr10 {
+export default class AtolRpcBase extends AtolWrapper.Fptr10 {
     workMode = WorkMode.async;
     constructor(settings) {
         super();
-        const { workMode = this.workMode } = settings ?? {};
-        this.workMode = workMode;
+        this.create();
+        process.on('SIGINT', () => {
+            this.destroy();
+        });
+        process.on('SIGTERM', () => {
+            this.destroy();
+        });
         if (settings) {
             this.setSettings(settings);
         }
+    }
+    getSettings() {
+        const { workMode } = this;
+        return { ...super.getSettings(), workMode };
+    }
+    setSettings(settings) {
+        const { workMode = this.workMode } = settings;
+        this.workMode = workMode;
+        return super.setSettings(settings);
     }
     async processJsonTask(task) {
         const paramTypeGuard = jsonTaskTypeGuards[task.type];

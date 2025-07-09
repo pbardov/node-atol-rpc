@@ -1,4 +1,4 @@
-import {Fptr10, type Settings as Fptr10Settings} from 'node-atol-wrapper';
+import AtolWrapper from 'node-atol-wrapper';
 import * as util from 'node:util';
 import {
 	type JsonTaskMap, type JsonTaskResultMap, jsonTaskResultTypeGuards, jsonTaskTypeGuards,
@@ -7,18 +7,34 @@ import type {TypeGuardDetail} from './common/types/type-guard.js';
 import {TypeGuardError} from './common/types/type-guard.error.js';
 import {type Settings, WorkMode} from './types/settings.js';
 
-export default class AtolRpcBase extends Fptr10 {
+export default class AtolRpcBase extends AtolWrapper.Fptr10 {
 	public workMode: WorkMode = WorkMode.async;
 
 	constructor(settings?: Settings) {
 		super();
 
-		const {workMode = this.workMode} = settings ?? {};
-		this.workMode = workMode;
+		this.create();
+		process.on('SIGINT', () => {
+			this.destroy();
+		});
+		process.on('SIGTERM', () => {
+			this.destroy();
+		});
 
 		if (settings) {
 			this.setSettings(settings);
 		}
+	}
+
+	getSettings(): Settings {
+		const {workMode} = this;
+		return {...super.getSettings(), workMode};
+	}
+
+	setSettings(settings: Settings): boolean {
+		const {workMode = this.workMode} = settings;
+		this.workMode = workMode;
+		return super.setSettings(settings);
 	}
 
 	async processJsonTask<T extends keyof JsonTaskMap, R = JsonTaskResultMap[T]>(task: JsonTaskMap[T]): Promise<R> {

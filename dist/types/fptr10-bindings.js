@@ -1,0 +1,115 @@
+/* eslint-disable @typescript-eslint/naming-convention */
+import isEnumOf from '../common/types/is-enum-of.js';
+import structureValidator from '../common/types/structure-validator.js';
+import isString from '../common/types/is-string.js';
+import isBoolean from '../common/types/is-boolean.js';
+import isNumber from '../common/types/is-number.js';
+export var Baudrate;
+(function (Baudrate) {
+    Baudrate[Baudrate["LIBFPTR_PORT_BR_1200"] = 1200] = "LIBFPTR_PORT_BR_1200";
+    Baudrate[Baudrate["LIBFPTR_PORT_BR_2400"] = 2400] = "LIBFPTR_PORT_BR_2400";
+    Baudrate[Baudrate["LIBFPTR_PORT_BR_4800"] = 4800] = "LIBFPTR_PORT_BR_4800";
+    Baudrate[Baudrate["LIBFPTR_PORT_BR_9600"] = 9600] = "LIBFPTR_PORT_BR_9600";
+    Baudrate[Baudrate["LIBFPTR_PORT_BR_19200"] = 19200] = "LIBFPTR_PORT_BR_19200";
+    Baudrate[Baudrate["LIBFPTR_PORT_BR_38400"] = 38400] = "LIBFPTR_PORT_BR_38400";
+    Baudrate[Baudrate["LIBFPTR_PORT_BR_57600"] = 57600] = "LIBFPTR_PORT_BR_57600";
+    Baudrate[Baudrate["LIBFPTR_PORT_BR_115200"] = 115200] = "LIBFPTR_PORT_BR_115200";
+    Baudrate[Baudrate["LIBFPTR_PORT_BR_230400"] = 230400] = "LIBFPTR_PORT_BR_230400";
+    Baudrate[Baudrate["LIBFPTR_PORT_BR_460800"] = 460800] = "LIBFPTR_PORT_BR_460800";
+    Baudrate[Baudrate["LIBFPTR_PORT_BR_921600"] = 921600] = "LIBFPTR_PORT_BR_921600";
+})(Baudrate || (Baudrate = {}));
+export const isBaudrate = isEnumOf(Baudrate);
+export var Bits;
+(function (Bits) {
+    Bits[Bits["LIBFPTR_PORT_BITS_7"] = 7] = "LIBFPTR_PORT_BITS_7";
+    Bits[Bits["LIBFPTR_PORT_BITS_8"] = 8] = "LIBFPTR_PORT_BITS_8";
+})(Bits || (Bits = {}));
+export const isBits = isEnumOf(Bits);
+export var Parity;
+(function (Parity) {
+    Parity[Parity["LIBFPTR_PORT_PARITY_NO"] = 0] = "LIBFPTR_PORT_PARITY_NO";
+    Parity[Parity["LIBFPTR_PORT_PARITY_ODD"] = 1] = "LIBFPTR_PORT_PARITY_ODD";
+    Parity[Parity["LIBFPTR_PORT_PARITY_EVEN"] = 2] = "LIBFPTR_PORT_PARITY_EVEN";
+    Parity[Parity["LIBFPTR_PORT_PARITY_MARK"] = 3] = "LIBFPTR_PORT_PARITY_MARK";
+    Parity[Parity["LIBFPTR_PORT_PARITY_SPACE"] = 4] = "LIBFPTR_PORT_PARITY_SPACE";
+})(Parity || (Parity = {}));
+export const isParity = isEnumOf(Parity);
+export var Stopbits;
+(function (Stopbits) {
+    Stopbits[Stopbits["LIBFPTR_PORT_SB_1"] = 0] = "LIBFPTR_PORT_SB_1";
+    Stopbits[Stopbits["LIBFPTR_PORT_SB_1_5"] = 1] = "LIBFPTR_PORT_SB_1_5";
+    Stopbits[Stopbits["LIBFPTR_PORT_SB_2"] = 2] = "LIBFPTR_PORT_SB_2";
+})(Stopbits || (Stopbits = {}));
+export const isStopbits = isEnumOf(Stopbits);
+export var Model;
+(function (Model) {
+    Model[Model["LIBFPTR_MODEL_UNKNOWN"] = 0] = "LIBFPTR_MODEL_UNKNOWN";
+    Model[Model["LIBFPTR_MODEL_ATOL_AUTO"] = 500] = "LIBFPTR_MODEL_ATOL_AUTO";
+    Model[Model["LIBFPTR_MODEL_ATOL_11F"] = 67] = "LIBFPTR_MODEL_ATOL_11F";
+    Model[Model["LIBFPTR_MODEL_ATOL_15F"] = 78] = "LIBFPTR_MODEL_ATOL_15F";
+    Model[Model["LIBFPTR_MODEL_ATOL_20F"] = 81] = "LIBFPTR_MODEL_ATOL_20F";
+    Model[Model["LIBFPTR_MODEL_ATOL_22F"] = 63] = "LIBFPTR_MODEL_ATOL_22F";
+    Model[Model["LIBFPTR_MODEL_ATOL_25F"] = 57] = "LIBFPTR_MODEL_ATOL_25F";
+    Model[Model["LIBFPTR_MODEL_ATOL_27F"] = 87] = "LIBFPTR_MODEL_ATOL_27F";
+    Model[Model["LIBFPTR_MODEL_ATOL_30F"] = 61] = "LIBFPTR_MODEL_ATOL_30F";
+    Model[Model["LIBFPTR_MODEL_ATOL_42FS"] = 77] = "LIBFPTR_MODEL_ATOL_42FS";
+    Model[Model["LIBFPTR_MODEL_ATOL_47FA"] = 48] = "LIBFPTR_MODEL_ATOL_47FA";
+    Model[Model["LIBFPTR_MODEL_ATOL_50F"] = 80] = "LIBFPTR_MODEL_ATOL_50F";
+    Model[Model["LIBFPTR_MODEL_ATOL_52F"] = 64] = "LIBFPTR_MODEL_ATOL_52F";
+    Model[Model["LIBFPTR_MODEL_ATOL_55F"] = 62] = "LIBFPTR_MODEL_ATOL_55F";
+    Model[Model["LIBFPTR_MODEL_ATOL_60F"] = 75] = "LIBFPTR_MODEL_ATOL_60F";
+    Model[Model["LIBFPTR_MODEL_ATOL_77F"] = 69] = "LIBFPTR_MODEL_ATOL_77F";
+    Model[Model["LIBFPTR_MODEL_ATOL_90F"] = 72] = "LIBFPTR_MODEL_ATOL_90F";
+    Model[Model["LIBFPTR_MODEL_ATOL_91F"] = 82] = "LIBFPTR_MODEL_ATOL_91F";
+    Model[Model["LIBFPTR_MODEL_ATOL_92F"] = 84] = "LIBFPTR_MODEL_ATOL_92F";
+    Model[Model["LIBFPTR_MODEL_ATOL_SIGMA_10"] = 86] = "LIBFPTR_MODEL_ATOL_SIGMA_10";
+    Model[Model["LIBFPTR_MODEL_ATOL_SIGMA_7F"] = 90] = "LIBFPTR_MODEL_ATOL_SIGMA_7F";
+    Model[Model["LIBFPTR_MODEL_ATOL_SIGMA_8F"] = 91] = "LIBFPTR_MODEL_ATOL_SIGMA_8F";
+    Model[Model["LIBFPTR_MODEL_ATOL_PT_5F"] = 89] = "LIBFPTR_MODEL_ATOL_PT_5F";
+    Model[Model["LIBFPTR_MODEL_KAZNACHEY_FA"] = 76] = "LIBFPTR_MODEL_KAZNACHEY_FA";
+    Model[Model["LIBFPTR_MODEL_ATOL_1F"] = 93] = "LIBFPTR_MODEL_ATOL_1F";
+    Model[Model["LIBFPTR_MODEL_ATOL_22v2F"] = 95] = "LIBFPTR_MODEL_ATOL_22v2F";
+})(Model || (Model = {}));
+export const isModel = isEnumOf(Model);
+export var OfdChannel;
+(function (OfdChannel) {
+    OfdChannel[OfdChannel["LIBFPTR_OFD_CHANNEL_NONE"] = 0] = "LIBFPTR_OFD_CHANNEL_NONE";
+    OfdChannel[OfdChannel["LIBFPTR_OFD_CHANNEL_USB"] = 1] = "LIBFPTR_OFD_CHANNEL_USB";
+    OfdChannel[OfdChannel["LIBFPTR_OFD_CHANNEL_PROTO"] = 2] = "LIBFPTR_OFD_CHANNEL_PROTO";
+    OfdChannel[OfdChannel["LIBFPTR_OFD_CHANNEL_AUTO"] = 2] = "LIBFPTR_OFD_CHANNEL_AUTO";
+})(OfdChannel || (OfdChannel = {}));
+export const isOfdChannel = isEnumOf(OfdChannel);
+export var Port;
+(function (Port) {
+    Port[Port["LIBFPTR_PORT_COM"] = 0] = "LIBFPTR_PORT_COM";
+    Port[Port["LIBFPTR_PORT_USB"] = 1] = "LIBFPTR_PORT_USB";
+    Port[Port["LIBFPTR_PORT_TCPIP"] = 2] = "LIBFPTR_PORT_TCPIP";
+    Port[Port["LIBFPTR_PORT_BLUETOOTH"] = 3] = "LIBFPTR_PORT_BLUETOOTH";
+})(Port || (Port = {}));
+export const isPort = isEnumOf(Port);
+export const isFptr10Settings = structureValidator({
+    AccessPassword: isString,
+    AutoDisableBluetooth: isBoolean,
+    AutoEnableBluetooth: isBoolean,
+    AutoReconnect: isBoolean,
+    BaudRate: isBaudrate,
+    Bits: isBits,
+    ComFile: isString,
+    DocumentsJournalPath: isString,
+    IPAddress: isString,
+    IPPort: isNumber,
+    InvertCashDrawerStatus: isBoolean,
+    LibraryPath: isString,
+    MACAddress: isString,
+    Model: isModel,
+    OfdChannel: isOfdChannel,
+    Parity: isParity,
+    Port: isPort,
+    RemoteServerAddr: isString,
+    RemoteServerConnectionTimeout: isNumber,
+    ScriptsPath: isString,
+    StopBits: isStopbits,
+    UsbDevicePath: isString,
+    UseDocumentsJournal: isBoolean,
+    UserPassword: isString,
+});
