@@ -1,0 +1,71 @@
+name: Publish npm package on tag
+
+on:
+  workflow_dispatch:          # вручную из UI
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22.x'
+          registry-url: "https://npm.pkg.github.com"
+          scope: "@${{ github.repository_owner }}"
+          cache: "npm"
+
+      - name: Install dependencies
+        run: |
+          set -euo pipefail
+          # yq v4
+          YQ_VERSION=v4.45.4
+          wget -qO /usr/local/bin/yq \
+          https://github.com/mikefarah/yq/releases/download/${YQ_VERSION}/yq_linux_amd64
+          chmod +x /usr/local/bin/yq
+          
+          # jq
+          apt-get update -qq && apt-get install -y -qq jq
+
+      - name: Setup Yarn
+        run: |
+          npm i -g yarn
+
+      - name: Extract tag version and package name
+        id: vars
+        run: |
+          if [[ "$GITHUB_REF" != "refs/tags/"* ]]; then
+            PKG_VER=$(jq -r '.version' package.json)
+          else
+            PKG_VER="${GITHUB_REF_NAME#v}"
+          fi
+          
+          echo "VERSION=${PKG_VER}" >> $GITHUB_ENV
+          echo "PACKAGE_NAME=@${GITHUB_REPOSITORY_OWNER}/$(jq -r .name package.json | cut -d"/" -f2)" >> $GITHUB_ENV
+
+      - run: echo "Package name $PACKAGE_NAME"
+      - run: echo "Package version $VERSION"
+
+      - name: Install dependencies
+        run: yarn install --frozen-lockfile
+
+      - name: Build package
+        run: yarn run build
+
+      - name: Set package scope
+        run: npm pkg set name=$PACKAGE_NAME
+
+      - name: Set package version
+        run: npm --no-git-tag-version version "$VERSION"
+
+      - name: Pack and publish
+        run: |
+          npm pack
+          npm unpublish --force $PACKAGE_NAME@$VERSION || true
+          npm publish
