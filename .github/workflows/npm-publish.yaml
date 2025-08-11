@@ -60,8 +60,7 @@ jobs:
             npm --no-git-tag-version version "$VERSION"
           fi
 
-      - name: Pack and publish
-        run: |
-          npm pack
-          npm unpublish --force $PACKAGE_NAME@$VERSION || true
-          npm publish
+      - name: Publish
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: npm publish
