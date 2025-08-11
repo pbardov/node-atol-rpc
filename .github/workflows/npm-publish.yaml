@@ -50,7 +50,11 @@ jobs:
         run: npm pkg set name=$PACKAGE_NAME
 
       - name: Set package version
-        run: npm --no-git-tag-version version "$VERSION"
+        run: |
+          PKG_VER=$(jq -r '.version' package.json)
+          if [[ "$PKG_VER" != "$VERSION" ]]; then
+            npm --no-git-tag-version version "$VERSION"
+          fi
 
       - name: Pack and publish
         run: |
