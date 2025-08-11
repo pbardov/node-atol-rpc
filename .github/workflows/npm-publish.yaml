@@ -21,18 +21,6 @@ jobs:
           scope: "@${{ github.repository_owner }}"
           cache: "npm"
 
-      - name: Install dependencies
-        run: |
-          set -euo pipefail
-          # yq v4
-          YQ_VERSION=v4.45.4
-          wget -qO /usr/local/bin/yq \
-          https://github.com/mikefarah/yq/releases/download/${YQ_VERSION}/yq_linux_amd64
-          chmod +x /usr/local/bin/yq
-          
-          # jq
-          apt-get update -qq && apt-get install -y -qq jq
-
       - name: Setup Yarn
         run: |
           npm i -g yarn
