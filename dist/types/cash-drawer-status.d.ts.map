@@ -1,1 +1,0 @@
-{"version":3,"file":"cash-drawer-status.d.ts","sourceRoot":"","sources":["../../src/types/cash-drawer-status.ts"],"names":[],"mappings":"AAIA,MAAM,MAAM,kBAAkB,GAAG;IAChC,OAAO,EAAE,MAAM,CAAC;CAChB,CAAC;AAEF,eAAO,MAAM,oBAAoB,6EAE/B,CAAC;AAEH,MAAM,MAAM,gBAAgB,GAAG;IAC9B,gBAAgB,EAAE,OAAO,CAAC;CAC1B,CAAC;AAEF,eAAO,MAAM,kBAAkB,2EAE7B,CAAC"}

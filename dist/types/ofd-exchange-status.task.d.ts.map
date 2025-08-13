@@ -1,1 +1,0 @@
-{"version":3,"file":"ofd-exchange-status.task.d.ts","sourceRoot":"","sources":["../../src/types/ofd-exchange-status.task.ts"],"names":[],"mappings":"AAAA,OAAO,EAAC,KAAK,QAAQ,EAAC,MAAM,gBAAgB,CAAC;AAC7C,OAAO,EAAC,YAAY,EAAC,MAAM,qBAAqB,CAAC;AAIjD,MAAM,MAAM,qBAAqB,GAAG,QAAQ,GAAG;IAC9C,IAAI,EAAE,YAAY,CAAC,iBAAiB,CAAC;CACrC,CAAC;AAEF,eAAO,MAAM,uBAAuB,gFAElC,CAAC"}

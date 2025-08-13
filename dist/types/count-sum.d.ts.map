@@ -1,1 +1,0 @@
-{"version":3,"file":"count-sum.d.ts","sourceRoot":"","sources":["../../src/types/count-sum.ts"],"names":[],"mappings":"AAGA,MAAM,MAAM,QAAQ,GAAG;IACtB,KAAK,EAAE,MAAM,CAAC;IACd,GAAG,EAAE,MAAM,CAAC;CACZ,CAAC;AAEF,eAAO,MAAM,UAAU,mEAGrB,CAAC;AAEH,MAAM,MAAM,GAAG,GAAG;IACjB,GAAG,EAAE,MAAM,CAAC;CACZ,CAAC;AAEF,eAAO,MAAM,KAAK,8DAA2C,CAAC"}

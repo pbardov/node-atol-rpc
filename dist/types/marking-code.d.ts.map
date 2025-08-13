@@ -1,1 +1,0 @@
-{"version":3,"file":"marking-code.d.ts","sourceRoot":"","sources":["../../src/types/marking-code.ts"],"names":[],"mappings":"AAGA,oBAAY,eAAe;IAC1B,KAAK,UAAU;IACf,OAAO,YAAY;IACnB,OAAO,YAAY;CACnB;AAED,wBAAgB,iBAAiB,CAAC,CAAC,EAAE,OAAO,GAAG,CAAC,IAAI,eAAe,CAElE;AAED,MAAM,MAAM,WAAW,GAAG;IACzB,IAAI,EAAE,eAAe,CAAC;IACtB,IAAI,EAAE,MAAM,CAAC;CACb,CAAC;AAEF,eAAO,MAAM,aAAa,sEAGxB,CAAC"}

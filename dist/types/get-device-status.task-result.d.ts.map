@@ -1,1 +1,0 @@
-{"version":3,"file":"get-device-status.task-result.d.ts","sourceRoot":"","sources":["../../src/types/get-device-status.task-result.ts"],"names":[],"mappings":"AAAA,OAAO,EAAC,KAAK,YAAY,EAAiB,MAAM,oBAAoB,CAAC;AAGrE,MAAM,MAAM,yBAAyB,GAAG;IACvC,YAAY,EAAE,YAAY,CAAC;CAC3B,CAAC;AAEF,eAAO,MAAM,2BAA2B,oFAEtC,CAAC"}

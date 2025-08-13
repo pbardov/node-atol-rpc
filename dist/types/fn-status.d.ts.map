@@ -1,1 +1,0 @@
-{"version":3,"file":"fn-status.d.ts","sourceRoot":"","sources":["../../src/types/fn-status.ts"],"names":[],"mappings":"AAEA,OAAO,EAAC,KAAK,cAAc,EAAmB,MAAM,cAAc,CAAC;AAEnE,MAAM,MAAM,QAAQ,GAAG;IACtB,oBAAoB,EAAE,MAAM,CAAC;IAC7B,mBAAmB,EAAE,MAAM,CAAC;IAC5B,QAAQ,EAAE,cAAc,CAAC;CACzB,CAAC;AAEF,eAAO,MAAM,UAAU,mEAIrB,CAAC"}

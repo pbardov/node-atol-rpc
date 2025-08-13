@@ -1,1 +1,0 @@
-{"version":3,"file":"get-mcu.task-result.d.ts","sourceRoot":"","sources":["../../src/types/get-mcu.task-result.ts"],"names":[],"mappings":"AAAA,OAAO,EACN,KAAK,aAAa,EAClB,KAAK,UAAU,EAIf,KAAK,OAAO,EACZ,MAAM,eAAe,CAAC;AAGvB,MAAM,MAAM,gBAAgB,GAAG;IAC9B,GAAG,EAAE,OAAO,CAAC;IACb,SAAS,EAAE,aAAa,CAAC;IACzB,UAAU,EAAE,UAAU,CAAC;CACvB,CAAC;AAEF,eAAO,MAAM,kBAAkB,2EAI7B,CAAC"}

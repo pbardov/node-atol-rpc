@@ -2,6 +2,7 @@
 /yarn-error.log
 .DS_Store
 .idea
+/dist/
 .*.crt
 .env*
 /settings*.json
