@@ -22,8 +22,8 @@ import isString from '../common/types/is-string.js';
 import {arrayTypeGuard} from '../common/types/is-array-of.js';
 import isNumber from '../common/types/is-number.js';
 
-const fiscalTaskTypes = [JsonTaskType.sell, JsonTaskType.buy, JsonTaskType.sellReturn, JsonTaskType.buyReturn] as const;
-type FiscalTaskTypesTuple = typeof fiscalTaskTypes;
+export const fiscalTaskTypes = [JsonTaskType.sell, JsonTaskType.buy, JsonTaskType.sellReturn, JsonTaskType.buyReturn] as const;
+export type FiscalTaskTypesTuple = typeof fiscalTaskTypes;
 export type FiscalTaskTypes = FiscalTaskTypesTuple[number];
 
 export type FiscalTask<T extends FiscalTaskTypes = FiscalTaskTypes> = JsonTask & {
