@@ -70,6 +70,8 @@ import {
 	type SellReturnCorrectionTaskResult
 } from './correction.task-result.js';
 import {isNonfiscalTask, type NonfiscalTask} from './nonfiscal.task.js';
+import {type CashInTask, type CashOutTask, isCashInTask, isCashOutTask} from './cash.task.js';
+import {type CashTaskResult, isCashTaskResult} from './cash.task-result.js';
 
 export type JsonTask = {
 	type: JsonTaskType;
@@ -94,6 +96,8 @@ export type JsonTaskMap = {
 	[JsonTaskType.sellReturnCorrection]: SellReturnCorrectionTask;
 	[JsonTaskType.buyReturnCorrection]: BuyReturnCorrectionTask;
 	[JsonTaskType.nonFiscal]: NonfiscalTask;
+	[JsonTaskType.cashIn]: CashInTask;
+	[JsonTaskType.cashOut]: CashOutTask;
 	[JsonTaskType.printLastReceiptCopy]: PrintLastReceiptCopyTask;
 	[JsonTaskType.getDeviceStatus]: GetDeviceStatusTask;
 	[JsonTaskType.getDeviceInfo]: GetDeviceInfoTask;
@@ -122,6 +126,8 @@ export type JsonTaskResultMap = {
 	[JsonTaskType.sellReturnCorrection]: SellReturnCorrectionTaskResult;
 	[JsonTaskType.buyReturnCorrection]: BuyReturnCorrectionTaskResult;
 	[JsonTaskType.nonFiscal]: VoidTaskResult;
+	[JsonTaskType.cashIn]: CashTaskResult;
+	[JsonTaskType.cashOut]: CashTaskResult;
 	[JsonTaskType.printLastReceiptCopy]: VoidTaskResult;
 	[JsonTaskType.getDeviceStatus]: GetDeviceStatusTaskResult;
 	[JsonTaskType.getDeviceInfo]: GetDeviceInfoTaskResult;
@@ -154,6 +160,8 @@ export const jsonTaskTypeGuards: TypeGuardMap<JsonTaskMap> = {
 	[JsonTaskType.sellReturnCorrection]: isSellReturnCorrectionTask,
 	[JsonTaskType.buyReturnCorrection]: isBuyReturnCorrectionTask,
 	[JsonTaskType.nonFiscal]: isNonfiscalTask,
+	[JsonTaskType.cashIn]: isCashInTask,
+	[JsonTaskType.cashOut]: isCashOutTask,
 	[JsonTaskType.printLastReceiptCopy]: isPrintLastReceiptCopyTask,
 	[JsonTaskType.getDeviceStatus]: isGetDeviceStatusTask,
 	[JsonTaskType.getDeviceInfo]: isGetDeviceInfoTask,
@@ -182,6 +190,8 @@ export const jsonTaskResultTypeGuards: TypeGuardMap<JsonTaskResultMap> = {
 	[JsonTaskType.sellReturnCorrection]: isSellReturnCorrectionTaskResult,
 	[JsonTaskType.buyReturnCorrection]: isBuyReturnCorrectionTaskResult,
 	[JsonTaskType.nonFiscal]: isVoidTaskResult,
+	[JsonTaskType.cashIn]: isCashTaskResult,
+	[JsonTaskType.cashOut]: isCashTaskResult,
 	[JsonTaskType.printLastReceiptCopy]: isVoidTaskResult,
 	[JsonTaskType.getDeviceStatus]: isGetDeviceStatusTaskResult,
 	[JsonTaskType.getDeviceInfo]: isGetDeviceInfoTaskResult,
