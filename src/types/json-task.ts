@@ -69,6 +69,7 @@ import {
 	type SellCorrectionTaskResult,
 	type SellReturnCorrectionTaskResult
 } from './correction.task-result.js';
+import {isNonfiscalTask, type NonfiscalTask} from './nonfiscal.task.js';
 
 export type JsonTask = {
 	type: JsonTaskType;
@@ -92,6 +93,7 @@ export type JsonTaskMap = {
 	[JsonTaskType.buyCorrection]: BuyCorrectionTask;
 	[JsonTaskType.sellReturnCorrection]: SellReturnCorrectionTask;
 	[JsonTaskType.buyReturnCorrection]: BuyReturnCorrectionTask;
+	[JsonTaskType.nonFiscal]: NonfiscalTask;
 	[JsonTaskType.printLastReceiptCopy]: PrintLastReceiptCopyTask;
 	[JsonTaskType.getDeviceStatus]: GetDeviceStatusTask;
 	[JsonTaskType.getDeviceInfo]: GetDeviceInfoTask;
@@ -119,6 +121,7 @@ export type JsonTaskResultMap = {
 	[JsonTaskType.buyCorrection]: BuyCorrectionTaskResult;
 	[JsonTaskType.sellReturnCorrection]: SellReturnCorrectionTaskResult;
 	[JsonTaskType.buyReturnCorrection]: BuyReturnCorrectionTaskResult;
+	[JsonTaskType.nonFiscal]: VoidTaskResult;
 	[JsonTaskType.printLastReceiptCopy]: VoidTaskResult;
 	[JsonTaskType.getDeviceStatus]: GetDeviceStatusTaskResult;
 	[JsonTaskType.getDeviceInfo]: GetDeviceInfoTaskResult;
@@ -150,6 +153,7 @@ export const jsonTaskTypeGuards: TypeGuardMap<JsonTaskMap> = {
 	[JsonTaskType.buyCorrection]: isBuyCorrectionTask,
 	[JsonTaskType.sellReturnCorrection]: isSellReturnCorrectionTask,
 	[JsonTaskType.buyReturnCorrection]: isBuyReturnCorrectionTask,
+	[JsonTaskType.nonFiscal]: isNonfiscalTask,
 	[JsonTaskType.printLastReceiptCopy]: isPrintLastReceiptCopyTask,
 	[JsonTaskType.getDeviceStatus]: isGetDeviceStatusTask,
 	[JsonTaskType.getDeviceInfo]: isGetDeviceInfoTask,
@@ -177,6 +181,7 @@ export const jsonTaskResultTypeGuards: TypeGuardMap<JsonTaskResultMap> = {
 	[JsonTaskType.buyCorrection]: isBuyCorrectionTaskResult,
 	[JsonTaskType.sellReturnCorrection]: isSellReturnCorrectionTaskResult,
 	[JsonTaskType.buyReturnCorrection]: isBuyReturnCorrectionTaskResult,
+	[JsonTaskType.nonFiscal]: isVoidTaskResult,
 	[JsonTaskType.printLastReceiptCopy]: isVoidTaskResult,
 	[JsonTaskType.getDeviceStatus]: isGetDeviceStatusTaskResult,
 	[JsonTaskType.getDeviceInfo]: isGetDeviceInfoTaskResult,
