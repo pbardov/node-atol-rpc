@@ -51,6 +51,24 @@ import {type GetOverallTotalsTask, isGetOverallTotalsTask} from './get-overall-t
 import {type GetDepartmentSumTask, isGetDepartmentSumTask} from './get-department-sum.task.js';
 import {type GetDepartmentSumTaskResult, isGetDepartmentSumTaskResult} from './get-department-sum.task-result.js';
 import {isReportXTask, type ReportXTask} from './report-x.task.js';
+import {
+	type BuyCorrectionTask,
+	type BuyReturnCorrectionTask,
+	isBuyCorrectionTask,
+	isBuyReturnCorrectionTask,
+	isSellCorrectionTask,
+	isSellReturnCorrectionTask,
+	type SellCorrectionTask,
+	type SellReturnCorrectionTask
+} from './correction.task.js';
+import {
+	type BuyCorrectionTaskResult,
+	type BuyReturnCorrectionTaskResult,
+	isBuyCorrectionTaskResult, isBuyReturnCorrectionTaskResult,
+	isSellCorrectionTaskResult, isSellReturnCorrectionTaskResult,
+	type SellCorrectionTaskResult,
+	type SellReturnCorrectionTaskResult
+} from './correction.task-result.js';
 
 export type JsonTask = {
 	type: JsonTaskType;
@@ -70,6 +88,10 @@ export type JsonTaskMap = {
 	[JsonTaskType.buy]: BuyTask;
 	[JsonTaskType.sellReturn]: SellReturnTask;
 	[JsonTaskType.buyReturn]: BuyReturnTask;
+	[JsonTaskType.sellCorrection]: SellCorrectionTask;
+	[JsonTaskType.buyCorrection]: BuyCorrectionTask;
+	[JsonTaskType.sellReturnCorrection]: SellReturnCorrectionTask;
+	[JsonTaskType.buyReturnCorrection]: BuyReturnCorrectionTask;
 	[JsonTaskType.printLastReceiptCopy]: PrintLastReceiptCopyTask;
 	[JsonTaskType.getDeviceStatus]: GetDeviceStatusTask;
 	[JsonTaskType.getDeviceInfo]: GetDeviceInfoTask;
@@ -93,6 +115,10 @@ export type JsonTaskResultMap = {
 	[JsonTaskType.buy]: BuyTaskResult;
 	[JsonTaskType.sellReturn]: SellReturnTaskResult;
 	[JsonTaskType.buyReturn]: BuyReturnTaskResult;
+	[JsonTaskType.sellCorrection]: SellCorrectionTaskResult;
+	[JsonTaskType.buyCorrection]: BuyCorrectionTaskResult;
+	[JsonTaskType.sellReturnCorrection]: SellReturnCorrectionTaskResult;
+	[JsonTaskType.buyReturnCorrection]: BuyReturnCorrectionTaskResult;
 	[JsonTaskType.printLastReceiptCopy]: VoidTaskResult;
 	[JsonTaskType.getDeviceStatus]: GetDeviceStatusTaskResult;
 	[JsonTaskType.getDeviceInfo]: GetDeviceInfoTaskResult;
@@ -120,6 +146,10 @@ export const jsonTaskTypeGuards: TypeGuardMap<JsonTaskMap> = {
 	[JsonTaskType.buy]: isBuyTask,
 	[JsonTaskType.sellReturn]: isSellReturnTask,
 	[JsonTaskType.buyReturn]: isBuyReturnTask,
+	[JsonTaskType.sellCorrection]: isSellCorrectionTask,
+	[JsonTaskType.buyCorrection]: isBuyCorrectionTask,
+	[JsonTaskType.sellReturnCorrection]: isSellReturnCorrectionTask,
+	[JsonTaskType.buyReturnCorrection]: isBuyReturnCorrectionTask,
 	[JsonTaskType.printLastReceiptCopy]: isPrintLastReceiptCopyTask,
 	[JsonTaskType.getDeviceStatus]: isGetDeviceStatusTask,
 	[JsonTaskType.getDeviceInfo]: isGetDeviceInfoTask,
@@ -143,6 +173,10 @@ export const jsonTaskResultTypeGuards: TypeGuardMap<JsonTaskResultMap> = {
 	[JsonTaskType.buy]: isBuyTaskResult,
 	[JsonTaskType.sellReturn]: isSellReturnTaskResult,
 	[JsonTaskType.buyReturn]: isBuyReturnTaskResult,
+	[JsonTaskType.sellCorrection]: isSellCorrectionTaskResult,
+	[JsonTaskType.buyCorrection]: isBuyCorrectionTaskResult,
+	[JsonTaskType.sellReturnCorrection]: isSellReturnCorrectionTaskResult,
+	[JsonTaskType.buyReturnCorrection]: isBuyReturnCorrectionTaskResult,
 	[JsonTaskType.printLastReceiptCopy]: isVoidTaskResult,
 	[JsonTaskType.getDeviceStatus]: isGetDeviceStatusTaskResult,
 	[JsonTaskType.getDeviceInfo]: isGetDeviceInfoTaskResult,

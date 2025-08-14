@@ -49,6 +49,11 @@ export type CorrectionTask<T extends CorrectionTaskType = CorrectionTaskType> = 
     postItems?: DocumentPrintItem[];
 };
 
+export type SellCorrectionTask = CorrectionTask<JsonTaskType.sellCorrection>;
+export type SellReturnCorrectionTask = CorrectionTask<JsonTaskType.sellReturnCorrection>;
+export type BuyCorrectionTask = CorrectionTask<JsonTaskType.buyCorrection>;
+export type BuyReturnCorrectionTask = CorrectionTask<JsonTaskType.buyReturnCorrection>;
+
 export const correctionTaskTypeGuard = <T extends CorrectionTaskType>(types: T[]) => structureValidator<CorrectionTask<T>>({
     type: (v: unknown): v is T => isJsonTaskType(v) && types.includes(v as T),
     ignoreNonFiscalPrintErrors: makeOpt(isBoolean),
