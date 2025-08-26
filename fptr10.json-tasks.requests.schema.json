@@ -1,0 +1,807 @@
+{
+  "$id": "https://example.org/schemas/fptr10/json-task.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "ATOL FPTR10 JSON Task",
+  "type": "object",
+  "oneOf": [
+    { "$ref": "#/$defs/tasks/continuePrint" },
+    { "$ref": "#/$defs/tasks/openShift" },
+    { "$ref": "#/$defs/tasks/closeShift" },
+    { "$ref": "#/$defs/tasks/sell" },
+    { "$ref": "#/$defs/tasks/buy" },
+    { "$ref": "#/$defs/tasks/sellReturn" },
+    { "$ref": "#/$defs/tasks/buyReturn" },
+    { "$ref": "#/$defs/tasks/sellCorrection" },
+    { "$ref": "#/$defs/tasks/buyCorrection" },
+    { "$ref": "#/$defs/tasks/sellReturnCorrection" },
+    { "$ref": "#/$defs/tasks/buyReturnCorrection" },
+    { "$ref": "#/$defs/tasks/nonFiscal" },
+    { "$ref": "#/$defs/tasks/reportX" },
+    { "$ref": "#/$defs/tasks/cashIn" },
+    { "$ref": "#/$defs/tasks/cashOut" },
+    { "$ref": "#/$defs/tasks/reportOfdExchangeStatus" },
+    { "$ref": "#/$defs/tasks/printFnDocument" },
+    { "$ref": "#/$defs/tasks/printLastReceiptCopy" },
+    { "$ref": "#/$defs/tasks/getRegistrationInfo" },
+    { "$ref": "#/$defs/tasks/registration" },
+    { "$ref": "#/$defs/tasks/fnChange" },
+    { "$ref": "#/$defs/tasks/changeRegistrationParameters" },
+    { "$ref": "#/$defs/tasks/closeArchive" },
+    { "$ref": "#/$defs/tasks/openCashDrawer" },
+    { "$ref": "#/$defs/tasks/setDateTime" },
+    { "$ref": "#/$defs/tasks/getDeviceParameters" },
+    { "$ref": "#/$defs/tasks/setDeviceParameters" },
+    { "$ref": "#/$defs/tasks/getDeviceInfo" },
+    { "$ref": "#/$defs/tasks/getDeviceStatus" },
+    { "$ref": "#/$defs/tasks/getCashDrawerStatus" },
+    { "$ref": "#/$defs/tasks/getShiftStatus" },
+    { "$ref": "#/$defs/tasks/getFnInfo" },
+    { "$ref": "#/$defs/tasks/getFnStatus" },
+    { "$ref": "#/$defs/tasks/ofdExchangeStatus" },
+    { "$ref": "#/$defs/tasks/getShiftTotals" },
+    { "$ref": "#/$defs/tasks/getOverallTotals" },
+    { "$ref": "#/$defs/tasks/getFnDocument" },
+    { "$ref": "#/$defs/tasks/getLicenses" }
+  ],
+  "unevaluatedProperties": false,
+
+  "$defs": {
+    "operator": {
+      "type": "object",
+      "properties": {
+        "name": { "type": "string", "minLength": 1 },
+        "vatin": { "type": "string" }
+      },
+      "required": ["name"],
+      "additionalProperties": false,
+      "description": "Оператор (кассир)."
+    },
+
+    "payment": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "anyOf": [
+            { "type": "string", "enum": ["cash", "electronically", "prepaid", "credit", "other"] },
+            { "type": "integer", "enum": [0, 1, 2, 3, 4] }
+          ]
+        },
+        "sum": { "type": "number" }
+      },
+      "required": ["type", "sum"],
+      "additionalProperties": false
+    },
+
+    "tax": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": ["none", "vat0", "vat10", "vat18", "vat110", "vat118", "vat20", "vat120"]
+        },
+        "sum": { "type": "number" }
+      },
+      "required": ["type"],
+      "additionalProperties": false,
+      "description": "Сумма обязательна для налогов чека; для позиций может опускаться."
+    },
+
+    "clientInfo": {
+      "type": "object",
+      "properties": {
+        "emailOrPhone": { "type": "string" },
+        "vatin": { "type": "string" },
+        "name": { "type": "string" }
+      },
+      "required": ["emailOrPhone"],
+      "additionalProperties": false
+    },
+
+    "companyInfo": {
+      "type": "object",
+      "properties": {
+        "email": { "type": "string" }
+      },
+      "required": [],
+      "additionalProperties": false
+    },
+
+    "agentInfo": {
+      "type": "object",
+      "properties": {
+        "agents": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "bankPayingAgent",
+              "bankPayingSubagent",
+              "payingAgent",
+              "payingSubagent",
+              "attorney",
+              "commissionAgent",
+              "another"
+            ]
+          }
+        },
+        "payingAgent": {
+          "type": "object",
+          "properties": {
+            "operation": { "type": "string" },
+            "phones": { "type": "array", "items": { "type": "string" }, "minItems": 1 }
+          },
+          "required": ["operation", "phones"],
+          "additionalProperties": false
+        },
+        "receivePaymentsOperator": {
+          "type": "object",
+          "properties": {
+            "phones": { "type": "array", "items": { "type": "string" }, "minItems": 1 }
+          },
+          "required": ["phones"],
+          "additionalProperties": false
+        },
+        "moneyTransferOperator": {
+          "type": "object",
+          "properties": {
+            "phones": { "type": "array", "items": { "type": "string" }, "minItems": 1 },
+            "name": { "type": "string" },
+            "address": { "type": "string" },
+            "vatin": { "type": "string" }
+          },
+          "required": ["phones", "name", "address", "vatin"],
+          "additionalProperties": false
+        }
+      },
+      "additionalProperties": false
+    },
+
+    "supplierInfo": {
+      "type": "object",
+      "properties": {
+        "phones": { "type": "array", "items": { "type": "string" }, "minItems": 1 },
+        "name": { "type": "string" },
+        "vatin": { "type": "string" }
+      },
+      "required": ["phones", "name", "vatin"],
+      "additionalProperties": false
+    },
+
+    "marking": {
+      "oneOf": [
+        { "type": "string" },
+        {
+          "type": "object",
+          "properties": {
+            "type": { "type": "string", "enum": ["furs", "medicines", "tobacco", "shoes"] },
+            "gtin": { "type": "string" },
+            "serial": { "type": "string" }
+          },
+          "required": ["type", "gtin", "serial"],
+          "additionalProperties": false
+        }
+      ],
+      "description": "Код маркировки (строка — base64 тега 1162; либо объект со структурой по типу ТРУ)."
+    },
+
+    "alignmentEnum": { "type": "string", "enum": ["left", "center", "right"] },
+    "wrapEnum": { "type": "string", "enum": ["none", "chars", "words"] },
+
+    "textItem": {
+      "type": "object",
+      "properties": {
+        "type": { "const": "text" },
+        "text": { "type": "string" },
+        "alignment": { "$ref": "#/$defs/alignmentEnum" },
+        "wrap": { "$ref": "#/$defs/wrapEnum" },
+        "font": { "type": "integer" },
+        "doubleWidth": { "type": "boolean" },
+        "doubleHeight": { "type": "boolean" }
+      },
+      "required": ["type"],
+      "additionalProperties": false
+    },
+
+    "barcodeItem": {
+      "type": "object",
+      "properties": {
+        "type": { "const": "barcode" },
+        "barcode": { "type": "string" },
+        "barcodeType": {
+          "type": "string",
+          "enum": [
+            "EAN8", "EAN13", "UPCA", "UPCE",
+            "CODE39", "CODE93", "CODE128", "CODABAR",
+            "ITF", "ITF14", "GS1_128",
+            "PDF417", "QR", "AZTEC"
+          ]
+        },
+        "alignment": { "$ref": "#/$defs/alignmentEnum" },
+        "scale": { "type": "number" },
+        "height": { "type": "number" },
+        "printText": { "type": "boolean" }
+      },
+      "required": ["type", "barcode", "barcodeType"],
+      "additionalProperties": false
+    },
+
+    "pictureFromMemoryItem": {
+      "type": "object",
+      "properties": {
+        "type": { "const": "pictureFromMemory" },
+        "pictureNumber": { "type": "integer" },
+        "alignment": { "$ref": "#/$defs/alignmentEnum" }
+      },
+      "required": ["type", "pictureNumber"],
+      "additionalProperties": false
+    },
+
+    "userAttributeItem": {
+      "type": "object",
+      "properties": {
+        "type": { "const": "userAttribute" },
+        "name": { "type": "string" },
+        "value": { "type": "string" },
+        "print": { "type": "boolean" }
+      },
+      "required": ["type", "name", "value"],
+      "additionalProperties": false
+    },
+
+    "additionalAttributeItem": {
+      "type": "object",
+      "properties": {
+        "type": { "const": "additionalAttribute" },
+        "value": { "type": "string" },
+        "print": { "type": "boolean" }
+      },
+      "required": ["type", "value"],
+      "additionalProperties": false
+    },
+
+    "positionItem": {
+      "type": "object",
+      "properties": {
+        "type": { "const": "position" },
+        "name": { "type": "string" },
+        "price": { "type": "number" },
+        "quantity": { "type": "number" },
+        "amount": { "type": "number" },
+        "infoDiscountAmount": { "type": "number" },
+        "department": { "type": "integer" },
+        "measurementUnit": { "type": "string" },
+        "piece": { "type": "boolean" },
+        "paymentMethod": {
+          "type": "string",
+          "enum": [
+            "fullPrepayment", "prepayment", "advance",
+            "fullPayment", "partialPayment", "credit", "creditPayment"
+          ]
+        },
+        "paymentObject": {
+          "type": "string",
+          "enum": [
+            "commodity", "excise", "job", "service",
+            "gamblingBet", "gamblingPrize",
+            "lottery", "lotteryPrize",
+            "intellectualActivity", "payment",
+            "agentCommission", "proprietaryLaw",
+            "nonOperatingIncome",
+            "insuranceContributions", "insuranceСontributions",
+            "merchantTax", "resortFee",
+            "deposit", "composite", "another"
+          ]
+        },
+        "nomenclatureCode": { "$ref": "#/$defs/marking" },
+        "tax": { "$ref": "#/$defs/tax" },
+        "agentInfo": { "$ref": "#/$defs/agentInfo" },
+        "supplierInfo": { "$ref": "#/$defs/supplierInfo" },
+        "additionalAttribute": { "type": "string" },
+        "additionalAttributePrint": { "type": "boolean" },
+        "exciseSum": { "type": "number" },
+        "countryCode": { "type": "string" },
+        "customsDeclaration": { "type": "string" }
+      },
+      "required": ["type", "name", "price", "quantity", "amount"],
+      "additionalProperties": false
+    },
+
+    "documentItem": {
+      "oneOf": [
+        { "$ref": "#/$defs/positionItem" },
+        { "$ref": "#/$defs/textItem" },
+        { "$ref": "#/$defs/barcodeItem" },
+        { "$ref": "#/$defs/userAttributeItem" },
+        { "$ref": "#/$defs/additionalAttributeItem" },
+        { "$ref": "#/$defs/pictureFromMemoryItem" }
+      ]
+    },
+
+    "printItem": {
+      "oneOf": [
+        { "$ref": "#/$defs/textItem" },
+        { "$ref": "#/$defs/barcodeItem" },
+        { "$ref": "#/$defs/pictureFromMemoryItem" }
+      ]
+    },
+
+    "printItemNoPicture": {
+      "oneOf": [
+        { "$ref": "#/$defs/textItem" },
+        { "$ref": "#/$defs/barcodeItem" }
+      ]
+    },
+
+    "taxationTypeEnum": {
+      "type": "string",
+      "enum": ["osn", "usnIncome", "usnIncomeOutcome", "envd", "esn", "patent"]
+    },
+
+    "receiptBase": {
+      "type": "object",
+      "properties": {
+        "taxationType": { "$ref": "#/$defs/taxationTypeEnum" },
+        "ignoreNonFiscalPrintErrors": { "type": "boolean" },
+        "electronically": { "type": "boolean" },
+        "useVAT18": { "type": "boolean" },
+        "paymentsPlace": { "type": "string" },
+        "fnsUrl": { "type": "string" },
+        "operator": { "$ref": "#/$defs/operator" },
+        "clientInfo": { "$ref": "#/$defs/clientInfo" },
+        "companyInfo": { "$ref": "#/$defs/companyInfo" },
+        "agentInfo": { "$ref": "#/$defs/agentInfo" },
+        "supplierInfo": { "$ref": "#/$defs/supplierInfo" },
+        "items": { "type": "array", "items": { "$ref": "#/$defs/documentItem" } },
+        "payments": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/payment" } },
+        "taxes": { "type": "array", "items": { "$ref": "#/$defs/tax" } },
+        "total": { "type": "number" },
+        "preItems": { "type": "array", "items": { "$ref": "#/$defs/printItem" } },
+        "postItems": { "type": "array", "items": { "$ref": "#/$defs/printItem" } }
+      },
+      "required": ["taxationType", "payments"],
+      "allOf": [
+        {
+          "if": { "properties": { "electronically": { "const": true } }, "required": ["electronically"] },
+          "then": {
+            "required": ["clientInfo"],
+            "properties": { "clientInfo": { "required": ["emailOrPhone"] } }
+          }
+        }
+      ],
+      "additionalProperties": false
+    },
+
+    "correctionBase": {
+      "allOf": [
+        { "$ref": "#/$defs/receiptBase" },
+        {
+          "type": "object",
+          "properties": {
+            "correctionType": { "type": "string", "enum": ["self", "instruction"] },
+            "correctionBaseName": { "type": "string" },
+            "correctionBaseDate": {
+              "type": "string",
+              "pattern": "^\\d{4}\\.\\d{2}\\.\\d{2}$"
+            },
+            "correctionBaseNumber": { "type": "string" }
+          },
+          "required": ["correctionType"],
+          "additionalProperties": false
+        }
+      ]
+    },
+
+    "deviceParams": {
+      "type": "object",
+      "properties": {
+        "paymentsAddress": { "type": "string" },
+        "fnsUrl": { "type": "string" },
+        "registrationNumber": { "type": "string" },
+        "offlineMode": { "type": "boolean" },
+        "machineInstallation": { "type": "boolean" },
+        "bso": { "type": "boolean" },
+        "encryption": { "type": "boolean" },
+        "autoMode": { "type": "boolean" },
+        "machineNumber": { "type": "string" },
+        "internet": { "type": "boolean" },
+        "service": { "type": "boolean" },
+        "gambling": { "type": "boolean" },
+        "lottery": { "type": "boolean" },
+        "excise": { "type": "boolean" },
+        "defaultTaxationType": { "$ref": "#/$defs/taxationTypeEnum" },
+        "ofdChannel": { "type": "string", "enum": ["usb", "ethernet", "wifi", "gsm", "proto"] },
+        "ffdVersion": { "type": "string", "enum": ["1.0", "1.05", "1.1"] }
+      },
+      "additionalProperties": false
+    },
+
+    "organizationInfo": {
+      "type": "object",
+      "properties": {
+        "name": { "type": "string" },
+        "vatin": { "type": "string" },
+        "email": { "type": "string" },
+        "taxationTypes": { "type": "array", "items": { "$ref": "#/$defs/taxationTypeEnum" } },
+        "agents": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "bankPayingAgent",
+              "bankPayingSubagent",
+              "payingAgent",
+              "payingSubagent",
+              "attorney",
+              "commissionAgent",
+              "another"
+            ]
+          }
+        },
+        "address": { "type": "string" }
+      },
+      "additionalProperties": false
+    },
+
+    "ofdParams": {
+      "type": "object",
+      "properties": {
+        "name": { "type": "string" },
+        "vatin": { "type": "string" },
+        "host": { "type": "string" },
+        "port": { "type": "integer", "minimum": 0, "maximum": 65535 },
+        "dns": { "type": "string" }
+      },
+      "additionalProperties": false
+    },
+
+    "tasks": {
+      "continuePrint": {
+        "type": "object",
+        "properties": { "type": { "const": "continuePrint" } },
+        "required": ["type"],
+        "additionalProperties": false
+      },
+
+      "openShift": {
+        "type": "object",
+        "properties": {
+          "type": { "const": "openShift" },
+          "operator": { "$ref": "#/$defs/operator" },
+          "preItems": { "type": "array", "items": { "$ref": "#/$defs/printItemNoPicture" } },
+          "postItems": { "type": "array", "items": { "$ref": "#/$defs/printItemNoPicture" } }
+        },
+        "required": ["type"],
+        "additionalProperties": false
+      },
+
+      "closeShift": {
+        "type": "object",
+        "properties": {
+          "type": { "const": "closeShift" },
+          "operator": { "$ref": "#/$defs/operator" },
+          "preItems": { "type": "array", "items": { "$ref": "#/$defs/printItem" } },
+          "postItems": { "type": "array", "items": { "$ref": "#/$defs/printItem" } }
+        },
+        "required": ["type"],
+        "additionalProperties": false
+      },
+
+      "sell": {
+        "allOf": [
+          { "$ref": "#/$defs/receiptBase" },
+          { "type": "object", "properties": { "type": { "const": "sell" } }, "required": ["type"] }
+        ]
+      },
+      "buy": {
+        "allOf": [
+          { "$ref": "#/$defs/receiptBase" },
+          { "type": "object", "properties": { "type": { "const": "buy" } }, "required": ["type"] }
+        ]
+      },
+      "sellReturn": {
+        "allOf": [
+          { "$ref": "#/$defs/receiptBase" },
+          { "type": "object", "properties": { "type": { "const": "sellReturn" } }, "required": ["type"] }
+        ]
+      },
+      "buyReturn": {
+        "allOf": [
+          { "$ref": "#/$defs/receiptBase" },
+          { "type": "object", "properties": { "type": { "const": "buyReturn" } }, "required": ["type"] }
+        ]
+      },
+
+      "sellCorrection": {
+        "allOf": [
+          { "$ref": "#/$defs/correctionBase" },
+          { "type": "object", "properties": { "type": { "const": "sellCorrection" } }, "required": ["type"] }
+        ]
+      },
+      "buyCorrection": {
+        "allOf": [
+          { "$ref": "#/$defs/correctionBase" },
+          { "type": "object", "properties": { "type": { "const": "buyCorrection" } }, "required": ["type"] }
+        ]
+      },
+      "sellReturnCorrection": {
+        "allOf": [
+          { "$ref": "#/$defs/correctionBase" },
+          { "type": "object", "properties": { "type": { "const": "sellReturnCorrection" } }, "required": ["type"] }
+        ]
+      },
+      "buyReturnCorrection": {
+        "allOf": [
+          { "$ref": "#/$defs/correctionBase" },
+          { "type": "object", "properties": { "type": { "const": "buyReturnCorrection" } }, "required": ["type"] }
+        ]
+      },
+
+      "nonFiscal": {
+        "type": "object",
+        "properties": {
+          "type": { "const": "nonFiscal" },
+          "items": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/printItem" } },
+          "printFooter": { "type": "boolean" }
+        },
+        "required": ["type", "items"],
+        "additionalProperties": false
+      },
+
+      "reportX": {
+        "type": "object",
+        "properties": {
+          "type": { "const": "reportX" },
+          "operator": { "$ref": "#/$defs/operator" },
+          "preItems": { "type": "array", "items": { "$ref": "#/$defs/printItem" } },
+          "postItems": { "type": "array", "items": { "$ref": "#/$defs/printItem" } }
+        },
+        "required": ["type"],
+        "additionalProperties": false
+      },
+
+      "cashIn": {
+        "type": "object",
+        "properties": {
+          "type": { "const": "cashIn" },
+          "operator": { "$ref": "#/$defs/operator" },
+          "cashSum": { "type": "number" },
+          "preItems": { "type": "array", "items": { "$ref": "#/$defs/printItem" } },
+          "postItems": { "type": "array", "items": { "$ref": "#/$defs/printItem" } }
+        },
+        "required": ["type", "cashSum"],
+        "additionalProperties": false
+      },
+
+      "cashOut": {
+        "type": "object",
+        "properties": {
+          "type": { "const": "cashOut" },
+          "operator": { "$ref": "#/$defs/operator" },
+          "cashSum": { "type": "number" },
+          "preItems": { "type": "array", "items": { "$ref": "#/$defs/printItem" } },
+          "postItems": { "type": "array", "items": { "$ref": "#/$defs/printItem" } }
+        },
+        "required": ["type", "cashSum"],
+        "additionalProperties": false
+      },
+
+      "reportOfdExchangeStatus": {
+        "type": "object",
+        "properties": {
+          "type": { "const": "reportOfdExchangeStatus" },
+          "operator": { "$ref": "#/$defs/operator" },
+          "preItems": { "type": "array", "items": { "$ref": "#/$defs/printItemNoPicture" } },
+          "postItems": { "type": "array", "items": { "$ref": "#/$defs/printItemNoPicture" } }
+        },
+        "required": ["type"],
+        "additionalProperties": false
+      },
+
+      "printFnDocument": {
+        "type": "object",
+        "properties": {
+          "type": { "const": "printFnDocument" },
+          "fiscalDocumentNumber": { "type": "integer" }
+        },
+        "required": ["type", "fiscalDocumentNumber"],
+        "additionalProperties": false
+      },
+
+      "printLastReceiptCopy": {
+        "type": "object",
+        "properties": { "type": { "const": "printLastReceiptCopy" } },
+        "required": ["type"],
+        "additionalProperties": false
+      },
+
+      "getRegistrationInfo": {
+        "type": "object",
+        "properties": { "type": { "const": "getRegistrationInfo" } },
+        "required": ["type"],
+        "additionalProperties": false
+      },
+
+      "registration": {
+        "type": "object",
+        "properties": {
+          "type": { "const": "registration" },
+          "operator": { "$ref": "#/$defs/operator" },
+          "organization": { "$ref": "#/$defs/organizationInfo" },
+          "device": { "$ref": "#/$defs/deviceParams" },
+          "ofd": { "$ref": "#/$defs/ofdParams" }
+        },
+        "required": ["type", "operator", "organization", "device", "ofd"],
+        "additionalProperties": false
+      },
+
+      "fnChange": {
+        "type": "object",
+        "properties": {
+          "type": { "const": "fnChange" },
+          "operator": { "$ref": "#/$defs/operator" },
+          "organization": { "$ref": "#/$defs/organizationInfo" },
+          "device": { "$ref": "#/$defs/deviceParams" },
+          "ofd": { "$ref": "#/$defs/ofdParams" },
+          "reason": { "type": "string", "enum": ["ofdChange", "attributesChange", "settingsChange"] },
+          "changeInfoReasons": { "type": "array", "items": { "type": "integer" } }
+        },
+        "required": ["type", "operator", "organization", "device", "ofd"],
+        "additionalProperties": false
+      },
+
+      "changeRegistrationParameters": {
+        "type": "object",
+        "properties": {
+          "type": { "const": "changeRegistrationParameters" },
+          "operator": { "$ref": "#/$defs/operator" },
+          "organization": { "$ref": "#/$defs/organizationInfo" },
+          "device": { "$ref": "#/$defs/deviceParams" },
+          "ofd": { "$ref": "#/$defs/ofdParams" },
+          "reason": { "type": "string", "enum": ["ofdChange", "attributesChange", "settingsChange"] },
+          "changeInfoReasons": { "type": "array", "items": { "type": "integer" } }
+        },
+        "required": ["type", "operator", "organization", "device", "ofd"],
+        "additionalProperties": false
+      },
+
+      "closeArchive": {
+        "type": "object",
+        "properties": {
+          "type": { "const": "closeArchive" },
+          "operator": { "$ref": "#/$defs/operator" }
+        },
+        "required": ["type", "operator"],
+        "additionalProperties": false
+      },
+
+      "openCashDrawer": {
+        "type": "object",
+        "properties": { "type": { "const": "openCashDrawer" } },
+        "required": ["type"],
+        "additionalProperties": false
+      },
+
+      "setDateTime": {
+        "type": "object",
+        "properties": {
+          "type": { "const": "setDateTime" },
+          "dateTime": { "type": "string", "pattern": "^\\d{4}\\.\\d{2}\\.\\d{2} \\d{2}:\\d{2}:\\d{2}$" }
+        },
+        "required": ["type", "dateTime"],
+        "additionalProperties": false
+      },
+
+      "getDeviceParameters": {
+        "type": "object",
+        "properties": {
+          "type": { "const": "getDeviceParameters" },
+          "keys": { "type": "array", "minItems": 1, "items": { "type": "integer" } }
+        },
+        "required": ["type", "keys"],
+        "additionalProperties": false
+      },
+
+      "setDeviceParameters": {
+        "type": "object",
+        "properties": {
+          "type": { "const": "setDeviceParameters" },
+          "deviceParameters": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "type": "object",
+              "properties": {
+                "key": { "type": "integer" },
+                "value": { "type": "string" }
+              },
+              "required": ["key", "value"],
+              "additionalProperties": false
+            }
+          }
+        },
+        "required": ["type", "deviceParameters"],
+        "additionalProperties": false
+      },
+
+      "getDeviceInfo": {
+        "type": "object",
+        "properties": { "type": { "const": "getDeviceInfo" } },
+        "required": ["type"],
+        "additionalProperties": false
+      },
+
+      "getDeviceStatus": {
+        "type": "object",
+        "properties": { "type": { "const": "getDeviceStatus" } },
+        "required": ["type"],
+        "additionalProperties": false
+      },
+
+      "getCashDrawerStatus": {
+        "type": "object",
+        "properties": { "type": { "const": "getCashDrawerStatus" } },
+        "required": ["type"],
+        "additionalProperties": false
+      },
+
+      "getShiftStatus": {
+        "type": "object",
+        "properties": { "type": { "const": "getShiftStatus" } },
+        "required": ["type"],
+        "additionalProperties": false
+      },
+
+      "getFnInfo": {
+        "type": "object",
+        "properties": { "type": { "const": "getFnInfo" } },
+        "required": ["type"],
+        "additionalProperties": false
+      },
+
+      "getFnStatus": {
+        "type": "object",
+        "properties": { "type": { "const": "getFnStatus" } },
+        "required": ["type"],
+        "additionalProperties": false
+      },
+
+      "ofdExchangeStatus": {
+        "type": "object",
+        "properties": { "type": { "const": "ofdExchangeStatus" } },
+        "required": ["type"],
+        "additionalProperties": false
+      },
+
+      "getShiftTotals": {
+        "type": "object",
+        "properties": { "type": { "const": "getShiftTotals" } },
+        "required": ["type"],
+        "additionalProperties": false
+      },
+
+      "getOverallTotals": {
+        "type": "object",
+        "properties": { "type": { "const": "getOverallTotals" } },
+        "required": ["type"],
+        "additionalProperties": false
+      },
+
+      "getFnDocument": {
+        "type": "object",
+        "properties": {
+          "type": { "const": "getFnDocument" },
+          "fiscalDocumentNumber": { "type": "integer" }
+        },
+        "required": ["type", "fiscalDocumentNumber"],
+        "additionalProperties": false
+      },
+
+      "getLicenses": {
+        "type": "object",
+        "properties": { "type": { "const": "getLicenses" } },
+        "required": ["type"],
+        "additionalProperties": false
+      }
+    }
+  }
+}
