@@ -83,6 +83,17 @@ import {
 	type GetRegistrationInfoTaskResult,
 	isGetRegistrationInfoTaskResult
 } from './get-registration-info.task-result.js';
+import {
+	type ChangeRegistrationParametersTask,
+	type FnChangeTask, isChangeRegistrationParametersTask, isFnChangeTask,
+	isRegistrationTask,
+	type RegistrationTask
+} from './registration.task.js';
+import {
+	type ChangeRegistrationParametersTaskResult,
+	type FnChangeTaskResult, isChangeRegistrationParametersTaskResult, isFnChangeTaskResult, isRegistrationTaskResult,
+	type RegistrationTaskResult
+} from './registration.task-result.js';
 
 export type JsonTask = {
 	type: JsonTaskType;
@@ -113,6 +124,9 @@ export type JsonTaskMap = {
 	[JsonTaskType.printFnDocument]: PrintFnDocumentTask;
 	[JsonTaskType.printLastReceiptCopy]: PrintLastReceiptCopyTask;
 	[JsonTaskType.getRegistrationInfo]: GetRegistrationInfoTask;
+	[JsonTaskType.registration]: RegistrationTask;
+	[JsonTaskType.fnChange]: FnChangeTask;
+	[JsonTaskType.changeRegistrationParameters]: ChangeRegistrationParametersTask;
 	[JsonTaskType.getDeviceStatus]: GetDeviceStatusTask;
 	[JsonTaskType.getDeviceInfo]: GetDeviceInfoTask;
 	[JsonTaskType.getMcu]: GetMcuTask;
@@ -146,6 +160,9 @@ export type JsonTaskResultMap = {
 	[JsonTaskType.printFnDocument]: VoidTaskResult;
 	[JsonTaskType.printLastReceiptCopy]: VoidTaskResult;
 	[JsonTaskType.getRegistrationInfo]: GetRegistrationInfoTaskResult;
+	[JsonTaskType.registration]: RegistrationTaskResult;
+	[JsonTaskType.fnChange]: FnChangeTaskResult;
+	[JsonTaskType.changeRegistrationParameters]: ChangeRegistrationParametersTaskResult;
 	[JsonTaskType.getDeviceStatus]: GetDeviceStatusTaskResult;
 	[JsonTaskType.getDeviceInfo]: GetDeviceInfoTaskResult;
 	[JsonTaskType.getMcu]: GetMcuTaskResult;
@@ -183,6 +200,9 @@ export const jsonTaskTypeGuards: TypeGuardMap<JsonTaskMap> = {
 	[JsonTaskType.printFnDocument]: isPrintFnDocumentTask,
 	[JsonTaskType.printLastReceiptCopy]: isPrintLastReceiptCopyTask,
 	[JsonTaskType.getRegistrationInfo]: isGetRegistrationInfoTask,
+	[JsonTaskType.registration]: isRegistrationTask,
+	[JsonTaskType.fnChange]: isFnChangeTask,
+	[JsonTaskType.changeRegistrationParameters]: isChangeRegistrationParametersTask,
 	[JsonTaskType.getDeviceStatus]: isGetDeviceStatusTask,
 	[JsonTaskType.getDeviceInfo]: isGetDeviceInfoTask,
 	[JsonTaskType.getMcu]: isGetMcuTask,
@@ -216,6 +236,9 @@ export const jsonTaskResultTypeGuards: TypeGuardMap<JsonTaskResultMap> = {
 	[JsonTaskType.printFnDocument]: isVoidTaskResult,
 	[JsonTaskType.printLastReceiptCopy]: isVoidTaskResult,
 	[JsonTaskType.getRegistrationInfo]: isGetRegistrationInfoTaskResult,
+	[JsonTaskType.registration]: isRegistrationTaskResult,
+	[JsonTaskType.fnChange]: isFnChangeTaskResult,
+	[JsonTaskType.changeRegistrationParameters]: isChangeRegistrationParametersTaskResult,
 	[JsonTaskType.getDeviceStatus]: isGetDeviceStatusTaskResult,
 	[JsonTaskType.getDeviceInfo]: isGetDeviceInfoTaskResult,
 	[JsonTaskType.getMcu]: isGetMcuTaskResult,
