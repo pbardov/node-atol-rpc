@@ -96,6 +96,7 @@ import {
 } from './registration.task-result.js';
 import {type CloseArchiveTask, isCloseArchiveTask} from './close-archive.task.js';
 import {type CloseArchiveTaskResult, isCloseArchiveTaskResult} from './close-archive.task-result.js';
+import {isOpenCashDrawerTask, type OpenCashDrawerTask} from './open-cash-drawer.task.js';
 
 export type JsonTask = {
 	type: JsonTaskType;
@@ -130,6 +131,7 @@ export type JsonTaskMap = {
 	[JsonTaskType.fnChange]: FnChangeTask;
 	[JsonTaskType.changeRegistrationParameters]: ChangeRegistrationParametersTask;
 	[JsonTaskType.closeArchive]: CloseArchiveTask;
+	[JsonTaskType.openCashDrawer]: OpenCashDrawerTask;
 	[JsonTaskType.getDeviceStatus]: GetDeviceStatusTask;
 	[JsonTaskType.getDeviceInfo]: GetDeviceInfoTask;
 	[JsonTaskType.getMcu]: GetMcuTask;
@@ -167,6 +169,7 @@ export type JsonTaskResultMap = {
 	[JsonTaskType.fnChange]: FnChangeTaskResult;
 	[JsonTaskType.changeRegistrationParameters]: ChangeRegistrationParametersTaskResult;
 	[JsonTaskType.closeArchive]: CloseArchiveTaskResult;
+	[JsonTaskType.openCashDrawer]: VoidTaskResult;
 	[JsonTaskType.getDeviceStatus]: GetDeviceStatusTaskResult;
 	[JsonTaskType.getDeviceInfo]: GetDeviceInfoTaskResult;
 	[JsonTaskType.getMcu]: GetMcuTaskResult;
@@ -208,6 +211,7 @@ export const jsonTaskTypeGuards: TypeGuardMap<JsonTaskMap> = {
 	[JsonTaskType.fnChange]: isFnChangeTask,
 	[JsonTaskType.changeRegistrationParameters]: isChangeRegistrationParametersTask,
 	[JsonTaskType.closeArchive]: isCloseArchiveTask,
+	[JsonTaskType.openCashDrawer]: isOpenCashDrawerTask,
 	[JsonTaskType.getDeviceStatus]: isGetDeviceStatusTask,
 	[JsonTaskType.getDeviceInfo]: isGetDeviceInfoTask,
 	[JsonTaskType.getMcu]: isGetMcuTask,
@@ -245,6 +249,7 @@ export const jsonTaskResultTypeGuards: TypeGuardMap<JsonTaskResultMap> = {
 	[JsonTaskType.fnChange]: isFnChangeTaskResult,
 	[JsonTaskType.changeRegistrationParameters]: isChangeRegistrationParametersTaskResult,
 	[JsonTaskType.closeArchive]: isCloseArchiveTaskResult,
+	[JsonTaskType.openCashDrawer]: isVoidTaskResult,
 	[JsonTaskType.getDeviceStatus]: isGetDeviceStatusTaskResult,
 	[JsonTaskType.getDeviceInfo]: isGetDeviceInfoTaskResult,
 	[JsonTaskType.getMcu]: isGetMcuTaskResult,
