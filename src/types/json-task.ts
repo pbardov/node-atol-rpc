@@ -77,6 +77,7 @@ import {
 	isReportOfdExchangeStatusTaskResult,
 	type ReportOfdExchangeStatusTaskResult
 } from './report-ofd-exchange-status.task-result.js';
+import {isPrintFnDocumentTask, type PrintFnDocumentTask} from './print-fn-document.task.js';
 
 export type JsonTask = {
 	type: JsonTaskType;
@@ -104,6 +105,7 @@ export type JsonTaskMap = {
 	[JsonTaskType.cashIn]: CashInTask;
 	[JsonTaskType.cashOut]: CashOutTask;
 	[JsonTaskType.reportOfdExchangeStatus]: ReportOfdExchangeStatusTask;
+	[JsonTaskType.printFnDocument]: PrintFnDocumentTask;
 	[JsonTaskType.printLastReceiptCopy]: PrintLastReceiptCopyTask;
 	[JsonTaskType.getDeviceStatus]: GetDeviceStatusTask;
 	[JsonTaskType.getDeviceInfo]: GetDeviceInfoTask;
@@ -135,6 +137,7 @@ export type JsonTaskResultMap = {
 	[JsonTaskType.cashIn]: CashTaskResult;
 	[JsonTaskType.cashOut]: CashTaskResult;
 	[JsonTaskType.reportOfdExchangeStatus]: ReportOfdExchangeStatusTaskResult;
+	[JsonTaskType.printFnDocument]: VoidTaskResult;
 	[JsonTaskType.printLastReceiptCopy]: VoidTaskResult;
 	[JsonTaskType.getDeviceStatus]: GetDeviceStatusTaskResult;
 	[JsonTaskType.getDeviceInfo]: GetDeviceInfoTaskResult;
@@ -170,6 +173,7 @@ export const jsonTaskTypeGuards: TypeGuardMap<JsonTaskMap> = {
 	[JsonTaskType.cashIn]: isCashInTask,
 	[JsonTaskType.cashOut]: isCashOutTask,
 	[JsonTaskType.reportOfdExchangeStatus]: isReportOfdExchangeStatusTask,
+	[JsonTaskType.printFnDocument]: isPrintFnDocumentTask,
 	[JsonTaskType.printLastReceiptCopy]: isPrintLastReceiptCopyTask,
 	[JsonTaskType.getDeviceStatus]: isGetDeviceStatusTask,
 	[JsonTaskType.getDeviceInfo]: isGetDeviceInfoTask,
@@ -201,6 +205,7 @@ export const jsonTaskResultTypeGuards: TypeGuardMap<JsonTaskResultMap> = {
 	[JsonTaskType.cashIn]: isCashTaskResult,
 	[JsonTaskType.cashOut]: isCashTaskResult,
 	[JsonTaskType.reportOfdExchangeStatus]: isReportOfdExchangeStatusTaskResult,
+	[JsonTaskType.printFnDocument]: isVoidTaskResult,
 	[JsonTaskType.printLastReceiptCopy]: isVoidTaskResult,
 	[JsonTaskType.getDeviceStatus]: isGetDeviceStatusTaskResult,
 	[JsonTaskType.getDeviceInfo]: isGetDeviceInfoTaskResult,
