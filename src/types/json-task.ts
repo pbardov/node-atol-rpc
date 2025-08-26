@@ -72,6 +72,11 @@ import {
 import {isNonfiscalTask, type NonfiscalTask} from './nonfiscal.task.js';
 import {type CashInTask, type CashOutTask, isCashInTask, isCashOutTask} from './cash.task.js';
 import {type CashTaskResult, isCashTaskResult} from './cash.task-result.js';
+import {isReportOfdExchangeStatusTask, type ReportOfdExchangeStatusTask} from './report-ofd-exchange-status.task.js';
+import {
+	isReportOfdExchangeStatusTaskResult,
+	type ReportOfdExchangeStatusTaskResult
+} from './report-ofd-exchange-status.task-result.js';
 
 export type JsonTask = {
 	type: JsonTaskType;
@@ -98,6 +103,7 @@ export type JsonTaskMap = {
 	[JsonTaskType.nonFiscal]: NonfiscalTask;
 	[JsonTaskType.cashIn]: CashInTask;
 	[JsonTaskType.cashOut]: CashOutTask;
+	[JsonTaskType.reportOfdExchangeStatus]: ReportOfdExchangeStatusTask;
 	[JsonTaskType.printLastReceiptCopy]: PrintLastReceiptCopyTask;
 	[JsonTaskType.getDeviceStatus]: GetDeviceStatusTask;
 	[JsonTaskType.getDeviceInfo]: GetDeviceInfoTask;
@@ -128,6 +134,7 @@ export type JsonTaskResultMap = {
 	[JsonTaskType.nonFiscal]: VoidTaskResult;
 	[JsonTaskType.cashIn]: CashTaskResult;
 	[JsonTaskType.cashOut]: CashTaskResult;
+	[JsonTaskType.reportOfdExchangeStatus]: ReportOfdExchangeStatusTaskResult;
 	[JsonTaskType.printLastReceiptCopy]: VoidTaskResult;
 	[JsonTaskType.getDeviceStatus]: GetDeviceStatusTaskResult;
 	[JsonTaskType.getDeviceInfo]: GetDeviceInfoTaskResult;
@@ -162,6 +169,7 @@ export const jsonTaskTypeGuards: TypeGuardMap<JsonTaskMap> = {
 	[JsonTaskType.nonFiscal]: isNonfiscalTask,
 	[JsonTaskType.cashIn]: isCashInTask,
 	[JsonTaskType.cashOut]: isCashOutTask,
+	[JsonTaskType.reportOfdExchangeStatus]: isReportOfdExchangeStatusTask,
 	[JsonTaskType.printLastReceiptCopy]: isPrintLastReceiptCopyTask,
 	[JsonTaskType.getDeviceStatus]: isGetDeviceStatusTask,
 	[JsonTaskType.getDeviceInfo]: isGetDeviceInfoTask,
@@ -192,6 +200,7 @@ export const jsonTaskResultTypeGuards: TypeGuardMap<JsonTaskResultMap> = {
 	[JsonTaskType.nonFiscal]: isVoidTaskResult,
 	[JsonTaskType.cashIn]: isCashTaskResult,
 	[JsonTaskType.cashOut]: isCashTaskResult,
+	[JsonTaskType.reportOfdExchangeStatus]: isReportOfdExchangeStatusTaskResult,
 	[JsonTaskType.printLastReceiptCopy]: isVoidTaskResult,
 	[JsonTaskType.getDeviceStatus]: isGetDeviceStatusTaskResult,
 	[JsonTaskType.getDeviceInfo]: isGetDeviceInfoTaskResult,
