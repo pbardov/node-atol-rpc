@@ -78,6 +78,11 @@ import {
 	type ReportOfdExchangeStatusTaskResult
 } from './report-ofd-exchange-status.task-result.js';
 import {isPrintFnDocumentTask, type PrintFnDocumentTask} from './print-fn-document.task.js';
+import {type GetRegistrationInfoTask, isGetRegistrationInfoTask} from './get-registration-info.task.js';
+import {
+	type GetRegistrationInfoTaskResult,
+	isGetRegistrationInfoTaskResult
+} from './get-registration-info.task-result.js';
 
 export type JsonTask = {
 	type: JsonTaskType;
@@ -107,6 +112,7 @@ export type JsonTaskMap = {
 	[JsonTaskType.reportOfdExchangeStatus]: ReportOfdExchangeStatusTask;
 	[JsonTaskType.printFnDocument]: PrintFnDocumentTask;
 	[JsonTaskType.printLastReceiptCopy]: PrintLastReceiptCopyTask;
+	[JsonTaskType.getRegistrationInfo]: GetRegistrationInfoTask;
 	[JsonTaskType.getDeviceStatus]: GetDeviceStatusTask;
 	[JsonTaskType.getDeviceInfo]: GetDeviceInfoTask;
 	[JsonTaskType.getMcu]: GetMcuTask;
@@ -139,6 +145,7 @@ export type JsonTaskResultMap = {
 	[JsonTaskType.reportOfdExchangeStatus]: ReportOfdExchangeStatusTaskResult;
 	[JsonTaskType.printFnDocument]: VoidTaskResult;
 	[JsonTaskType.printLastReceiptCopy]: VoidTaskResult;
+	[JsonTaskType.getRegistrationInfo]: GetRegistrationInfoTaskResult;
 	[JsonTaskType.getDeviceStatus]: GetDeviceStatusTaskResult;
 	[JsonTaskType.getDeviceInfo]: GetDeviceInfoTaskResult;
 	[JsonTaskType.getMcu]: GetMcuTaskResult;
@@ -175,6 +182,7 @@ export const jsonTaskTypeGuards: TypeGuardMap<JsonTaskMap> = {
 	[JsonTaskType.reportOfdExchangeStatus]: isReportOfdExchangeStatusTask,
 	[JsonTaskType.printFnDocument]: isPrintFnDocumentTask,
 	[JsonTaskType.printLastReceiptCopy]: isPrintLastReceiptCopyTask,
+	[JsonTaskType.getRegistrationInfo]: isGetRegistrationInfoTask,
 	[JsonTaskType.getDeviceStatus]: isGetDeviceStatusTask,
 	[JsonTaskType.getDeviceInfo]: isGetDeviceInfoTask,
 	[JsonTaskType.getMcu]: isGetMcuTask,
@@ -207,6 +215,7 @@ export const jsonTaskResultTypeGuards: TypeGuardMap<JsonTaskResultMap> = {
 	[JsonTaskType.reportOfdExchangeStatus]: isReportOfdExchangeStatusTaskResult,
 	[JsonTaskType.printFnDocument]: isVoidTaskResult,
 	[JsonTaskType.printLastReceiptCopy]: isVoidTaskResult,
+	[JsonTaskType.getRegistrationInfo]: isGetRegistrationInfoTaskResult,
 	[JsonTaskType.getDeviceStatus]: isGetDeviceStatusTaskResult,
 	[JsonTaskType.getDeviceInfo]: isGetDeviceInfoTaskResult,
 	[JsonTaskType.getMcu]: isGetMcuTaskResult,
