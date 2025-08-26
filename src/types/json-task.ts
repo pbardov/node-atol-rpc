@@ -103,6 +103,11 @@ import {
 	type GetDeviceParametersTaskResult,
 	isGetDeviceParametersTaskResult
 } from './get-device-parameters.task-result.js';
+import {isSetDeviceParametersTask, type SetDeviceParametersTask} from './set-device-parameters.task.js';
+import {
+	isSetDeviceParametersTaskResult,
+	type SetDeviceParametersTaskResult
+} from './set-device-parameters.task-result.js';
 
 export type JsonTask = {
 	type: JsonTaskType;
@@ -140,6 +145,7 @@ export type JsonTaskMap = {
 	[JsonTaskType.openCashDrawer]: OpenCashDrawerTask;
 	[JsonTaskType.setDateTime]: SetDateTimeTask;
 	[JsonTaskType.getDeviceParameters]: GetDeviceParametersTask;
+	[JsonTaskType.setDeviceParameters]: SetDeviceParametersTask;
 	[JsonTaskType.getDeviceStatus]: GetDeviceStatusTask;
 	[JsonTaskType.getDeviceInfo]: GetDeviceInfoTask;
 	[JsonTaskType.getMcu]: GetMcuTask;
@@ -180,6 +186,7 @@ export type JsonTaskResultMap = {
 	[JsonTaskType.openCashDrawer]: VoidTaskResult;
 	[JsonTaskType.setDateTime]: VoidTaskResult;
 	[JsonTaskType.getDeviceParameters]: GetDeviceParametersTaskResult;
+	[JsonTaskType.setDeviceParameters]: SetDeviceParametersTaskResult;
 	[JsonTaskType.getDeviceStatus]: GetDeviceStatusTaskResult;
 	[JsonTaskType.getDeviceInfo]: GetDeviceInfoTaskResult;
 	[JsonTaskType.getMcu]: GetMcuTaskResult;
@@ -224,6 +231,7 @@ export const jsonTaskTypeGuards: TypeGuardMap<JsonTaskMap> = {
 	[JsonTaskType.openCashDrawer]: isOpenCashDrawerTask,
 	[JsonTaskType.setDateTime]: isSetDateTimeTask,
 	[JsonTaskType.getDeviceParameters]: isGetDeviceParametersTask,
+	[JsonTaskType.setDeviceParameters]: isSetDeviceParametersTask,
 	[JsonTaskType.getDeviceStatus]: isGetDeviceStatusTask,
 	[JsonTaskType.getDeviceInfo]: isGetDeviceInfoTask,
 	[JsonTaskType.getMcu]: isGetMcuTask,
@@ -264,6 +272,7 @@ export const jsonTaskResultTypeGuards: TypeGuardMap<JsonTaskResultMap> = {
 	[JsonTaskType.openCashDrawer]: isVoidTaskResult,
 	[JsonTaskType.setDateTime]: isVoidTaskResult,
 	[JsonTaskType.getDeviceParameters]: isGetDeviceParametersTaskResult,
+	[JsonTaskType.setDeviceParameters]: isSetDeviceParametersTaskResult,
 	[JsonTaskType.getDeviceStatus]: isGetDeviceStatusTaskResult,
 	[JsonTaskType.getDeviceInfo]: isGetDeviceInfoTaskResult,
 	[JsonTaskType.getMcu]: isGetMcuTaskResult,
