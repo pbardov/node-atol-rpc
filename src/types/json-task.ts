@@ -108,6 +108,8 @@ import {
 	isSetDeviceParametersTaskResult,
 	type SetDeviceParametersTaskResult
 } from './set-device-parameters.task-result.js';
+import {type GetFnDocumentTask, isGetFnDocumentTask} from './get-fn-document.task.js';
+import {type GetFnDocumentTaskResult, isGetFnDocumentTaskResult} from './get-fn-document.task-result.js';
 
 export type JsonTask = {
 	type: JsonTaskType;
@@ -156,6 +158,7 @@ export type JsonTaskMap = {
 	[JsonTaskType.ofdExchangeStatus]: OfdExchangeStatusTask;
 	[JsonTaskType.getShiftTotals]: GetShiftTotalsTask;
 	[JsonTaskType.getOverallTotals]: GetOverallTotalsTask;
+	[JsonTaskType.getFnDocument]: GetFnDocumentTask;
 	[JsonTaskType.getDepartmentSum]: GetDepartmentSumTask;
 	[JsonTaskType.reportX]: ReportXTask;
 };
@@ -197,6 +200,7 @@ export type JsonTaskResultMap = {
 	[JsonTaskType.ofdExchangeStatus]: OfdExchangeStatusTaskResult;
 	[JsonTaskType.getShiftTotals]: GetShiftTotalsTaskResult;
 	[JsonTaskType.getOverallTotals]: GetShiftTotalsTaskResult;
+	[JsonTaskType.getFnDocument]: GetFnDocumentTaskResult;
 	[JsonTaskType.getDepartmentSum]: GetDepartmentSumTaskResult;
 	[JsonTaskType.reportX]: VoidTaskResult;
 };
@@ -242,6 +246,7 @@ export const jsonTaskTypeGuards: TypeGuardMap<JsonTaskMap> = {
 	[JsonTaskType.ofdExchangeStatus]: isOfdExchangeStatusTask,
 	[JsonTaskType.getShiftTotals]: isGetShiftTotalsTask,
 	[JsonTaskType.getOverallTotals]: isGetOverallTotalsTask,
+	[JsonTaskType.getFnDocument]: isGetFnDocumentTask,
 	[JsonTaskType.getDepartmentSum]: isGetDepartmentSumTask,
 	[JsonTaskType.reportX]: isReportXTask,
 } as const;
@@ -283,6 +288,7 @@ export const jsonTaskResultTypeGuards: TypeGuardMap<JsonTaskResultMap> = {
 	[JsonTaskType.ofdExchangeStatus]: isOfdExchangeStatusTaskResult,
 	[JsonTaskType.getShiftTotals]: isGetShiftTotalsTaskResult,
 	[JsonTaskType.getOverallTotals]: isGetShiftTotalsTaskResult,
+	[JsonTaskType.getFnDocument]: isGetFnDocumentTaskResult,
 	[JsonTaskType.getDepartmentSum]: isGetDepartmentSumTaskResult,
 	[JsonTaskType.reportX]: isVoidTaskResult,
 };
