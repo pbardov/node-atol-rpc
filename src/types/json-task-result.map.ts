@@ -30,6 +30,7 @@ import type {GetShiftTotalsTaskResult} from './get-shift-totals.task-result.js';
 import type {GetFnDocumentTaskResult} from './get-fn-document.task-result.js';
 import type {GetDepartmentSumTaskResult} from './get-department-sum.task-result.js';
 import type {GetLicensesTaskResult} from './get-licenses.task-result.js';
+import type {ReportDepartmentsTaskResult} from './report-departments.task-result.js';
 
 export type JsonTaskResultMap = {
     [JsonTaskType.continuePrint]: VoidTaskResult;
@@ -72,4 +73,5 @@ export type JsonTaskResultMap = {
     [JsonTaskType.getDepartmentSum]: GetDepartmentSumTaskResult;
     [JsonTaskType.getLicenses]: GetLicensesTaskResult;
     [JsonTaskType.reportX]: VoidTaskResult;
+    [JsonTaskType.reportDepartments]: ReportDepartmentsTaskResult;
 };
