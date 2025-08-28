@@ -1,0 +1,79 @@
+import {JsonTaskType} from './json-task-type.js';
+import type {ContinuePrintTask} from './continue-print.task.js';
+import type {CloseShiftTask, OpenShiftTask} from './shift.task.js';
+import type {BuyReturnTask, BuyTask, SellReturnTask, SellTask} from './fiscal.task.js';
+import type {
+    BuyCorrectionTask,
+    BuyReturnCorrectionTask,
+    SellCorrectionTask,
+    SellReturnCorrectionTask
+} from './correction.task.js';
+import type {NonfiscalTask} from './nonfiscal.task.js';
+import type {CashInTask, CashOutTask} from './cash.task.js';
+import type {ReportOfdExchangeStatusTask} from './report-ofd-exchange-status.task.js';
+import type {PrintFnDocumentTask} from './print-fn-document.task.js';
+import type {PrintLastReceiptCopyTask} from './print-last-receipt-copy.task.js';
+import type {GetRegistrationInfoTask} from './get-registration-info.task.js';
+import type {ChangeRegistrationParametersTask, FnChangeTask, RegistrationTask} from './registration.task.js';
+import type {CloseArchiveTask} from './close-archive.task.js';
+import type {OpenCashDrawerTask} from './open-cash-drawer.task.js';
+import type {SetDateTimeTask} from './set-date-time.task.js';
+import type {GetDeviceParametersTask} from './get-device-parameters.task.js';
+import type {SetDeviceParametersTask} from './set-device-parameters.task.js';
+import type {GetDeviceStatusTask} from './get-device-status.task.js';
+import type {GetDeviceInfoTask} from './get-device-info.task.js';
+import type {GetMcuTask} from './get-mcu.task.js';
+import type {GetCashDrawerStatusTask} from './get-cash-drawer-status.task.js';
+import type {GetShiftStatusTask} from './get-shift-status.task.js';
+import type {GetFnInfoTask} from './get-fn-info.task.js';
+import type {GetFnStatusTask} from './get-fn-status.task.js';
+import type {OfdExchangeStatusTask} from './ofd-exchange-status.task.js';
+import type {GetShiftTotalsTask} from './get-shift-totals.task.js';
+import type {GetOverallTotalsTask} from './get-overall-totals.task.js';
+import type {GetFnDocumentTask} from './get-fn-document.task.js';
+import type {GetDepartmentSumTask} from './get-department-sum.task.js';
+import type {GetLicensesTask} from './get-licenses.task.js';
+import type {ReportXTask} from './report-x.task.js';
+
+export type JsonTaskMap = {
+    [JsonTaskType.continuePrint]: ContinuePrintTask;
+    [JsonTaskType.openShift]: OpenShiftTask;
+    [JsonTaskType.closeShift]: CloseShiftTask;
+    [JsonTaskType.sell]: SellTask;
+    [JsonTaskType.buy]: BuyTask;
+    [JsonTaskType.sellReturn]: SellReturnTask;
+    [JsonTaskType.buyReturn]: BuyReturnTask;
+    [JsonTaskType.sellCorrection]: SellCorrectionTask;
+    [JsonTaskType.buyCorrection]: BuyCorrectionTask;
+    [JsonTaskType.sellReturnCorrection]: SellReturnCorrectionTask;
+    [JsonTaskType.buyReturnCorrection]: BuyReturnCorrectionTask;
+    [JsonTaskType.nonFiscal]: NonfiscalTask;
+    [JsonTaskType.cashIn]: CashInTask;
+    [JsonTaskType.cashOut]: CashOutTask;
+    [JsonTaskType.reportOfdExchangeStatus]: ReportOfdExchangeStatusTask;
+    [JsonTaskType.printFnDocument]: PrintFnDocumentTask;
+    [JsonTaskType.printLastReceiptCopy]: PrintLastReceiptCopyTask;
+    [JsonTaskType.getRegistrationInfo]: GetRegistrationInfoTask;
+    [JsonTaskType.registration]: RegistrationTask;
+    [JsonTaskType.fnChange]: FnChangeTask;
+    [JsonTaskType.changeRegistrationParameters]: ChangeRegistrationParametersTask;
+    [JsonTaskType.closeArchive]: CloseArchiveTask;
+    [JsonTaskType.openCashDrawer]: OpenCashDrawerTask;
+    [JsonTaskType.setDateTime]: SetDateTimeTask;
+    [JsonTaskType.getDeviceParameters]: GetDeviceParametersTask;
+    [JsonTaskType.setDeviceParameters]: SetDeviceParametersTask;
+    [JsonTaskType.getDeviceStatus]: GetDeviceStatusTask;
+    [JsonTaskType.getDeviceInfo]: GetDeviceInfoTask;
+    [JsonTaskType.getMcu]: GetMcuTask;
+    [JsonTaskType.getCashDrawerStatus]: GetCashDrawerStatusTask;
+    [JsonTaskType.getShiftStatus]: GetShiftStatusTask;
+    [JsonTaskType.getFnInfo]: GetFnInfoTask;
+    [JsonTaskType.getFnStatus]: GetFnStatusTask;
+    [JsonTaskType.ofdExchangeStatus]: OfdExchangeStatusTask;
+    [JsonTaskType.getShiftTotals]: GetShiftTotalsTask;
+    [JsonTaskType.getOverallTotals]: GetOverallTotalsTask;
+    [JsonTaskType.getFnDocument]: GetFnDocumentTask;
+    [JsonTaskType.getDepartmentSum]: GetDepartmentSumTask;
+    [JsonTaskType.getLicenses]: GetLicensesTask;
+    [JsonTaskType.reportX]: ReportXTask;
+};
