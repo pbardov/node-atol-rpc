@@ -35,6 +35,7 @@ import type {GetDepartmentSumTask} from './get-department-sum.task.js';
 import type {GetLicensesTask} from './get-licenses.task.js';
 import type {ReportXTask} from './report-x.task.js';
 import type {ReportDepartmentsTask} from './report-departments.task.js';
+import type {ReportFnRegistrationsTask} from './report-fn-registrations.task.js';
 
 export type JsonTaskMap = {
     [JsonTaskType.continuePrint]: ContinuePrintTask;
@@ -78,4 +79,5 @@ export type JsonTaskMap = {
     [JsonTaskType.getLicenses]: GetLicensesTask;
     [JsonTaskType.reportX]: ReportXTask;
     [JsonTaskType.reportDepartments]: ReportDepartmentsTask;
+    [JsonTaskType.reportFnRegistrations]: ReportFnRegistrationsTask;
 };
