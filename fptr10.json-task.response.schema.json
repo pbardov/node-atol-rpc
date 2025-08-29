@@ -5,12 +5,21 @@
   "description": "Ответ JSON-task: либо ошибка, либо объект результата конкретной задачи.",
   "type": "object",
 
-  "properties": {
-    "error": { "$ref": "#/$defs/error" }
-  },
-
   "oneOf": [
-    { "required": ["error"] },
+    {
+      "type": "object",
+      "properties": { "error": {
+        "type": "object",
+        "properties": {
+          "code": { "type": "integer" },
+          "description": { "type": "string" }
+        },
+        "required": ["code", "description"],
+        "additionalProperties": false
+      }},
+      "required": ["error"],
+      "additionalProperties": false
+    },
 
     { "$ref": "#/$defs/results/fiscalReceipt" },
     { "$ref": "#/$defs/results/correctionReceipt" },
@@ -47,20 +56,11 @@
     { "$ref": "#/$defs/results/getFnDocument" },
     { "$ref": "#/$defs/results/getLicenses" },
 
-    { "$ref": "#/$defs/results/printDocumentsFromJournal" }
+    { "$ref": "#/$defs/results/printDocumentsFromJournal" },
+    { "$ref": "#/$defs/results/continuePrint" }
   ],
 
   "$defs": {
-    "error": {
-      "type": "object",
-      "properties": {
-        "code": { "type": "integer" },
-        "description": { "type": "string" }
-      },
-      "required": ["code", "description"],
-      "additionalProperties": false
-    },
-
     "warnings": {
       "type": "object",
       "properties": {
@@ -392,8 +392,7 @@
             "bso",
             "bsoCorrection"
           ]
-        },
-        "short": { "type": "boolean" }
+        }
       },
       "additionalProperties": true
     },
@@ -624,6 +623,16 @@
       },
 
       "printDocumentsFromJournal": {
+        "type": "object",
+        "additionalProperties": false
+      },
+
+      "continuePrint": {
+        "type": "object",
+        "additionalProperties": false
+      },
+
+      "continuePrint": {
         "type": "object",
         "additionalProperties": false
       }
