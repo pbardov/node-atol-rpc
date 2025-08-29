@@ -1,39 +1,83 @@
 {
-  "$id": "https://example.org/schemas/fptr10/json-result.schema.json",
+  "$id": "https://schemas.example.com/fptr10/json-task-response.schema.json",
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "title": "ATOL FPTR10 JSON Task Result",
+  "title": "ATOL FPTR10 JSON Tasks — Response",
+  "description": "Ответ JSON-task: либо ошибка, либо объект результата конкретной задачи.",
   "type": "object",
-  "description": "Коллекция схем ответов; выбирайте нужный $ref из $defs.results.*",
+
+  "properties": {
+    "error": { "$ref": "#/$defs/error" }
+  },
+
+  "oneOf": [
+    { "required": ["error"] },
+
+    { "$ref": "#/$defs/results/fiscalReceipt" },
+    { "$ref": "#/$defs/results/correctionReceipt" },
+    { "$ref": "#/$defs/results/nonFiscal" },
+    { "$ref": "#/$defs/results/reportX" },
+    { "$ref": "#/$defs/results/cashInOut" },
+    { "$ref": "#/$defs/results/reportOfdExchangeStatus" },
+
+    { "$ref": "#/$defs/results/printFnDocument" },
+    { "$ref": "#/$defs/results/printLastReceiptCopy" },
+
+    { "$ref": "#/$defs/results/getRegistrationInfo" },
+    { "$ref": "#/$defs/results/registrationOrChange" },
+    { "$ref": "#/$defs/results/closeArchive" },
+
+    { "$ref": "#/$defs/results/openCashDrawer" },
+    { "$ref": "#/$defs/results/setDateTime" },
+
+    { "$ref": "#/$defs/results/getDeviceParameters" },
+    { "$ref": "#/$defs/results/setDeviceParameters" },
+
+    { "$ref": "#/$defs/results/getDeviceInfo" },
+    { "$ref": "#/$defs/results/getDeviceStatus" },
+    { "$ref": "#/$defs/results/getCashDrawerStatus" },
+
+    { "$ref": "#/$defs/results/getShiftStatus" },
+    { "$ref": "#/$defs/results/getFnInfo" },
+    { "$ref": "#/$defs/results/getFnStatus" },
+    { "$ref": "#/$defs/results/ofdExchangeStatus" },
+
+    { "$ref": "#/$defs/results/getShiftTotals" },
+    { "$ref": "#/$defs/results/getOverallTotals" },
+
+    { "$ref": "#/$defs/results/getFnDocument" },
+    { "$ref": "#/$defs/results/getLicenses" },
+
+    { "$ref": "#/$defs/results/printDocumentsFromJournal" }
+  ],
+
   "$defs": {
-    "fiscalParams": {
+    "error": {
       "type": "object",
-      "description": "Фискальные параметры результата операции. Помимо идентификаторов ФД, может включать агрегированные счетчики ФН (fnTotals, fnQuantityCounters).",
       "properties": {
-        "fiscalDocumentNumber": { "type": "integer" },
-        "fiscalDocumentSign": { "type": "string" },
-        "fiscalDocumentDateTime": { "type": "string" },
-        "fiscalReceiptNumber": { "type": "integer" },
-        "shiftNumber": { "type": "integer" },
-        "fnNumber": { "type": "string" },
-        "registrationNumber": { "type": "string" },
-        "receiptsCount": { "type": "integer" },
-        "fnsUrl": { "type": "string" },
-        "fnTotals": { "$ref": "#/$defs/fnTotals" },
-        "fnQuantityCounters": { "$ref": "#/$defs/fnQuantityCounters" }
+        "code": { "type": "integer" },
+        "description": { "type": "string" }
+      },
+      "required": ["code", "description"],
+      "additionalProperties": false
+    },
+
+    "warnings": {
+      "type": "object",
+      "properties": {
+        "notPrinted": { "type": "boolean" }
       },
       "additionalProperties": false
     },
-    "warnings": {
-      "type": "object",
-      "properties": { "notPrinted": { "type": "boolean" } },
-      "additionalProperties": false
-    },
+
     "counters": {
       "type": "object",
-      "properties": { "cashSum": { "type": "number" } },
+      "properties": {
+        "cashSum": { "type": "number" }
+      },
       "required": ["cashSum"],
       "additionalProperties": false
     },
+
     "deviceParameters": {
       "type": "array",
       "items": {
@@ -48,6 +92,7 @@
         "additionalProperties": false
       }
     },
+
     "deviceInfo": {
       "type": "object",
       "properties": {
@@ -63,6 +108,7 @@
       },
       "additionalProperties": false
     },
+
     "deviceStatus": {
       "type": "object",
       "properties": {
@@ -78,12 +124,16 @@
       },
       "additionalProperties": false
     },
+
     "cashDrawerStatus": {
       "type": "object",
-      "properties": { "cashDrawerOpened": { "type": "boolean" } },
+      "properties": {
+        "cashDrawerOpened": { "type": "boolean" }
+      },
       "required": ["cashDrawerOpened"],
       "additionalProperties": false
     },
+
     "shiftStatus": {
       "type": "object",
       "properties": {
@@ -94,6 +144,7 @@
       },
       "additionalProperties": false
     },
+
     "fnInfoWarnings": {
       "type": "object",
       "properties": {
@@ -105,6 +156,7 @@
       },
       "additionalProperties": false
     },
+
     "fnInfo": {
       "type": "object",
       "properties": {
@@ -122,6 +174,7 @@
       },
       "additionalProperties": false
     },
+
     "fnStatus": {
       "type": "object",
       "properties": {
@@ -131,6 +184,7 @@
       },
       "additionalProperties": false
     },
+
     "ofdErrors": {
       "type": "object",
       "properties": {
@@ -157,6 +211,7 @@
       },
       "additionalProperties": false
     },
+
     "ofdStatus": {
       "type": "object",
       "properties": {
@@ -166,6 +221,7 @@
       },
       "additionalProperties": false
     },
+
     "receiptTotals": {
       "type": "object",
       "properties": {
@@ -187,13 +243,26 @@
       },
       "additionalProperties": false
     },
+
     "shiftTotals": {
       "type": "object",
       "properties": {
         "shiftNumber": { "type": "integer" },
-        "cashDrawer": { "type": "object", "properties": { "sum": { "type": "number" } }, "additionalProperties": false },
-        "income": { "type": "object", "properties": { "count": { "type": "integer" }, "sum": { "type": "number" } }, "additionalProperties": false },
-        "outcome": { "type": "object", "properties": { "count": { "type": "integer" }, "sum": { "type": "number" } }, "additionalProperties": false },
+        "cashDrawer": {
+          "type": "object",
+          "properties": { "sum": { "type": "number" } },
+          "additionalProperties": false
+        },
+        "income": {
+          "type": "object",
+          "properties": { "count": { "type": "integer" }, "sum": { "type": "number" } },
+          "additionalProperties": false
+        },
+        "outcome": {
+          "type": "object",
+          "properties": { "count": { "type": "integer" }, "sum": { "type": "number" } },
+          "additionalProperties": false
+        },
         "receipts": {
           "type": "object",
           "properties": {
@@ -207,6 +276,7 @@
       },
       "additionalProperties": false
     },
+
     "overallReceiptTotals": {
       "type": "object",
       "properties": {
@@ -229,6 +299,7 @@
       "required": ["sum"],
       "additionalProperties": false
     },
+
     "overallTotals": {
       "type": "object",
       "properties": {
@@ -245,9 +316,10 @@
       },
       "additionalProperties": false
     },
+
     "fnTotals": {
       "type": "object",
-      "description": "Суммовые счетчики ФН. При открытой смене соответствуют «счетчикам текущей смены», при закрытой — «необнуляемым счетчикам».",
+      "description": "Суммовые счетчики ФН. Открытая смена — счётчики текущей смены; закрытая — необнуляемые.",
       "properties": {
         "receipts": {
           "type": "object",
@@ -263,9 +335,10 @@
       "required": ["receipts"],
       "additionalProperties": false
     },
+
     "fnQuantityCounters": {
       "type": "object",
-      "description": "Количественные счетчики ФН (число операций по типам). При открытой смене — за текущую смену; при закрытой — необнуляемые.",
+      "description": "Количественные счётчики ФН (число операций). Открытая смена — текущая смена; закрытая — необнуляемые.",
       "properties": {
         "receipts": {
           "type": "object",
@@ -281,6 +354,27 @@
       "required": ["receipts"],
       "additionalProperties": false
     },
+
+    "fiscalParams": {
+      "type": "object",
+      "description": "Фискальные параметры результата операции (+ агрегированные счётчики ФН при их наличии).",
+      "properties": {
+        "fiscalDocumentNumber": { "type": "integer" },
+        "fiscalDocumentSign": { "type": "string" },
+        "fiscalDocumentDateTime": { "type": "string" },
+        "fiscalReceiptNumber": { "type": "integer" },
+        "shiftNumber": { "type": "integer" },
+        "fnNumber": { "type": "string" },
+        "registrationNumber": { "type": "string" },
+        "receiptsCount": { "type": "integer" },
+        "fnsUrl": { "type": "string" },
+
+        "fnTotals": { "$ref": "#/$defs/fnTotals" },
+        "fnQuantityCounters": { "$ref": "#/$defs/fnQuantityCounters" }
+      },
+      "additionalProperties": false
+    },
+
     "documentTLV": {
       "type": "object",
       "properties": {
@@ -303,6 +397,7 @@
       },
       "additionalProperties": true
     },
+
     "licenses": {
       "type": "array",
       "items": {
@@ -315,6 +410,7 @@
         "additionalProperties": false
       }
     },
+
     "results": {
       "fiscalReceipt": {
         "type": "object",
@@ -325,15 +421,28 @@
         "required": ["fiscalParams"],
         "additionalProperties": false
       },
+
       "correctionReceipt": { "$ref": "#/$defs/results/fiscalReceipt" },
-      "nonFiscal": { "type": "object", "additionalProperties": false },
-      "reportX": { "type": "object", "additionalProperties": false },
+
+      "nonFiscal": {
+        "type": "object",
+        "additionalProperties": false
+      },
+
+      "reportX": {
+        "type": "object",
+        "additionalProperties": false
+      },
+
       "cashInOut": {
         "type": "object",
-        "properties": { "counters": { "$ref": "#/$defs/counters" } },
+        "properties": {
+          "counters": { "$ref": "#/$defs/counters" }
+        },
         "required": ["counters"],
         "additionalProperties": false
       },
+
       "reportOfdExchangeStatus": {
         "type": "object",
         "properties": {
@@ -345,8 +454,17 @@
         "required": ["fiscalParams", "errors", "status"],
         "additionalProperties": false
       },
-      "printFnDocument": { "type": "object", "additionalProperties": false },
-      "printLastReceiptCopy": { "type": "object", "additionalProperties": false },
+
+      "printFnDocument": {
+        "type": "object",
+        "additionalProperties": false
+      },
+
+      "printLastReceiptCopy": {
+        "type": "object",
+        "additionalProperties": false
+      },
+
       "getRegistrationInfo": {
         "type": "object",
         "properties": {
@@ -357,6 +475,7 @@
         "required": ["organization", "device", "ofd"],
         "additionalProperties": false
       },
+
       "registrationOrChange": {
         "type": "object",
         "properties": {
@@ -366,33 +485,55 @@
         "required": ["fiscalParams"],
         "additionalProperties": false
       },
+
       "closeArchive": { "$ref": "#/$defs/results/registrationOrChange" },
-      "openCashDrawer": { "type": "object", "additionalProperties": false },
-      "setDateTime": { "type": "object", "additionalProperties": false },
+
+      "openCashDrawer": {
+        "type": "object",
+        "additionalProperties": false
+      },
+
+      "setDateTime": {
+        "type": "object",
+        "additionalProperties": false
+      },
+
       "getDeviceParameters": {
         "type": "object",
-        "properties": { "deviceParameters": { "$ref": "#/$defs/deviceParameters" } },
+        "properties": {
+          "deviceParameters": { "$ref": "#/$defs/deviceParameters" }
+        },
         "required": ["deviceParameters"],
         "additionalProperties": false
       },
+
       "setDeviceParameters": {
         "type": "object",
-        "properties": { "deviceParameters": { "$ref": "#/$defs/deviceParameters" } },
+        "properties": {
+          "deviceParameters": { "$ref": "#/$defs/deviceParameters" }
+        },
         "required": ["deviceParameters"],
         "additionalProperties": false
       },
+
       "getDeviceInfo": {
         "type": "object",
-        "properties": { "deviceInfo": { "$ref": "#/$defs/deviceInfo" } },
+        "properties": {
+          "deviceInfo": { "$ref": "#/$defs/deviceInfo" }
+        },
         "required": ["deviceInfo"],
         "additionalProperties": false
       },
+
       "getDeviceStatus": {
         "type": "object",
-        "properties": { "deviceStatus": { "$ref": "#/$defs/deviceStatus" } },
+        "properties": {
+          "deviceStatus": { "$ref": "#/$defs/deviceStatus" }
+        },
         "required": ["deviceStatus"],
         "additionalProperties": false
       },
+
       "getCashDrawerStatus": {
         "type": "object",
         "properties": {
@@ -402,15 +543,19 @@
         "required": ["counters", "cashDrawerStatus"],
         "additionalProperties": false
       },
+
       "getShiftStatus": {
         "type": "object",
-        "properties": { "shiftStatus": { "$ref": "#/$defs/shiftStatus" } },
+        "properties": {
+          "shiftStatus": { "$ref": "#/$defs/shiftStatus" }
+        },
         "required": ["shiftStatus"],
         "additionalProperties": false
       },
+
       "getFnInfo": {
         "type": "object",
-        "description": "Информация о ФН; может включать суммовые и количественные счетчики ФН.",
+        "description": "Информация о ФН; может включать суммовые и количественные счётчики ФН.",
         "properties": {
           "fnInfo": { "$ref": "#/$defs/fnInfo" },
           "fnTotals": { "$ref": "#/$defs/fnTotals" },
@@ -419,9 +564,10 @@
         "required": ["fnInfo"],
         "additionalProperties": false
       },
+
       "getFnStatus": {
         "type": "object",
-        "description": "Статус ФН; может включать суммовые и количественные счетчики ФН.",
+        "description": "Статус ФН; может включать суммовые и количественные счётчики ФН.",
         "properties": {
           "fnStatus": { "$ref": "#/$defs/fnStatus" },
           "fnTotals": { "$ref": "#/$defs/fnTotals" },
@@ -430,6 +576,7 @@
         "required": ["fnStatus"],
         "additionalProperties": false
       },
+
       "ofdExchangeStatus": {
         "type": "object",
         "properties": {
@@ -439,31 +586,49 @@
         "required": ["errors", "status"],
         "additionalProperties": false
       },
+
       "getShiftTotals": {
         "type": "object",
-        "properties": { "shiftTotals": { "$ref": "#/$defs/shiftTotals" } },
+        "properties": {
+          "shiftTotals": { "$ref": "#/$defs/shiftTotals" }
+        },
         "required": ["shiftTotals"],
         "additionalProperties": false
       },
+
       "getOverallTotals": {
         "type": "object",
-        "properties": { "overallTotals": { "$ref": "#/$defs/overallTotals" } },
+        "properties": {
+          "overallTotals": { "$ref": "#/$defs/overallTotals" }
+        },
         "required": ["overallTotals"],
         "additionalProperties": false
       },
+
       "getFnDocument": {
         "type": "object",
-        "properties": { "documentTLV": { "$ref": "#/$defs/documentTLV" } },
+        "properties": {
+          "documentTLV": { "$ref": "#/$defs/documentTLV" }
+        },
         "required": ["documentTLV"],
         "additionalProperties": false
       },
+
       "getLicenses": {
         "type": "object",
-        "properties": { "licenses": { "$ref": "#/$defs/licenses" } },
+        "properties": {
+          "licenses": { "$ref": "#/$defs/licenses" }
+        },
         "required": ["licenses"],
+        "additionalProperties": false
+      },
+
+      "printDocumentsFromJournal": {
+        "type": "object",
         "additionalProperties": false
       }
     },
+
     "organizationInfo": {
       "type": "object",
       "properties": {
@@ -496,6 +661,7 @@
       },
       "additionalProperties": false
     },
+
     "deviceParams": {
       "type": "object",
       "properties": {
@@ -513,12 +679,16 @@
         "gambling": { "type": "boolean" },
         "lottery": { "type": "boolean" },
         "excise": { "type": "boolean" },
-        "defaultTaxationType": { "type": "string", "enum": ["osn", "usnIncome", "usnIncomeOutcome", "envd", "esn", "patent"] },
+        "defaultTaxationType": {
+          "type": "string",
+          "enum": ["osn", "usnIncome", "usnIncomeOutcome", "envd", "esn", "patent"]
+        },
         "ofdChannel": { "type": "string", "enum": ["usb", "ethernet", "wifi", "gsm", "proto"] },
         "ffdVersion": { "type": "string", "enum": ["1.0", "1.05", "1.1"] }
       },
       "additionalProperties": false
     },
+
     "ofdParams": {
       "type": "object",
       "properties": {
