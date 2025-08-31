@@ -23,6 +23,8 @@
 
     { "$ref": "#/$defs/task.sellCorrection" },
     { "$ref": "#/$defs/task.buyCorrection" },
+    { "$ref": "#/$defs/task.sellReturnCorrection" },
+    { "$ref": "#/$defs/task.buyReturnCorrection" },
 
     { "$ref": "#/$defs/task.nonFiscal" },
 
@@ -214,7 +216,7 @@
         },
         "scale": { "type": "integer", "minimum": 1 }
       },
-      "required": ["type", "barcode"]
+      "required": ["type", "barcode", "barcodeType"]
     },
 
     "printItem.pictureFromMemory": {
@@ -467,6 +469,18 @@
         { "$ref": "#/$defs/correctionBase" }
       ]
     },
+    "task.sellReturnCorrection": {
+      "allOf": [
+        { "type": "object", "properties": { "type": { "const": "sellReturnCorrection" } }, "required": ["type"] },
+        { "$ref": "#/$defs/correctionBase" }
+      ]
+    },
+    "task.buyReturnCorrection": {
+      "allOf": [
+        { "type": "object", "properties": { "type": { "const": "buyReturnCorrection" } }, "required": ["type"] },
+        { "$ref": "#/$defs/correctionBase" }
+      ]
+    },
 
     "task.nonFiscal": {
       "type": "object",
@@ -544,9 +558,7 @@
     "task.registration": {
       "description": "Регистрация/перерегистрация ККТ. Параметры зависят от ФФД и модели, допускается расширение.",
       "type": "object",
-      "properties": {
-        "type": { "const": "registration" }
-      },
+      "properties": { "type": { "const": "registration" } },
       "required": ["type"],
       "additionalProperties": true
     },
