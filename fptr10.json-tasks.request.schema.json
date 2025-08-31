@@ -5,7 +5,9 @@
   "type": "object",
   "additionalProperties": false,
   "properties": {
-    "type": { "type": "string" }
+    "type": {
+      "type": "string"
+    }
   },
   "required": ["type"],
   "oneOf": [
@@ -77,9 +79,7 @@
       "properties": {
         "type": {
           "type": "string",
-          "enum": [
-            "none", "vat0", "vat10", "vat20", "vat110", "vat120", "vat18", "vat118"
-          ]
+          "enum": ["none", "vat0", "vat10", "vat20", "vat110", "vat120", "vat18", "vat118"]
         },
         "sum": { "type": "number" }
       },
@@ -90,10 +90,7 @@
       "type": "object",
       "additionalProperties": false,
       "properties": {
-        "type": {
-          "type": "string",
-          "enum": ["cash", "electronically", "prepaid", "credit", "other"]
-        },
+        "type": { "type": "string", "enum": ["cash", "electronically", "prepaid", "credit", "other"] },
         "sum": { "type": "number" }
       },
       "required": ["type", "sum"]
@@ -108,9 +105,13 @@
           "items": {
             "type": "string",
             "enum": [
-              "bankPayingAgent", "bankSubagent",
-              "payingAgent", "subagent",
-              "commissionaire", "agent", "other"
+              "bankPayingAgent",
+              "bankPayingSubagent",
+              "payingAgent",
+              "payingSubagent",
+              "commissionAgent",
+              "attorney",
+              "another"
             ]
           }
         },
@@ -205,7 +206,10 @@
         "barcodeType": {
           "type": "string",
           "enum": [
-            "EAN13", "EAN8", "CODE128", "ITF", "CODE39", "QR", "PDF417", "UPC_A", "UPC_E"
+            "EAN13", "EAN8", "UPCA", "UPCE",
+            "CODE39", "CODE93", "CODE128",
+            "ITF", "ITF14", "GS1_128",
+            "QR", "PDF417", "AZTEC"
           ]
         },
         "scale": { "type": "integer", "minimum": 1 }
@@ -218,8 +222,6 @@
       "additionalProperties": true,
       "properties": {
         "type": { "const": "pictureFromMemory" }
-        /* В разных реализациях поле номера/идентификатора картинки отличается;
-           допускаем расширение. */
       },
       "required": ["type"]
     },
@@ -309,20 +311,9 @@
         "agentInfo": { "$ref": "#/$defs/agentInfo" },
         "supplierInfo": { "$ref": "#/$defs/supplierInfo" },
 
-        "items": {
-          "type": "array",
-          "minItems": 1,
-          "items": { "$ref": "#/$defs/receiptItem" }
-        },
-        "payments": {
-          "type": "array",
-          "minItems": 1,
-          "items": { "$ref": "#/$defs/payment" }
-        },
-        "taxes": {
-          "type": "array",
-          "items": { "$ref": "#/$defs/tax" }
-        },
+        "items": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/receiptItem" } },
+        "payments": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/payment" } },
+        "taxes": { "type": "array", "items": { "$ref": "#/$defs/tax" } },
         "total": { "type": "number" },
 
         "preItems": { "type": "array", "items": { "$ref": "#/$defs/printItem.common" } },
@@ -332,6 +323,17 @@
         {
           "if": { "properties": { "electronically": { "const": true } }, "required": ["electronically"] },
           "then": { "required": ["clientInfo"] }
+        },
+        {
+          "if": { "properties": { "electronically": { "const": true } }, "required": ["electronically"] },
+          "then": {
+            "properties": {
+              "clientInfo": {
+                "type": "object",
+                "required": ["emailOrPhone"]
+              }
+            }
+          }
         }
       ],
       "required": ["taxationType", "operator", "items", "payments"]
@@ -348,7 +350,7 @@
         "ignoreNonFiscalPrintErrors": { "type": "boolean" },
         "electronically": { "type": "boolean" },
 
-        "correctionType": { "type": "string", "enum": ["self", "byOrder"] },
+        "correctionType": { "type": "string", "enum": ["self", "instruction"] },
         "correctionBaseDate": { "type": "string" },
         "correctionBaseNumber": { "type": "string" },
         "correctionBaseName": { "type": "string" },
@@ -369,9 +371,32 @@
         {
           "if": { "properties": { "electronically": { "const": true } }, "required": ["electronically"] },
           "then": { "required": ["clientInfo"] }
+        },
+        {
+          "if": { "properties": { "electronically": { "const": true } }, "required": ["electronically"] },
+          "then": {
+            "properties": {
+              "clientInfo": {
+                "type": "object",
+                "required": ["emailOrPhone"]
+              }
+            }
+          }
         }
       ],
       "required": ["taxationType", "operator", "correctionType"]
+    },
+
+    "cashInOutBase": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "operator": { "$ref": "#/$defs/operator" },
+        "cashSum": { "type": "number" },
+        "preItems": { "type": "array", "items": { "$ref": "#/$defs/printItem.common" } },
+        "postItems": { "type": "array", "items": { "$ref": "#/$defs/printItem.common" } }
+      },
+      "required": ["cashSum"]
     },
 
     "task.continuePrint": {
@@ -448,11 +473,7 @@
       "additionalProperties": false,
       "properties": {
         "type": { "const": "nonFiscal" },
-        "items": {
-          "type": "array",
-          "minItems": 1,
-          "items": { "$ref": "#/$defs/printItem.common" }
-        },
+        "items": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/printItem.common" } },
         "printFooter": { "type": "boolean" }
       },
       "required": ["type", "items"]
@@ -471,22 +492,16 @@
     },
 
     "task.cashIn": {
-      "type": "object",
-      "additionalProperties": false,
-      "properties": {
-        "type": { "const": "cashIn" },
-        "operator": { "$ref": "#/$defs/operator" },
-        "cashSum": { "type": "number" },
-        "preItems": { "type": "array", "items": { "$ref": "#/$defs/printItem.common" } },
-        "postItems": { "type": "array", "items": { "$ref": "#/$defs/printItem.common" } }
-      },
-      "required": ["type", "cashSum"]
+      "allOf": [
+        { "type": "object", "properties": { "type": { "const": "cashIn" } }, "required": ["type"] },
+        { "$ref": "#/$defs/cashInOutBase" }
+      ]
     },
 
     "task.cashOut": {
       "allOf": [
         { "type": "object", "properties": { "type": { "const": "cashOut" } }, "required": ["type"] },
-        { "$ref": "#/$defs/task.cashIn" }
+        { "$ref": "#/$defs/cashInOutBase" }
       ]
     },
 
@@ -565,7 +580,7 @@
       "additionalProperties": false,
       "properties": {
         "type": { "const": "getDeviceParameters" },
-        "keys": { "type": "array", "items": { "type": "integer" }, "minItems": 1 }
+        "keys": { "type": "array", "items": { "type": "integer" }, "minItems": 1, "uniqueItems": true }
       },
       "required": ["type", "keys"]
     },

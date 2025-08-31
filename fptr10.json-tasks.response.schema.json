@@ -8,15 +8,7 @@
   "oneOf": [
     {
       "type": "object",
-      "properties": { "error": {
-        "type": "object",
-        "properties": {
-          "code": { "type": "integer" },
-          "description": { "type": "string" }
-        },
-        "required": ["code", "description"],
-        "additionalProperties": false
-      }},
+      "properties": { "error": { "$ref": "#/$defs/error" } },
       "required": ["error"],
       "additionalProperties": false
     },
@@ -61,19 +53,22 @@
   ],
 
   "$defs": {
+    "error": {
+      "type": "object",
+      "properties": { "code": { "type": "integer" }, "description": { "type": "string" } },
+      "required": ["code", "description"],
+      "additionalProperties": false
+    },
+
     "warnings": {
       "type": "object",
-      "properties": {
-        "notPrinted": { "type": "boolean" }
-      },
+      "properties": { "notPrinted": { "type": "boolean" } },
       "additionalProperties": false
     },
 
     "counters": {
       "type": "object",
-      "properties": {
-        "cashSum": { "type": "number" }
-      },
+      "properties": { "cashSum": { "type": "number" } },
       "required": ["cashSum"],
       "additionalProperties": false
     },
@@ -127,9 +122,7 @@
 
     "cashDrawerStatus": {
       "type": "object",
-      "properties": {
-        "cashDrawerOpened": { "type": "boolean" }
-      },
+      "properties": { "cashDrawerOpened": { "type": "boolean" } },
       "required": ["cashDrawerOpened"],
       "additionalProperties": false
     },
@@ -248,21 +241,9 @@
       "type": "object",
       "properties": {
         "shiftNumber": { "type": "integer" },
-        "cashDrawer": {
-          "type": "object",
-          "properties": { "sum": { "type": "number" } },
-          "additionalProperties": false
-        },
-        "income": {
-          "type": "object",
-          "properties": { "count": { "type": "integer" }, "sum": { "type": "number" } },
-          "additionalProperties": false
-        },
-        "outcome": {
-          "type": "object",
-          "properties": { "count": { "type": "integer" }, "sum": { "type": "number" } },
-          "additionalProperties": false
-        },
+        "cashDrawer": { "type": "object", "properties": { "sum": { "type": "number" } }, "additionalProperties": false },
+        "income": { "type": "object", "properties": { "count": { "type": "integer" }, "sum": { "type": "number" } }, "additionalProperties": false },
+        "outcome": { "type": "object", "properties": { "count": { "type": "integer" }, "sum": { "type": "number" } }, "additionalProperties": false },
         "receipts": {
           "type": "object",
           "properties": {
@@ -401,13 +382,76 @@
       "type": "array",
       "items": {
         "type": "object",
-        "properties": {
-          "id": { "type": "string" },
-          "state": { "type": "string", "enum": ["active"] }
-        },
+        "properties": { "id": { "type": "string" }, "state": { "type": "string", "enum": ["active"] } },
         "required": ["id", "state"],
         "additionalProperties": false
       }
+    },
+
+    "organizationInfo": {
+      "type": "object",
+      "properties": {
+        "name": { "type": "string" },
+        "vatin": { "type": "string" },
+        "email": { "type": "string" },
+        "taxationTypes": {
+          "type": "array",
+          "items": { "type": "string", "enum": ["osn", "usnIncome", "usnIncomeOutcome", "envd", "esn", "patent"] }
+        },
+        "agents": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "bankPayingAgent",
+              "bankPayingSubagent",
+              "payingAgent",
+              "payingSubagent",
+              "attorney",
+              "commissionAgent",
+              "another"
+            ]
+          }
+        },
+        "address": { "type": "string" }
+      },
+      "additionalProperties": false
+    },
+
+    "deviceParams": {
+      "type": "object",
+      "properties": {
+        "paymentsAddress": { "type": "string" },
+        "fnsUrl": { "type": "string" },
+        "registrationNumber": { "type": "string" },
+        "offlineMode": { "type": "boolean" },
+        "machineInstallation": { "type": "boolean" },
+        "bso": { "type": "boolean" },
+        "encryption": { "type": "boolean" },
+        "autoMode": { "type": "boolean" },
+        "machineNumber": { "type": "string" },
+        "internet": { "type": "boolean" },
+        "service": { "type": "boolean" },
+        "gambling": { "type": "boolean" },
+        "lottery": { "type": "boolean" },
+        "excise": { "type": "boolean" },
+        "defaultTaxationType": { "type": "string", "enum": ["osn", "usnIncome", "usnIncomeOutcome", "envd", "esn", "patent"] },
+        "ofdChannel": { "type": "string", "enum": ["usb", "ethernet", "wifi", "gsm", "proto"] },
+        "ffdVersion": { "type": "string", "enum": ["1.0", "1.05", "1.1"] }
+      },
+      "additionalProperties": false
+    },
+
+    "ofdParams": {
+      "type": "object",
+      "properties": {
+        "name": { "type": "string" },
+        "vatin": { "type": "string" },
+        "host": { "type": "string" },
+        "port": { "type": "integer", "minimum": 0, "maximum": 65535 },
+        "dns": { "type": "string" }
+      },
+      "additionalProperties": false
     },
 
     "results": {
@@ -423,21 +467,13 @@
 
       "correctionReceipt": { "$ref": "#/$defs/results/fiscalReceipt" },
 
-      "nonFiscal": {
-        "type": "object",
-        "additionalProperties": false
-      },
+      "nonFiscal": { "type": "object", "additionalProperties": false },
 
-      "reportX": {
-        "type": "object",
-        "additionalProperties": false
-      },
+      "reportX": { "type": "object", "additionalProperties": false },
 
       "cashInOut": {
         "type": "object",
-        "properties": {
-          "counters": { "$ref": "#/$defs/counters" }
-        },
+        "properties": { "counters": { "$ref": "#/$defs/counters" } },
         "required": ["counters"],
         "additionalProperties": false
       },
@@ -454,15 +490,8 @@
         "additionalProperties": false
       },
 
-      "printFnDocument": {
-        "type": "object",
-        "additionalProperties": false
-      },
-
-      "printLastReceiptCopy": {
-        "type": "object",
-        "additionalProperties": false
-      },
+      "printFnDocument": { "type": "object", "additionalProperties": false },
+      "printLastReceiptCopy": { "type": "object", "additionalProperties": false },
 
       "getRegistrationInfo": {
         "type": "object",
@@ -487,48 +516,33 @@
 
       "closeArchive": { "$ref": "#/$defs/results/registrationOrChange" },
 
-      "openCashDrawer": {
-        "type": "object",
-        "additionalProperties": false
-      },
-
-      "setDateTime": {
-        "type": "object",
-        "additionalProperties": false
-      },
+      "openCashDrawer": { "type": "object", "additionalProperties": false },
+      "setDateTime": { "type": "object", "additionalProperties": false },
 
       "getDeviceParameters": {
         "type": "object",
-        "properties": {
-          "deviceParameters": { "$ref": "#/$defs/deviceParameters" }
-        },
+        "properties": { "deviceParameters": { "$ref": "#/$defs/deviceParameters" } },
         "required": ["deviceParameters"],
         "additionalProperties": false
       },
 
       "setDeviceParameters": {
         "type": "object",
-        "properties": {
-          "deviceParameters": { "$ref": "#/$defs/deviceParameters" }
-        },
+        "properties": { "deviceParameters": { "$ref": "#/$defs/deviceParameters" } },
         "required": ["deviceParameters"],
         "additionalProperties": false
       },
 
       "getDeviceInfo": {
         "type": "object",
-        "properties": {
-          "deviceInfo": { "$ref": "#/$defs/deviceInfo" }
-        },
+        "properties": { "deviceInfo": { "$ref": "#/$defs/deviceInfo" } },
         "required": ["deviceInfo"],
         "additionalProperties": false
       },
 
       "getDeviceStatus": {
         "type": "object",
-        "properties": {
-          "deviceStatus": { "$ref": "#/$defs/deviceStatus" }
-        },
+        "properties": { "deviceStatus": { "$ref": "#/$defs/deviceStatus" } },
         "required": ["deviceStatus"],
         "additionalProperties": false
       },
@@ -545,9 +559,7 @@
 
       "getShiftStatus": {
         "type": "object",
-        "properties": {
-          "shiftStatus": { "$ref": "#/$defs/shiftStatus" }
-        },
+        "properties": { "shiftStatus": { "$ref": "#/$defs/shiftStatus" } },
         "required": ["shiftStatus"],
         "additionalProperties": false
       },
@@ -588,126 +600,34 @@
 
       "getShiftTotals": {
         "type": "object",
-        "properties": {
-          "shiftTotals": { "$ref": "#/$defs/shiftTotals" }
-        },
+        "properties": { "shiftTotals": { "$ref": "#/$defs/shiftTotals" } },
         "required": ["shiftTotals"],
         "additionalProperties": false
       },
 
       "getOverallTotals": {
         "type": "object",
-        "properties": {
-          "overallTotals": { "$ref": "#/$defs/overallTotals" }
-        },
+        "properties": { "overallTotals": { "$ref": "#/$defs/overallTotals" } },
         "required": ["overallTotals"],
         "additionalProperties": false
       },
 
       "getFnDocument": {
         "type": "object",
-        "properties": {
-          "documentTLV": { "$ref": "#/$defs/documentTLV" }
-        },
+        "properties": { "documentTLV": { "$ref": "#/$defs/documentTLV" } },
         "required": ["documentTLV"],
         "additionalProperties": false
       },
 
       "getLicenses": {
         "type": "object",
-        "properties": {
-          "licenses": { "$ref": "#/$defs/licenses" }
-        },
+        "properties": { "licenses": { "$ref": "#/$defs/licenses" } },
         "required": ["licenses"],
         "additionalProperties": false
       },
 
-      "printDocumentsFromJournal": {
-        "type": "object",
-        "additionalProperties": false
-      },
-
-      "continuePrint": {
-        "type": "object",
-        "additionalProperties": false
-      },
-
-      "continuePrint": {
-        "type": "object",
-        "additionalProperties": false
-      }
-    },
-
-    "organizationInfo": {
-      "type": "object",
-      "properties": {
-        "name": { "type": "string" },
-        "vatin": { "type": "string" },
-        "email": { "type": "string" },
-        "taxationTypes": {
-          "type": "array",
-          "items": {
-            "type": "string",
-            "enum": ["osn", "usnIncome", "usnIncomeOutcome", "envd", "esn", "patent"]
-          }
-        },
-        "agents": {
-          "type": "array",
-          "items": {
-            "type": "string",
-            "enum": [
-              "bankPayingAgent",
-              "bankPayingSubagent",
-              "payingAgent",
-              "payingSubagent",
-              "attorney",
-              "commissionAgent",
-              "another"
-            ]
-          }
-        },
-        "address": { "type": "string" }
-      },
-      "additionalProperties": false
-    },
-
-    "deviceParams": {
-      "type": "object",
-      "properties": {
-        "paymentsAddress": { "type": "string" },
-        "fnsUrl": { "type": "string" },
-        "registrationNumber": { "type": "string" },
-        "offlineMode": { "type": "boolean" },
-        "machineInstallation": { "type": "boolean" },
-        "bso": { "type": "boolean" },
-        "encryption": { "type": "boolean" },
-        "autoMode": { "type": "boolean" },
-        "machineNumber": { "type": "string" },
-        "internet": { "type": "boolean" },
-        "service": { "type": "boolean" },
-        "gambling": { "type": "boolean" },
-        "lottery": { "type": "boolean" },
-        "excise": { "type": "boolean" },
-        "defaultTaxationType": {
-          "type": "string",
-          "enum": ["osn", "usnIncome", "usnIncomeOutcome", "envd", "esn", "patent"]
-        },
-        "ofdChannel": { "type": "string", "enum": ["usb", "ethernet", "wifi", "gsm", "proto"] },
-        "ffdVersion": { "type": "string", "enum": ["1.0", "1.05", "1.1"] }
-      },
-      "additionalProperties": false
-    },
-
-    "ofdParams": {
-      "type": "object",
-      "properties": {
-        "name": { "type": "string" },
-        "vatin": { "type": "string" },
-        "host": { "type": "string" },
-        "port": { "type": "integer", "minimum": 0, "maximum": 65535 },
-        "dns": { "type": "string" }
-      },
-      "additionalProperties": false
+      "printDocumentsFromJournal": { "type": "object", "additionalProperties": false },
+      "continuePrint": { "type": "object", "additionalProperties": false }
     }
   }
 }
