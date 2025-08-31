@@ -76,4 +76,5 @@ export type JsonTaskResultMap = {
     [JsonTaskType.reportX]: VoidTaskResult;
     [JsonTaskType.reportDepartments]: ReportDepartmentsTaskResult;
     [JsonTaskType.reportFnRegistrations]: ReportFnRegistrationsTaskResult;
+    [JsonTaskType.printDocumentsFromJournal]: VoidTaskResult;
 };

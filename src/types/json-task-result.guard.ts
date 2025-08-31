@@ -83,4 +83,5 @@ export const jsonTaskResultTypeGuards: TypeGuardMap<JsonTaskResultMap> = {
     [JsonTaskType.reportX]: isVoidTaskResult,
     [JsonTaskType.reportDepartments]: isReportDepartmentsTaskResult,
     [JsonTaskType.reportFnRegistrations]: isReportFnRegistrationsTaskResult,
+    [JsonTaskType.printDocumentsFromJournal]: isVoidTaskResult,
 };
