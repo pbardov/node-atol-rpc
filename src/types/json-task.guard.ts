@@ -40,6 +40,7 @@ import {isReportDepartmentsTask} from './report-departments.task.js';
 import {isReportFnRegistrationsTask} from './report-fn-registrations.task.js';
 import {isPrintDocumentsFromJournalTask} from './print-documents-from-journal.task.js';
 import {isIsmExchangeStatusTask} from './ism-exchange-status.task.js';
+import {isBeginMarkingCodeValidationTask} from './begin-marking-code-validation.task.js';
 
 export const jsonTaskTypeGuards: TypeGuardMap<JsonTaskMap> = {
     [JsonTaskType.continuePrint]: isContinuePrint,
@@ -86,4 +87,5 @@ export const jsonTaskTypeGuards: TypeGuardMap<JsonTaskMap> = {
     [JsonTaskType.reportFnRegistrations]: isReportFnRegistrationsTask,
     [JsonTaskType.printDocumentsFromJournal]: isPrintDocumentsFromJournalTask,
     [JsonTaskType.ismExchangeStatus]: isIsmExchangeStatusTask,
+    [JsonTaskType.beginMarkingCodeValidation]: isBeginMarkingCodeValidationTask,
 } as const;

@@ -33,6 +33,7 @@ import type {GetLicensesTaskResult} from './get-licenses.task-result.js';
 import type {ReportDepartmentsTaskResult} from './report-departments.task-result.js';
 import type {ReportFnRegistrationsTaskResult} from './report-fn-registrations.task-result.js';
 import type {IsmExchangeStatusTaskResult} from './ism-exchange-status.task-result.js';
+import type {BeginMarkingCodeValidationTaskResult} from './begin-marking-code-validation.task-result.js';
 
 export type JsonTaskResultMap = {
     [JsonTaskType.continuePrint]: VoidTaskResult;
@@ -79,4 +80,5 @@ export type JsonTaskResultMap = {
     [JsonTaskType.reportFnRegistrations]: ReportFnRegistrationsTaskResult;
     [JsonTaskType.printDocumentsFromJournal]: VoidTaskResult;
     [JsonTaskType.ismExchangeStatus]: IsmExchangeStatusTaskResult;
+    [JsonTaskType.beginMarkingCodeValidation]: BeginMarkingCodeValidationTaskResult;
 };
