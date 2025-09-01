@@ -36,6 +36,7 @@ import type {IsmExchangeStatusTaskResult} from './ism-exchange-status.task-resul
 import type {BeginMarkingCodeValidationTaskResult} from './begin-marking-code-validation.task-result.js';
 import type {GetMarkingCodeValidationStatusTaskResult} from './get-marking-code-validation-status.task-result.js';
 import type {AcceptMarkingCodeTaskResult} from './accept-marking-code.task-result.js';
+import type {CheckMarkingCodeValidationReadyTaskResult} from './check-marking-code-validation-ready.task-result.js';
 
 export type JsonTaskResultMap = {
     [JsonTaskType.continuePrint]: VoidTaskResult;
@@ -88,4 +89,5 @@ export type JsonTaskResultMap = {
     [JsonTaskType.declineMarkingCode]: VoidTaskResult;
     [JsonTaskType.cancelMarkingCodeValidation]: VoidTaskResult;
     [JsonTaskType.clearMarkingCodeValidationResult]: VoidTaskResult;
+    [JsonTaskType.checkMarkingCodeValidationsReady]: CheckMarkingCodeValidationReadyTaskResult;
 };

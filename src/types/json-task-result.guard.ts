@@ -43,6 +43,7 @@ import {isIsmExchangeStatusTaskResult} from './ism-exchange-status.task-result.j
 import {isBeginMarkingCodeValidationTaskResult} from './begin-marking-code-validation.task-result.js';
 import {isGetMarkingCodeValidationStatusTaskResult} from './get-marking-code-validation-status.task-result.js';
 import {isAcceptMarkingCodeTaskResult} from './accept-marking-code.task-result.js';
+import {isCheckMarkingCodeValidationReadyTaskResult} from './check-marking-code-validation-ready.task-result.js';
 
 export const jsonTaskResultTypeGuards: TypeGuardMap<JsonTaskResultMap> = {
     [JsonTaskType.continuePrint]: isVoidTaskResult,
@@ -95,4 +96,5 @@ export const jsonTaskResultTypeGuards: TypeGuardMap<JsonTaskResultMap> = {
     [JsonTaskType.declineMarkingCode]: isVoidTaskResult,
     [JsonTaskType.cancelMarkingCodeValidation]: isVoidTaskResult,
     [JsonTaskType.clearMarkingCodeValidationResult]: isVoidTaskResult,
+    [JsonTaskType.checkMarkingCodeValidationsReady]: isCheckMarkingCodeValidationReadyTaskResult,
 };
