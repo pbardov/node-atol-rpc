@@ -51,6 +51,7 @@ import {isValidateMarksTask} from './validate-marks.task.js';
 import {isAddMarksToBufferTask} from './add-marks-to-buffer.task.js';
 import {isCheckImcWorkStateTask} from './check-imc-work-state.task.js';
 import {isCheckImcTimeTask} from './check-imc-time.task.js';
+import {isPingIsmTask} from './ping-ism.task.js';
 
 export const jsonTaskTypeGuards: TypeGuardMap<JsonTaskMap> = {
     [JsonTaskType.continuePrint]: isContinuePrint,
@@ -108,4 +109,5 @@ export const jsonTaskTypeGuards: TypeGuardMap<JsonTaskMap> = {
     [JsonTaskType.addMarksToBuffer]: isAddMarksToBufferTask,
     [JsonTaskType.checkImcWorkState]: isCheckImcWorkStateTask,
     [JsonTaskType.checkImcTime]: isCheckImcTimeTask,
+    [JsonTaskType.pingIsm]: isPingIsmTask,
 } as const;

@@ -41,6 +41,7 @@ import type {ValidateMarksTaskResult} from './validate-marks.task-result.js';
 import type {AddMarksToBufferTaskResult} from './add-marks-to-buffer.task-result.js';
 import type {CheckImcWorkStateTaskResult} from './check-imc-work-state.task-result.js';
 import type {CheckImcTimeTaskResult} from './check-imc-time.task-result.js';
+import type {PingIsmTaskResult} from './ping-ism.task-result.js';
 
 export type JsonTaskResultMap = {
     [JsonTaskType.continuePrint]: VoidTaskResult;
@@ -98,4 +99,5 @@ export type JsonTaskResultMap = {
     [JsonTaskType.addMarksToBuffer]: AddMarksToBufferTaskResult;
     [JsonTaskType.checkImcWorkState]: CheckImcWorkStateTaskResult;
     [JsonTaskType.checkImcTime]: CheckImcTimeTaskResult;
+    [JsonTaskType.pingIsm]: PingIsmTaskResult;
 };
