@@ -45,6 +45,7 @@ import {isGetMarkingCodeValidationStatusTaskResult} from './get-marking-code-val
 import {isAcceptMarkingCodeTaskResult} from './accept-marking-code.task-result.js';
 import {isCheckMarkingCodeValidationReadyTaskResult} from './check-marking-code-validation-ready.task-result.js';
 import {isValidateMarksTaskResult} from './validate-marks.task-result.js';
+import {isAddMarksToBufferTaskResult} from './add-marks-to-buffer.task-result.js';
 
 export const jsonTaskResultTypeGuards: TypeGuardMap<JsonTaskResultMap> = {
     [JsonTaskType.continuePrint]: isVoidTaskResult,
@@ -99,4 +100,5 @@ export const jsonTaskResultTypeGuards: TypeGuardMap<JsonTaskResultMap> = {
     [JsonTaskType.clearMarkingCodeValidationResult]: isVoidTaskResult,
     [JsonTaskType.checkMarkingCodeValidationsReady]: isCheckMarkingCodeValidationReadyTaskResult,
     [JsonTaskType.validateMarks]: isValidateMarksTaskResult,
+    [JsonTaskType.addMarksToBuffer]: isAddMarksToBufferTaskResult,
 };

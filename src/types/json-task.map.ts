@@ -46,6 +46,7 @@ import type {CancelMarkingCodeValidationTask} from './cancel-marking-code-valida
 import type {ClearMarkingCodeValidationTask} from './clear-marking-code-validation.task.js';
 import type {CheckMarkingCodeValidationReadyTask} from './check-marking-code-validation-ready.task.js';
 import type {ValidateMarksTask} from './validate-marks.task.js';
+import type {AddMarksToBufferTask} from './add-marks-to-buffer.task.js';
 
 export type JsonTaskMap = {
     [JsonTaskType.continuePrint]: ContinuePrintTask;
@@ -100,4 +101,5 @@ export type JsonTaskMap = {
     [JsonTaskType.clearMarkingCodeValidationResult]: ClearMarkingCodeValidationTask;
     [JsonTaskType.checkMarkingCodeValidationsReady]: CheckMarkingCodeValidationReadyTask;
     [JsonTaskType.validateMarks]: ValidateMarksTask;
+    [JsonTaskType.addMarksToBuffer]: AddMarksToBufferTask;
 };
