@@ -45,6 +45,7 @@ import type {DeclineMarkingCodeTask} from './decline-marking-code.task.js';
 import type {CancelMarkingCodeValidationTask} from './cancel-marking-code-validation.task.js';
 import type {ClearMarkingCodeValidationTask} from './clear-marking-code-validation.task.js';
 import type {CheckMarkingCodeValidationReadyTask} from './check-marking-code-validation-ready.task.js';
+import type {ValidateMarksTask} from './validate-marks.task.js';
 
 export type JsonTaskMap = {
     [JsonTaskType.continuePrint]: ContinuePrintTask;
@@ -98,4 +99,5 @@ export type JsonTaskMap = {
     [JsonTaskType.cancelMarkingCodeValidation]: CancelMarkingCodeValidationTask;
     [JsonTaskType.clearMarkingCodeValidationResult]: ClearMarkingCodeValidationTask;
     [JsonTaskType.checkMarkingCodeValidationsReady]: CheckMarkingCodeValidationReadyTask;
+    [JsonTaskType.validateMarks]: ValidateMarksTask;
 };

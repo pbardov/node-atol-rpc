@@ -37,6 +37,7 @@ import type {BeginMarkingCodeValidationTaskResult} from './begin-marking-code-va
 import type {GetMarkingCodeValidationStatusTaskResult} from './get-marking-code-validation-status.task-result.js';
 import type {AcceptMarkingCodeTaskResult} from './accept-marking-code.task-result.js';
 import type {CheckMarkingCodeValidationReadyTaskResult} from './check-marking-code-validation-ready.task-result.js';
+import type {ValidateMarksTaskResult} from './validate-marks.task-result.js';
 
 export type JsonTaskResultMap = {
     [JsonTaskType.continuePrint]: VoidTaskResult;
@@ -90,4 +91,5 @@ export type JsonTaskResultMap = {
     [JsonTaskType.cancelMarkingCodeValidation]: VoidTaskResult;
     [JsonTaskType.clearMarkingCodeValidationResult]: VoidTaskResult;
     [JsonTaskType.checkMarkingCodeValidationsReady]: CheckMarkingCodeValidationReadyTaskResult;
+    [JsonTaskType.validateMarks]: ValidateMarksTaskResult;
 };
