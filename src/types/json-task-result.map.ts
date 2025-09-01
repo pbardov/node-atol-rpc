@@ -85,4 +85,5 @@ export type JsonTaskResultMap = {
     [JsonTaskType.beginMarkingCodeValidation]: BeginMarkingCodeValidationTaskResult;
     [JsonTaskType.getMarkingCodeValidationStatus]: GetMarkingCodeValidationStatusTaskResult;
     [JsonTaskType.acceptMarkingCode]: AcceptMarkingCodeTaskResult;
+    [JsonTaskType.declineMarkingCode]: VoidTaskResult;
 };

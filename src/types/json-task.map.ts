@@ -41,6 +41,7 @@ import type {IsmExchangeStatusTask} from './ism-exchange-status.task.js';
 import type {BeginMarkingCodeValidationTask} from './begin-marking-code-validation.task.js';
 import type {GetMarkingCodeValidationStatusTask} from './get-marking-code-validation-status.task.js';
 import type {AcceptMarkingCodeTask} from './accept-marking-code.task.js';
+import type {DeclineMarkingCodeTask} from './decline-marking-code.task.js';
 
 export type JsonTaskMap = {
     [JsonTaskType.continuePrint]: ContinuePrintTask;
@@ -90,4 +91,5 @@ export type JsonTaskMap = {
     [JsonTaskType.beginMarkingCodeValidation]: BeginMarkingCodeValidationTask;
     [JsonTaskType.getMarkingCodeValidationStatus]: GetMarkingCodeValidationStatusTask;
     [JsonTaskType.acceptMarkingCode]: AcceptMarkingCodeTask;
+    [JsonTaskType.declineMarkingCode]: DeclineMarkingCodeTask;
 };
