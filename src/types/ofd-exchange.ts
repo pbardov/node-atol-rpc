@@ -2,6 +2,7 @@ import structureValidator from '../common/types/structure-validator.js';
 import isNumber from '../common/types/is-number.js';
 import isString from '../common/types/is-string.js';
 import isBoolean from '../common/types/is-boolean.js';
+import {type CodeDescription, isCodeDescription} from './code-description.js';
 
 export type OfdExchangeStatus = {
 	notSentCount: number;
@@ -15,16 +16,6 @@ export const isOfdExchangeStatus = structureValidator<OfdExchangeStatus>({
 	notSentFirstDocNumber: isNumber,
 	notSentFirstDocDateTime: isString,
 	lastSuccessKeysUpdate: isString,
-});
-
-export type CodeDescription = {
-	code: number;
-	description: string;
-};
-
-export const isCodeDescription = structureValidator<CodeDescription>({
-	code: isNumber,
-	description: isString,
 });
 
 export type OfdExchangeErrors = {

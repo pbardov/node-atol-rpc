@@ -32,6 +32,7 @@ import type {GetDepartmentSumTaskResult} from './get-department-sum.task-result.
 import type {GetLicensesTaskResult} from './get-licenses.task-result.js';
 import type {ReportDepartmentsTaskResult} from './report-departments.task-result.js';
 import type {ReportFnRegistrationsTaskResult} from './report-fn-registrations.task-result.js';
+import type {IsmExchangeStatusTaskResult} from './ism-exchange-status.task-result.js';
 
 export type JsonTaskResultMap = {
     [JsonTaskType.continuePrint]: VoidTaskResult;
@@ -77,4 +78,5 @@ export type JsonTaskResultMap = {
     [JsonTaskType.reportDepartments]: ReportDepartmentsTaskResult;
     [JsonTaskType.reportFnRegistrations]: ReportFnRegistrationsTaskResult;
     [JsonTaskType.printDocumentsFromJournal]: VoidTaskResult;
+    [JsonTaskType.ismExchangeStatus]: IsmExchangeStatusTaskResult;
 };

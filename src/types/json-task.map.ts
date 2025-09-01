@@ -37,6 +37,7 @@ import type {ReportXTask} from './report-x.task.js';
 import type {ReportDepartmentsTask} from './report-departments.task.js';
 import type {ReportFnRegistrationsTask} from './report-fn-registrations.task.js';
 import type {PrintDocumentsFromJournalTask} from './print-documents-from-journal.task.js';
+import type {IsmExchangeStatusTask} from './ism-exchange-status.task.js';
 
 export type JsonTaskMap = {
     [JsonTaskType.continuePrint]: ContinuePrintTask;
@@ -82,4 +83,5 @@ export type JsonTaskMap = {
     [JsonTaskType.reportDepartments]: ReportDepartmentsTask;
     [JsonTaskType.reportFnRegistrations]: ReportFnRegistrationsTask;
     [JsonTaskType.printDocumentsFromJournal]: PrintDocumentsFromJournalTask;
+    [JsonTaskType.ismExchangeStatus]: IsmExchangeStatusTask;
 };

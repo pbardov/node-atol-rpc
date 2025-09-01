@@ -39,6 +39,7 @@ import {isGetDepartmentSumTaskResult} from './get-department-sum.task-result.js'
 import {isGetLicensesTaskResult} from './get-licenses.task-result.js';
 import {isReportDepartmentsTaskResult} from './report-departments.task-result.js';
 import {isReportFnRegistrationsTaskResult} from './report-fn-registrations.task-result.js';
+import {isIsmExchangeStatusTaskResult} from './ism-exchange-status.task-result.js';
 
 export const jsonTaskResultTypeGuards: TypeGuardMap<JsonTaskResultMap> = {
     [JsonTaskType.continuePrint]: isVoidTaskResult,
@@ -84,4 +85,5 @@ export const jsonTaskResultTypeGuards: TypeGuardMap<JsonTaskResultMap> = {
     [JsonTaskType.reportDepartments]: isReportDepartmentsTaskResult,
     [JsonTaskType.reportFnRegistrations]: isReportFnRegistrationsTaskResult,
     [JsonTaskType.printDocumentsFromJournal]: isVoidTaskResult,
+    [JsonTaskType.ismExchangeStatus]: isIsmExchangeStatusTaskResult,
 };
