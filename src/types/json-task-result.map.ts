@@ -34,6 +34,7 @@ import type {ReportDepartmentsTaskResult} from './report-departments.task-result
 import type {ReportFnRegistrationsTaskResult} from './report-fn-registrations.task-result.js';
 import type {IsmExchangeStatusTaskResult} from './ism-exchange-status.task-result.js';
 import type {BeginMarkingCodeValidationTaskResult} from './begin-marking-code-validation.task-result.js';
+import type {GetMarkingCodeValidationStatusTaskResult} from './get-marking-code-validation-status.task-result.js';
 
 export type JsonTaskResultMap = {
     [JsonTaskType.continuePrint]: VoidTaskResult;
@@ -81,4 +82,5 @@ export type JsonTaskResultMap = {
     [JsonTaskType.printDocumentsFromJournal]: VoidTaskResult;
     [JsonTaskType.ismExchangeStatus]: IsmExchangeStatusTaskResult;
     [JsonTaskType.beginMarkingCodeValidation]: BeginMarkingCodeValidationTaskResult;
+    [JsonTaskType.getMarkingCodeValidationStatus]: GetMarkingCodeValidationStatusTaskResult;
 };

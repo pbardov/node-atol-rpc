@@ -39,6 +39,7 @@ import type {ReportFnRegistrationsTask} from './report-fn-registrations.task.js'
 import type {PrintDocumentsFromJournalTask} from './print-documents-from-journal.task.js';
 import type {IsmExchangeStatusTask} from './ism-exchange-status.task.js';
 import type {BeginMarkingCodeValidationTask} from './begin-marking-code-validation.task.js';
+import type {GetMarkingCodeValidationStatusTask} from './get-marking-code-validation-status.task.js';
 
 export type JsonTaskMap = {
     [JsonTaskType.continuePrint]: ContinuePrintTask;
@@ -86,4 +87,5 @@ export type JsonTaskMap = {
     [JsonTaskType.printDocumentsFromJournal]: PrintDocumentsFromJournalTask;
     [JsonTaskType.ismExchangeStatus]: IsmExchangeStatusTask;
     [JsonTaskType.beginMarkingCodeValidation]: BeginMarkingCodeValidationTask;
+    [JsonTaskType.getMarkingCodeValidationStatus]: GetMarkingCodeValidationStatusTask;
 };

@@ -41,6 +41,7 @@ import {isReportDepartmentsTaskResult} from './report-departments.task-result.js
 import {isReportFnRegistrationsTaskResult} from './report-fn-registrations.task-result.js';
 import {isIsmExchangeStatusTaskResult} from './ism-exchange-status.task-result.js';
 import {isBeginMarkingCodeValidationTaskResult} from './begin-marking-code-validation.task-result.js';
+import {isGetMarkingCodeValidationStatusTaskResult} from './get-marking-code-validation-status.task-result.js';
 
 export const jsonTaskResultTypeGuards: TypeGuardMap<JsonTaskResultMap> = {
     [JsonTaskType.continuePrint]: isVoidTaskResult,
@@ -88,4 +89,5 @@ export const jsonTaskResultTypeGuards: TypeGuardMap<JsonTaskResultMap> = {
     [JsonTaskType.printDocumentsFromJournal]: isVoidTaskResult,
     [JsonTaskType.ismExchangeStatus]: isIsmExchangeStatusTaskResult,
     [JsonTaskType.beginMarkingCodeValidation]: isBeginMarkingCodeValidationTaskResult,
+    [JsonTaskType.getMarkingCodeValidationStatus]: isGetMarkingCodeValidationStatusTaskResult,
 };
