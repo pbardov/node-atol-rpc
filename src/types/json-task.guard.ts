@@ -44,6 +44,7 @@ import {isBeginMarkingCodeValidationTask} from './begin-marking-code-validation.
 import {isGetMarkingCodeValidationStatusTask} from './get-marking-code-validation-status.task.js';
 import {isAcceptMarkingCodeTask} from './accept-marking-code.task.js';
 import {isDeclineMarkingCodeTask} from './decline-marking-code.task.js';
+import {isCancelMarkingCodeValidationTask} from './cancel-marking-code-validation.task.js';
 
 export const jsonTaskTypeGuards: TypeGuardMap<JsonTaskMap> = {
     [JsonTaskType.continuePrint]: isContinuePrint,
@@ -94,4 +95,5 @@ export const jsonTaskTypeGuards: TypeGuardMap<JsonTaskMap> = {
     [JsonTaskType.getMarkingCodeValidationStatus]: isGetMarkingCodeValidationStatusTask,
     [JsonTaskType.acceptMarkingCode]: isAcceptMarkingCodeTask,
     [JsonTaskType.declineMarkingCode]: isDeclineMarkingCodeTask,
+    [JsonTaskType.cancelMarkingCodeValidation]: isCancelMarkingCodeValidationTask,
 } as const;

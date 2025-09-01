@@ -93,4 +93,5 @@ export const jsonTaskResultTypeGuards: TypeGuardMap<JsonTaskResultMap> = {
     [JsonTaskType.getMarkingCodeValidationStatus]: isGetMarkingCodeValidationStatusTaskResult,
     [JsonTaskType.acceptMarkingCode]: isAcceptMarkingCodeTaskResult,
     [JsonTaskType.declineMarkingCode]: isVoidTaskResult,
+    [JsonTaskType.cancelMarkingCodeValidation]: isVoidTaskResult,
 };
