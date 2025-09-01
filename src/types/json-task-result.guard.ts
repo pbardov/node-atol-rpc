@@ -42,6 +42,7 @@ import {isReportFnRegistrationsTaskResult} from './report-fn-registrations.task-
 import {isIsmExchangeStatusTaskResult} from './ism-exchange-status.task-result.js';
 import {isBeginMarkingCodeValidationTaskResult} from './begin-marking-code-validation.task-result.js';
 import {isGetMarkingCodeValidationStatusTaskResult} from './get-marking-code-validation-status.task-result.js';
+import {isAcceptMarkingCodeTaskResult} from './accept-marking-code.task-result.js';
 
 export const jsonTaskResultTypeGuards: TypeGuardMap<JsonTaskResultMap> = {
     [JsonTaskType.continuePrint]: isVoidTaskResult,
@@ -90,4 +91,5 @@ export const jsonTaskResultTypeGuards: TypeGuardMap<JsonTaskResultMap> = {
     [JsonTaskType.ismExchangeStatus]: isIsmExchangeStatusTaskResult,
     [JsonTaskType.beginMarkingCodeValidation]: isBeginMarkingCodeValidationTaskResult,
     [JsonTaskType.getMarkingCodeValidationStatus]: isGetMarkingCodeValidationStatusTaskResult,
+    [JsonTaskType.acceptMarkingCode]: isAcceptMarkingCodeTaskResult,
 };

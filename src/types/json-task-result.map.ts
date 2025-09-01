@@ -35,6 +35,7 @@ import type {ReportFnRegistrationsTaskResult} from './report-fn-registrations.ta
 import type {IsmExchangeStatusTaskResult} from './ism-exchange-status.task-result.js';
 import type {BeginMarkingCodeValidationTaskResult} from './begin-marking-code-validation.task-result.js';
 import type {GetMarkingCodeValidationStatusTaskResult} from './get-marking-code-validation-status.task-result.js';
+import type {AcceptMarkingCodeTaskResult} from './accept-marking-code.task-result.js';
 
 export type JsonTaskResultMap = {
     [JsonTaskType.continuePrint]: VoidTaskResult;
@@ -83,4 +84,5 @@ export type JsonTaskResultMap = {
     [JsonTaskType.ismExchangeStatus]: IsmExchangeStatusTaskResult;
     [JsonTaskType.beginMarkingCodeValidation]: BeginMarkingCodeValidationTaskResult;
     [JsonTaskType.getMarkingCodeValidationStatus]: GetMarkingCodeValidationStatusTaskResult;
+    [JsonTaskType.acceptMarkingCode]: AcceptMarkingCodeTaskResult;
 };

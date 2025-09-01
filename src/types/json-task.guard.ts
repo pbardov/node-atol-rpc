@@ -42,6 +42,7 @@ import {isPrintDocumentsFromJournalTask} from './print-documents-from-journal.ta
 import {isIsmExchangeStatusTask} from './ism-exchange-status.task.js';
 import {isBeginMarkingCodeValidationTask} from './begin-marking-code-validation.task.js';
 import {isGetMarkingCodeValidationStatusTask} from './get-marking-code-validation-status.task.js';
+import {isAcceptMarkingCodeTask} from './accept-marking-code.task.js';
 
 export const jsonTaskTypeGuards: TypeGuardMap<JsonTaskMap> = {
     [JsonTaskType.continuePrint]: isContinuePrint,
@@ -90,4 +91,5 @@ export const jsonTaskTypeGuards: TypeGuardMap<JsonTaskMap> = {
     [JsonTaskType.ismExchangeStatus]: isIsmExchangeStatusTask,
     [JsonTaskType.beginMarkingCodeValidation]: isBeginMarkingCodeValidationTask,
     [JsonTaskType.getMarkingCodeValidationStatus]: isGetMarkingCodeValidationStatusTask,
+    [JsonTaskType.acceptMarkingCode]: isAcceptMarkingCodeTask,
 } as const;
