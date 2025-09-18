@@ -7,6 +7,8 @@ import {type DocumentPrintItem, isDocumentPrintItem} from './document-item.js';
 import {type JsonTask} from './json-task.js';
 import {isJsonTaskType, JsonTaskType} from './json-task-type.js';
 import {type TypeGuardDetail} from '../common/types/type-guard.js';
+import {type AdditionalAttribute, isAdditionalAttribute} from './additional-attribute.js';
+import isString from '../common/types/is-string.js';
 
 const shiftTaskTypes = [JsonTaskType.openShift, JsonTaskType.closeShift] as const;
 type ShiftTaskTypesTuple = typeof shiftTaskTypes;
@@ -18,6 +20,9 @@ export type ShiftTask<T extends ShiftTaskTypes = ShiftTaskTypes> = JsonTask & {
 	preItems?: DocumentPrintItem[];
 	postItems?: DocumentPrintItem[];
 	electronically?: boolean;
+	additionAttribute?: AdditionalAttribute;
+	address?: string;
+	paymentAddress?: string;
 };
 export type OpenShiftTask = ShiftTask<JsonTaskType.openShift>;
 export type CloseShiftTask = ShiftTask<JsonTaskType.closeShift>;
@@ -28,6 +33,9 @@ export const shiftTaskTypeGuard = <T extends ShiftTaskTypes>(types: T[]): TypeGu
 	preItems: makeOpt(arrayTypeGuard(isDocumentPrintItem)),
 	postItems: makeOpt(arrayTypeGuard(isDocumentPrintItem)),
 	electronically: makeOpt(isBoolean),
+	additionAttribute: makeOpt(isAdditionalAttribute),
+	address: makeOpt(isString),
+	paymentAddress: makeOpt(isString),
 });
 
 export const isShiftTask = shiftTaskTypeGuard([JsonTaskType.openShift, JsonTaskType.closeShift]);
