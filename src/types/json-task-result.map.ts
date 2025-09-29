@@ -42,6 +42,7 @@ import type {AddMarksToBufferTaskResult} from './add-marks-to-buffer.task-result
 import type {CheckImcWorkStateTaskResult} from './check-imc-work-state.task-result.js';
 import type {CheckImcTimeTaskResult} from './check-imc-time.task-result.js';
 import type {PingIsmTaskResult} from './ping-ism.task-result.js';
+import type {GetOverallTotalsTaskResult} from './get-overall-totals.task-result.js';
 
 export type JsonTaskResultMap = {
     [JsonTaskType.continuePrint]: VoidTaskResult;
@@ -79,7 +80,7 @@ export type JsonTaskResultMap = {
     [JsonTaskType.getFnStatus]: GetFnStatusTaskResult;
     [JsonTaskType.ofdExchangeStatus]: OfdExchangeStatusTaskResult;
     [JsonTaskType.getShiftTotals]: GetShiftTotalsTaskResult;
-    [JsonTaskType.getOverallTotals]: GetShiftTotalsTaskResult;
+    [JsonTaskType.getOverallTotals]: GetOverallTotalsTaskResult;
     [JsonTaskType.getFnDocument]: GetFnDocumentTaskResult;
     [JsonTaskType.getDepartmentSum]: GetDepartmentSumTaskResult;
     [JsonTaskType.getLicenses]: GetLicensesTaskResult;

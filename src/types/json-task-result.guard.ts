@@ -49,6 +49,7 @@ import {isAddMarksToBufferTaskResult} from './add-marks-to-buffer.task-result.js
 import {isCheckImcWorkStateTaskResult} from './check-imc-work-state.task-result.js';
 import {isCheckImcTimeTaskResult} from './check-imc-time.task-result.js';
 import {isPingIsmTaskResult} from './ping-ism.task-result.js';
+import {isGetOverallTotalsTaskResult} from './get-overall-totals.task-result.js';
 
 export const jsonTaskResultTypeGuards: TypeGuardMap<JsonTaskResultMap> = {
     [JsonTaskType.continuePrint]: isVoidTaskResult,
@@ -86,7 +87,7 @@ export const jsonTaskResultTypeGuards: TypeGuardMap<JsonTaskResultMap> = {
     [JsonTaskType.getFnStatus]: isGetFnStatusTaskResult,
     [JsonTaskType.ofdExchangeStatus]: isOfdExchangeStatusTaskResult,
     [JsonTaskType.getShiftTotals]: isGetShiftTotalsTaskResult,
-    [JsonTaskType.getOverallTotals]: isGetShiftTotalsTaskResult,
+    [JsonTaskType.getOverallTotals]: isGetOverallTotalsTaskResult,
     [JsonTaskType.getFnDocument]: isGetFnDocumentTaskResult,
     [JsonTaskType.getDepartmentSum]: isGetDepartmentSumTaskResult,
     [JsonTaskType.getLicenses]: isGetLicensesTaskResult,

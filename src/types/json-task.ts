@@ -15,8 +15,8 @@ export const isJsonTask = structureValidator<JsonTask>({
 	type: isJsonTaskType,
 });
 
-// export type JsonTaskDriver = {
-// 	[K in keyof JsonTaskMap]: (p?: JsonTaskParam<JsonTaskMap[K]>) => Promise<JsonTaskResultMap[K]>;
-// };
+export type JsonTaskDriver = {
+	[K in keyof JsonTaskMap]: (p?: JsonTaskParam<JsonTaskMap[K]>) => Promise<JsonTaskResultMap[K]>;
+};
 
 export {JsonTaskMap, JsonTaskResultMap, jsonTaskTypeGuards, jsonTaskResultTypeGuards};
