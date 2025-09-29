@@ -15,8 +15,11 @@ export const isJsonTask = structureValidator<JsonTask>({
 	type: isJsonTaskType,
 });
 
+type IsEmptyObject<T> = keyof T extends never ? true : false;
+type ArgsFor<T> = IsEmptyObject<T> extends true ? [] : [T];
+
 export type JsonTaskDriver = {
-	[K in keyof JsonTaskMap]: (p?: JsonTaskParam<JsonTaskMap[K]>) => Promise<JsonTaskResultMap[K]>;
+	[K in keyof JsonTaskMap]: (...args: ArgsFor<JsonTaskParam<JsonTaskMap[K]>>) => Promise<JsonTaskResultMap[K]>;
 };
 
 export {JsonTaskMap, JsonTaskResultMap, jsonTaskTypeGuards, jsonTaskResultTypeGuards};
