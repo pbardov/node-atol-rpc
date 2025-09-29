@@ -2,6 +2,7 @@ import AtolRpc from './atol-rpc.js';
 import * as util from 'node:util';
 import {readFile} from 'node:fs/promises';
 import {isSettings} from './types/settings.js';
+import {JsonTaskType} from './types/json-task-type.js';
 
 async function bootstrap() {
 	const kkm = new AtolRpc();
@@ -22,7 +23,8 @@ async function bootstrap() {
 	kkm.open();
 	const deviceInfo = await kkm.getDeviceInfo();
 	const deviceStatus = await kkm.getDeviceStatus();
-	console.log(JSON.stringify({deviceInfo, deviceStatus}, null, '  '));
+	const registrationInfo = await kkm.processJsonTask({type: JsonTaskType.getRegistrationInfo});
+	console.log(JSON.stringify({deviceInfo, deviceStatus, registrationInfo}, null, '  '));
 }
 
 void bootstrap().then(() => {
