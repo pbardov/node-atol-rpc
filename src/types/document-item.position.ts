@@ -5,7 +5,7 @@ import {isPaymentMethod, type PaymentMethod} from './payment-method.js';
 import {isPaymentObject, type PaymentObject} from './payment-object.js';
 import {isNomenclatureCode, type NomenclatureCode} from './nomenclature-code.js';
 import {isMarkingCode, type MarkingCode} from './marking-code.js';
-import {type ImcParams, isImcParams} from './imc-params.js';
+import {type ImcParamsDocument, isImcParamsDocument} from './imc-params.js';
 import {isTax, type Tax} from './tax.js';
 import {type AgentInfo, isAgentInfo} from './agent-info.js';
 import {isSupplierInfo, type SupplierInfo} from './supplier-info.js';
@@ -33,7 +33,7 @@ export type DocumentItemPosition = DocumentItem & {
 	paymentObject: PaymentObject;
 	nomenclatureCode?: NomenclatureCode;
 	markingCode?: MarkingCode;
-	imcParams?: ImcParams;
+	imcParams?: ImcParamsDocument;
 	tax?: Tax;
 	agentInfo?: AgentInfo;
 	supplierInfo?: SupplierInfo;
@@ -64,7 +64,7 @@ export const isDocumentItemPosition = structureValidator<DocumentItemPosition>({
 	paymentObject: makeOpt(isPaymentObject),
 	nomenclatureCode: makeOpt(isNomenclatureCode),
 	markingCode: makeOpt(isMarkingCode),
-	imcParams: makeOpt(isImcParams),
+	imcParams: makeOpt(isImcParamsDocument),
 	tax: makeOpt(isTax),
 	agentInfo: makeOpt(isAgentInfo),
 	supplierInfo: makeOpt(isSupplierInfo),

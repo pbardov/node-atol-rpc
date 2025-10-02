@@ -1,7 +1,7 @@
 import {type Base64String, isBase64String} from '../common/types/base64-string.js';
 import {isItemInfoCheckResult, type ItemInfoCheckResult} from './item-info-check-result.js';
 import {isMeasurementUnit, type MeasurementUnit} from './measurement-unit.js';
-import structureValidator from '../common/types/structure-validator.js';
+import structureValidator, {type StructureValidator} from '../common/types/structure-validator.js';
 import isNumber from '../common/types/is-number.js';
 import {makeOpt} from '../common/types/is-opt.js';
 import isString from '../common/types/is-string.js';
@@ -25,6 +25,8 @@ export enum ItemEstimatedStatus {
 	itemDryForSale,
 	itemPieceReturn,
 	itemDryReturn,
+	itemPieceForSale,
+	itemDrySold,
 	itemStatusUnchanged = 255,
 }
 
@@ -39,19 +41,39 @@ export type ImcParams = {
 	imcModeProcessing: number;
 	itemFractionalAmount?: string;
 	imcBarcode?: Base64String;
-	itemInfoCheckResult?: ItemInfoCheckResult;
-	itemQuantity?: number;
-	itemUnits?: MeasurementUnit;
 };
 
-export const isImcParams = structureValidator<ImcParams>({
+export const imcParamsValidator: StructureValidator<ImcParams> = {
 	imcType: isImcType,
 	imc: isBase64String,
 	itemEstimatedStatus: isItemEstimatedStatus,
 	imcModeProcessing: isNumber,
 	itemFractionalAmount: makeOpt(isString),
 	imcBarcode: makeOpt(isBase64String),
-	itemInfoCheckResult: makeOpt(isItemInfoCheckResult),
+};
+
+export type ImcParamsValidation = ImcParams & {
+	itemEstimatedStatus: ItemEstimatedStatus;
+	itemQuantity?: number;
+	itemUnits?: MeasurementUnit;
+};
+
+export const imcParamsValidationValidator: StructureValidator<ImcParamsValidation> = {
+	...imcParamsValidator,
+	itemEstimatedStatus: isItemEstimatedStatus,
 	itemQuantity: makeOpt(isNumber),
 	itemUnits: makeOpt(isMeasurementUnit),
-});
+};
+
+export type ImcParamsDocument = ImcParams & {
+	itemEstimatedStatus: ItemEstimatedStatus;
+};
+
+export const imcParamsDocumentValidator: StructureValidator<ImcParamsDocument> = {
+	...imcParamsValidator,
+	itemEstimatedStatus: isItemEstimatedStatus,
+};
+
+export const isImcParams = structureValidator<ImcParams>(imcParamsValidator);
+export const isImcParamsValidation = structureValidator<ImcParamsValidation>(imcParamsValidationValidator);
+export const isImcParamsDocument = structureValidator<ImcParamsDocument>(imcParamsDocumentValidator);
