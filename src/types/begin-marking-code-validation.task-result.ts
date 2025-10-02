@@ -1,18 +1,17 @@
 import structureValidator from '../common/types/structure-validator.js';
 import isBoolean from '../common/types/is-boolean.js';
-import {makeOpt} from '../common/types/is-opt.js';
 import isString from '../common/types/is-string.js';
 
 export type OfflineValidationResult = {
     fmCheck: boolean;
     fmCheckResult: boolean;
-    fmCheckErrorReason?: string;
+    fmCheckErrorReason: string;
 };
 
 export const isOfflineValidationResult = structureValidator<OfflineValidationResult>({
     fmCheck: isBoolean,
     fmCheckResult: isBoolean,
-    fmCheckErrorReason: makeOpt(isString)
+    fmCheckErrorReason: isString
 })
 
 export type BeginMarkingCodeValidationTaskResult = {
