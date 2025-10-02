@@ -5,8 +5,9 @@ import isEqual from '../common/types/is-equal.js';
 import {makeOpt} from '../common/types/is-opt.js';
 import isNumber from '../common/types/is-number.js';
 import {arrayTypeGuard} from '../common/types/is-array-of.js';
+import type {JsonTask} from './json-task.js';
 
-export type ValidateMarksTask = {
+export type ValidateMarksTask = JsonTask & {
     type: JsonTaskType.validateMarks;
     timeout?: number;
     params: ImcParamsValidation[];
