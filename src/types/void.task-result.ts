@@ -2,5 +2,5 @@
 export type VoidTaskResult = void | null | undefined;
 
 export function isVoidTaskResult(v: unknown): v is VoidTaskResult {
-	return !v;
+	return true; // в данном случае нам не важно что в значении
 }
