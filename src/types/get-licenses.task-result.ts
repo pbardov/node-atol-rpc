@@ -4,14 +4,14 @@ import {arrayTypeGuard} from '../common/types/is-array-of.js';
 
 export type License = {
   id: string;
-  state: 'active';
+  name: string;
 };
 
 export type Licenses = License[];
 
 export const isLicense = structureValidator<License>({
   id: isString,
-  state: (v: unknown): v is 'active' => v === 'active',
+  name: isString,
 });
 
 export const isLicenses = arrayTypeGuard(isLicense);
