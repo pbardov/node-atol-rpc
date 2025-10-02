@@ -1,61 +1,53 @@
 import structureValidator from '../common/types/structure-validator.js';
 import isNumber from '../common/types/is-number.js';
-import { makeOpt } from '../common/types/is-opt.js';
 
-// Define the Payments type
-export type Payments = {
-  cash?: number;
-  electronically?: number;
-  credit?: number;
-  prepaid?: number;
-  other?: number;
-  [key: `userPaymentType-${string}`]: number | undefined; // Pattern for custom user payment types
+export type FnTotalCounter = {
+  receipts: number;
+  corrections: number;
+  receiptsSum: number;
+  correctionsSum: number;
+  cashSum: number;
+  noncashSum: number;
+  prepaidSum: number;
+  creditSum: number;
+  barterSum: number;
+  vat20Sum: number;
+  vat10Sum: number;
+  vat120Sum: number;
+  vat110Sum: number;
+  vat0Sum: number;
+  vatNoSum: number;
 };
 
-// Validator for Payments type
-export const isPayments = structureValidator<Payments>({
-  cash: makeOpt(isNumber),
-  electronically: makeOpt(isNumber),
-  credit: makeOpt(isNumber),
-  prepaid: makeOpt(isNumber),
-  other: makeOpt(isNumber),
-  // Custom user payment type pattern cannot be directly validated here
+export const isFnTotalCounter = structureValidator<FnTotalCounter>({
+  receipts: isNumber,
+  corrections: isNumber,
+  receiptsSum: isNumber,
+  correctionsSum: isNumber,
+  cashSum: isNumber,
+  noncashSum: isNumber,
+  prepaidSum: isNumber,
+  creditSum: isNumber,
+  barterSum: isNumber,
+  vat20Sum: isNumber,
+  vat10Sum: isNumber,
+  vat120Sum: isNumber,
+  vat110Sum: isNumber,
+  vat0Sum: isNumber,
+  vatNoSum: isNumber,
 });
 
-// Define the OverallReceiptTotals type
-export type OverallReceiptTotals = {
-  sum: number;
-  payments: Payments;
-};
-
-// Validator for OverallReceiptTotals type
-export const isOverallReceiptTotals = structureValidator<OverallReceiptTotals>({
-  sum: isNumber,
-  payments: isPayments,
-});
-
-// Define Receipts type
-export type Receipts = {
-  sell: OverallReceiptTotals;
-  sellReturn: OverallReceiptTotals;
-  buy: OverallReceiptTotals;
-  buyReturn: OverallReceiptTotals;
-};
-
-// Validator for Receipts type
-export const isReceipts = structureValidator<Receipts>({
-  sell: isOverallReceiptTotals,
-  sellReturn: isOverallReceiptTotals,
-  buy: isOverallReceiptTotals,
-  buyReturn: isOverallReceiptTotals,
-});
-
-// Define the FnTotals type
 export type FnTotals = {
-  receipts: Receipts;
+  sell: FnTotalCounter;
+  buy: FnTotalCounter;
+  sellReturn: FnTotalCounter;
+  buyReturn: FnTotalCounter;
 };
 
-// Validator for FnTotals type
+
 export const isFnTotals = structureValidator<FnTotals>({
-  receipts: isReceipts,
+  sell: isFnTotalCounter,
+  buy: isFnTotalCounter,
+  sellReturn: isFnTotalCounter,
+  buyReturn: isFnTotalCounter,
 });
