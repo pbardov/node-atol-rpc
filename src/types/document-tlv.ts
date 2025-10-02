@@ -1,6 +1,7 @@
 import isBoolean from '../common/types/is-boolean.js';
 import structureValidator from '../common/types/structure-validator.js';
 import isEnumOf from '../common/types/is-enum-of.js';
+import isString from '../common/types/is-string.js';
 
 // Define the enum for Fiscal Document Types
 export enum FiscalDocumentType {
@@ -20,11 +21,14 @@ export enum FiscalDocumentType {
 export const isFiscalDocumentType = isEnumOf(FiscalDocumentType);
 
 export type DocumentTLV = {
+  [key: number]: string;
   fiscalDocumentType: FiscalDocumentType;
   short: boolean;
+  qr: string;
 };
 
 export const isDocumentTLV = structureValidator<DocumentTLV>({
   fiscalDocumentType: isFiscalDocumentType,
   short: isBoolean,
+  qr: isString,
 });
