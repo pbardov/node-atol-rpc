@@ -20,10 +20,14 @@ async function bootstrap() {
 	console.log(`KKM settings:\n${JSON.stringify(settings, null, '  ')}`);
 
 	kkm.open();
-	const deviceInfo = await kkm.getDeviceInfo();
-	const deviceStatus = await kkm.getDeviceStatus();
-	const registrationInfo = await kkm.getRegistrationInfo();
-	console.log(JSON.stringify({deviceInfo, deviceStatus, registrationInfo}, null, '  '));
+	try {
+		const deviceInfo = await kkm.getDeviceInfo();
+		const deviceStatus = await kkm.getDeviceStatus();
+		const registrationInfo = await kkm.getRegistrationInfo();
+		console.log(JSON.stringify({deviceInfo, deviceStatus, registrationInfo}, null, '  '));
+	} finally {
+		kkm.close();
+	}
 }
 
 void bootstrap().then(() => {
