@@ -4,8 +4,10 @@ import isBoolean from '../common/types/is-boolean.js';
 
 export type ResultWarnings = {
 	notPrinted?: boolean;
+	dataForSendIsEmpty?: boolean;
 };
 
 export const isResultWarnings = structureValidator<ResultWarnings>({
 	notPrinted: makeOpt(isBoolean),
+	dataForSendIsEmpty: makeOpt(isBoolean),
 });

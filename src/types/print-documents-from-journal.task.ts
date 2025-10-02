@@ -3,6 +3,7 @@ import isEnumOf from '../common/types/is-enum-of.js';
 import structureValidator from '../common/types/structure-validator.js';
 import isEqual from '../common/types/is-equal.js';
 import isNumber from '../common/types/is-number.js';
+import type {JsonTask} from './json-task.js';
 
 export enum DocumentFilter {
     shiftNumber = 'shiftNumber',
@@ -11,7 +12,7 @@ export enum DocumentFilter {
 
 export const isDocumentFilter = isEnumOf(DocumentFilter);
 
-export type PrintDocumentsFromJournalTask = {
+export type PrintDocumentsFromJournalTask = JsonTask & {
     type: JsonTaskType.printDocumentsFromJournal;
     filter: DocumentFilter;
     from: number;

@@ -2,6 +2,8 @@ import structureValidator from '../common/types/structure-validator.js';
 import isNumber from '../common/types/is-number.js';
 import isString from '../common/types/is-string.js';
 import {type CodeDescription, isCodeDescription} from './code-description.js';
+import {isResultWarnings, type ResultWarnings} from './result-warnings.js';
+import {makeOpt} from '../common/types/is-opt.js';
 
 export type IsmExchangeStatus = {
     notSentCount: number;
@@ -36,9 +38,11 @@ export const isIsmExchangeErrors = structureValidator<IsmExchangeErrors>({
 export type IsmExchangeStatusTaskResult = {
     status: IsmExchangeStatus;
     errors: IsmExchangeErrors;
+    warnings?: ResultWarnings;
 };
 
 export const isIsmExchangeStatusTaskResult = structureValidator<IsmExchangeStatusTaskResult>({
     status: isIsmExchangeStatus,
     errors: isIsmExchangeErrors,
+    warnings: makeOpt(isResultWarnings),
 });
