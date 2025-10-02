@@ -5,6 +5,7 @@ import isString from '../common/types/is-string.js';
 import isBoolean from '../common/types/is-boolean.js';
 import isEnumOf from '../common/types/is-enum-of.js';
 import {type ImcType, isImcType} from './imc-params.js';
+import combineTypeGuards from '../common/types/combine-type-guards.js';
 
 export type DriverError = {
     code: number;
@@ -75,7 +76,7 @@ export const isOnlineValidationResult = structureValidator<OnlineValidationResul
     markOperatorItemStatus: isMarkOperatorItemStatus,
     markOperatorResponse: isMarkOperatorResponse,
     markOperatorResponseResult: isMarkOperatorResponseResult,
-    imcType: isImcType,
+    imcType: combineTypeGuards(isString, isImcType),
     imcBarcode: isString,
     imcModeProcessing: isNumber,
 })

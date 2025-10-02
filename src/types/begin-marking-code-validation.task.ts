@@ -5,6 +5,7 @@ import structureValidator from '../common/types/structure-validator.js';
 import {arrayTypeGuard} from '../common/types/is-array-of.js';
 import {makeOpt} from '../common/types/is-opt.js';
 import isBoolean from '../common/types/is-boolean.js';
+import type {JsonTask} from './json-task.js';
 
 export type MarkingCodeValidationParams = ImcParamsValidation & {
     notSendToServer?: boolean;
@@ -17,7 +18,7 @@ export const isMarkingCodeValidationParams = structureValidator<MarkingCodeValid
     notFormRequest: makeOpt(isBoolean),
 });
 
-export type BeginMarkingCodeValidationTask = {
+export type BeginMarkingCodeValidationTask = JsonTask & {
     type: JsonTaskType.beginMarkingCodeValidation;
     params: MarkingCodeValidationParams;
 };
