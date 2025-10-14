@@ -3,19 +3,22 @@ import * as util from 'node:util';
 
 export type TypeGuardErrorOptions = {
 	cause?: ValidationErrors;
+	value?: any;
 };
 
 export class TypeGuardError extends TypeError {
 	readonly cause: ValidationErrors | undefined;
+	readonly value?: any;
 
-	constructor(message: string, {cause}: TypeGuardErrorOptions = {}) {
+	constructor(message: string, {cause, value}: TypeGuardErrorOptions = {}) {
 		super(message, {cause});
 		this.cause = cause;
+		this.value = value;
 
 		Object.setPrototypeOf(this, TypeGuardError.prototype);
 	}
 
 	toString() {
-		return util.inspect(this, {showHidden: true});
+		return util.inspect(this, {showHidden: true, depth: Infinity});
 	}
 }
