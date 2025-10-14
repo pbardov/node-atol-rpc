@@ -50,14 +50,14 @@ export default class AtolRpcBase extends AtolWrapper.Fptr10 {
 
 		let validationErrors = {};
 		if (!paramTypeGuard(task, validationErrors)) {
-			throw new TypeGuardError('Invalid input params type', {cause: validationErrors});
+			throw new TypeGuardError('Invalid input params type', {cause: validationErrors, value: task});
 		}
 
 		// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
 		const result = await this.processJsonP(task);
 		validationErrors = {};
 		if (!resultTypeGuard(result, validationErrors)) {
-			throw new TypeGuardError('Invalid return value type', {cause: validationErrors});
+			throw new TypeGuardError('Invalid return value type', {cause: validationErrors, value: result});
 		}
 
 		return result;
