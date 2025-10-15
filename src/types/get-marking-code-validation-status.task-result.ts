@@ -83,14 +83,14 @@ export const isOnlineValidationResult = structureValidator<OnlineValidationResul
 
 export type GetMarkingCodeValidationStatusTaskResult = {
     ready: boolean;
-    sentImcRequest: boolean;
-    driverError: DriverError;
+    sentImcRequest?: boolean;
+    driverError?: DriverError;
     onlineValidation?: OnlineValidationResult;
 };
 
 export const isGetMarkingCodeValidationStatusTaskResult = structureValidator<GetMarkingCodeValidationStatusTaskResult>({
     ready: isBoolean,
-    sentImcRequest: isBoolean,
-    driverError: isDriverError,
+    sentImcRequest: makeOpt(isBoolean),
+    driverError: makeOpt(isDriverError),
     onlineValidation: makeOpt(isOnlineValidationResult),
 });
