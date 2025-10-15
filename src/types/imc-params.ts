@@ -13,7 +13,7 @@ export enum ImcType {
 	imcVerifyCode44,
 	imcFmVerifyCode44,
 	imcVerifyCode4,
-	auto = 255,
+	auto = 256,
 }
 
 export function isImcType(v: unknown): v is ImcType {
