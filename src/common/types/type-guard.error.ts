@@ -13,6 +13,7 @@ export class TypeGuardError extends TypeError {
 	constructor(message: string, {cause, value}: TypeGuardErrorOptions = {}) {
 		super(message, {cause});
 		this.cause = cause;
+		// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
 		this.value = value;
 
 		Object.setPrototypeOf(this, TypeGuardError.prototype);
