@@ -60,7 +60,7 @@ export type ImcFmState = {
     soldImcCount: number;
     noticeIsBegin: boolean;
     noticeFreeMemory: ImcFmFreeMemory;
-    noticeCount: number;
+    noticeUnsentCount: number;
 };
 
 export const isImcFmState = structureValidator<ImcFmState>({
@@ -69,7 +69,7 @@ export const isImcFmState = structureValidator<ImcFmState>({
     soldImcCount: isNumber,
     noticeIsBegin: isBoolean,
     noticeFreeMemory: isImcFmFreeMemory,
-    noticeCount: isNumber,
+    noticeUnsentCount: isNumber,
 });
 
 export type ImcEcrState = {
