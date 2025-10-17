@@ -34,11 +34,11 @@ export const isShiftTotalsPayments = structureValidator<ShiftTotalsPayments>({
 });
 
 export type ReceiptPayments = {
-	payments: ShiftTotalsPayments;
+	payments?: ShiftTotalsPayments;
 };
 
 export const isReceiptPayments = structureValidator<ReceiptPayments>({
-	payments: isShiftTotalsPayments,
+	payments: makeOpt(isShiftTotalsPayments),
 });
 
 export type ReceiptTotal = CountSum & ReceiptPayments;
