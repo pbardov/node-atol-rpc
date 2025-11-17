@@ -1,20 +1,10 @@
 import {isResultWarnings, type ResultWarnings} from './result-warnings.js';
 import structureValidator from '../common/types/structure-validator.js';
-import isNumber from '../common/types/is-number.js';
-import isString from '../common/types/is-string.js';
-import {makeOpt} from '../common/types/is-opt.js';
+import {isReceiptFiscalParams, type ReceiptFiscalParams} from './receipt-fiscal-params.js';
 
 export type FiscalTaskResult = {
-	total: number;
-	fiscalDocumentNumber: number;
-	fiscalDocumentSign: string;
-	fiscalDocumentDateTime: string;
-	fiscalReceiptNumber: number;
-	shiftNumber: number;
-	fnNumber: string;
-	registrationNumber: string;
-	fnsUrl: string;
-	warnings?: ResultWarnings;
+	fiscalParams: ReceiptFiscalParams,
+	warnings: ResultWarnings
 };
 
 export type SellTaskResult = FiscalTaskResult;
@@ -23,16 +13,8 @@ export type SellReturnTaskResult = FiscalTaskResult;
 export type BuyReturnTaskResult = FiscalTaskResult;
 
 export const isFiscalTaskResult = structureValidator<FiscalTaskResult>({
-	total: isNumber,
-	fiscalDocumentNumber: isNumber,
-	fiscalDocumentSign: isString,
-	fiscalDocumentDateTime: isString,
-	fiscalReceiptNumber: isNumber,
-	shiftNumber: isNumber,
-	fnNumber: isString,
-	registrationNumber: isString,
-	fnsUrl: isString,
-	warnings: makeOpt(isResultWarnings),
+	fiscalParams: isReceiptFiscalParams,
+	warnings: isResultWarnings
 });
 
 export const isSellTaskResult = isFiscalTaskResult;
