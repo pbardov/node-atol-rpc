@@ -8,6 +8,12 @@ export enum TaxType {
 	vat110 = 'vat110',
 	vat20 = 'vat20',
 	vat120 = 'vat120',
+	vat5 = 'vat5',
+	vat105 = 'vat105',
+	vat7 = 'vat7',
+	vat107 = 'vat107',
+	vat22 = 'vat22',
+	vat122 = 'vat122',
 }
 
 export function isTaxType(v: unknown): v is TaxType {
@@ -15,11 +21,16 @@ export function isTaxType(v: unknown): v is TaxType {
 }
 
 export type Tax = {
+	/** Налоговая ставка (тег 1199) */
 	type: TaxType;
-	sum: number;
+	/**
+	 * Сумма налога.
+	 * Обязательна для налогов на чек; для позиций необязательна (по умолчанию рассчитывается автоматически).
+	 */
+	sum?: number;
 };
 
 export const isTax = structureValidator<Tax>({
 	type: isTaxType,
-	sum: isNumber,
+	sum: (v: unknown): v is number | undefined => v === undefined || isNumber(v),
 });
