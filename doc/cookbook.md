@@ -2,12 +2,17 @@
 
 Ниже — набор практических сценариев, которые часто встречаются при интеграции.
 
+Во всех примерах подразумевается, что вы передаёте корректный `Settings` (см. [settings.md](./settings.md)).
+Для краткости полный набор полей не приводится — используйте типовой `settings.json` вашего проекта как основу.
+
 ## Проверка доступности ККТ (ping)
 
 ```ts
 import AtolRpc from 'node-atol-rpc';
 
-const atol = new AtolRpc({ host: '127.0.0.1', port: 50000 });
+const atol = new AtolRpc({
+  /* ... Settings ... */
+} as any);
 await atol.connect();
 
 const info = await atol.getDeviceInfo();
@@ -21,7 +26,9 @@ await atol.disconnect();
 ```ts
 import AtolRpc from 'node-atol-rpc';
 
-const atol = new AtolRpc({ host: '127.0.0.1', port: 50000 });
+const atol = new AtolRpc({
+  /* ... Settings ... */
+} as any);
 await atol.connect();
 
 await atol.openCashDrawer();
@@ -34,7 +41,9 @@ await atol.disconnect();
 ```ts
 import AtolRpc from 'node-atol-rpc';
 
-const atol = new AtolRpc({ host: '127.0.0.1', port: 50000 });
+const atol = new AtolRpc({
+  /* ... Settings ... */
+} as any);
 await atol.connect();
 
 await atol.reportX({

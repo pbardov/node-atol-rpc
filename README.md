@@ -24,10 +24,10 @@ yarn add node-atol-rpc
 import AtolRpc from 'node-atol-rpc';
 
 const atol = new AtolRpc({
-  host: '127.0.0.1',
-  port: 50000,
-  timeout: 10_000,
-});
+  // Settings = Fptr10Settings (+ опциональный workMode)
+  // Для краткости полный набор полей не приводится — используйте типовой settings.json вашего проекта.
+  /* ... Settings ... */
+} as any);
 
 await atol.connect();
 
@@ -49,7 +49,7 @@ import AtolRpc, { AtolRpcBase, type Settings, isSettings } from 'node-atol-rpc';
 
 - `AtolRpc` — основной высокоуровневый клиент.
 - `AtolRpcBase` — низкоуровневый JSON-RPC слой.
-- `Settings` — настройки подключения.
+- `Settings` — настройки драйвера/подключения (Fptr10Settings + опциональный workMode), см. `doc/settings.md`.
 - `isSettings` — runtime-проверка объекта настроек.
 
 ## Требования

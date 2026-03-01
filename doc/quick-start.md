@@ -14,10 +14,17 @@ yarn add node-atol-rpc
 import AtolRpc from 'node-atol-rpc';
 
 const atol = new AtolRpc({
-  host: '127.0.0.1',
-  port: 50000,
-  timeout: 10_000,
-});
+  // Settings = Fptr10Settings (+ опциональный workMode)
+  // Укороченный пример: часть полей опущена. За «типовой default» можно взять
+  // рабочий `settings.json` вашего проекта.
+  IPAddress: '192.168.109.233',
+  IPPort: 5555,
+  Port: 2, // LIBFPTR_PORT_TCPIP
+
+  // ... остальные обязательные поля из Fptr10Settings ...
+
+  workMode: 'async',
+} as any);
 
 await atol.connect();
 
@@ -35,7 +42,9 @@ await atol.disconnect();
 ```ts
 import AtolRpc from 'node-atol-rpc';
 
-const atol = new AtolRpc({ host: '127.0.0.1', port: 50000 });
+const atol = new AtolRpc({
+  // ... Settings (см. doc/settings.md; типовой пример — settings.json вашего проекта) ...
+} as any);
 await atol.connect();
 
 await atol.openShift({
@@ -56,7 +65,7 @@ await atol.printReceipt({
       tax: 'vat20',
     },
   ],
-  payments: [{ type: 'cash', amount: 200 }],
+  payments: [{type: 'cash', amount: 200}],
 });
 
 await atol.disconnect();
@@ -64,6 +73,6 @@ await atol.disconnect();
 
 ## Что дальше
 
-- [Настройки подключения](./settings.md)
+- [Настройки драйвера/подключения (Settings)](./settings.md)
 - [JSON tasks и результаты](./json-tasks.md)
 - [Диагностика](./troubleshooting.md)
