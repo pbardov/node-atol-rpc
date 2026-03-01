@@ -92,7 +92,30 @@ const settings: Settings = {
 
 const atol = new AtolRpc(settings);
 
+## Как получить валидный Settings под вашу версию ДТО/драйвера
+
+Поля настроек, которые реально поддерживает драйвер, зависят от версии ДТО/драйвера и окружения. На практике самый надёжный способ получить **валидную полную структуру** настроек для конкретной версии — создать инстанс и прочитать настройки из драйвера:
+
+import AtolRpc from 'node-atol-rpc';
+
+const kkm = new AtolRpc({
+  /* ... минимально необходимые настройки, чтобы драйвер мог создаться ... */
+} as any);
+
+// Вернёт структуру, которую понимает конкретная версия драйвера
+const settingsFromDriver = kkm.getSettings();
+
+// Дальше можно сериализовать и править нужные поля
+console.log(JSON.stringify(settingsFromDriver, null, 2));
+
+Дальше корректный «рецепт» такой:
+
+1) получить `settings = kkm.getSettings()`;
+2) сохранить (json-файл/ENV/БД);
+3) править в нём только нужные поля (например `IPAddress`, `IPPort`, `Port`, `Model`, `workMode` и т.п.);
+4) передавать обратно через `new AtolRpc(settings)` / `kkm.setSettings(settings)`.
+
 ## Важное замечание
 
 Библиотека валидирует `Settings` через type-guards (`isFptr10Settings` + `isWithWorkMode`).
-Если вы ожидаете настройки вида `host`/`port`/`timeout` — их в `Settings` **нет** (по крайней мере в текущей версии кода).
+Если вы ожидаете настройки вида `host`/`port`/`timeout` — их в `Settings` **нет**.
